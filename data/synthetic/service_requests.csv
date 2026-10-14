@@ -1,24 +1,21 @@
 request_id,employee_id,type,created_day,sla_days,status,owner
 REQ-0001,E0421,laptop_issue,2,2,open,IT Service Desk
 REQ-0002,E0422,transfer_approval,12,5,open,Receiving Manager
-REQ-0003,E9561,laptop_issue,4,2,resolved,HR Mobility
-REQ-0004,E1797,leave_query,2,2,resolved,HR Onboarding
-REQ-0005,E5414,insurance_query,20,3,open,HR Benefits
-REQ-0006,E1698,relocation_support,3,2,open,Payroll
-REQ-0007,E7008,laptop_issue,15,3,resolved,Payroll
-REQ-0008,E7706,transfer_approval,1,2,resolved,HR Benefits
-REQ-0009,E3250,it_ticket,3,3,resolved,Facilities
-REQ-0010,E7989,relocation_support,4,5,open,HR Onboarding
-REQ-0011,E7142,access_request,3,5,open,Facilities
-REQ-0012,E3946,laptop_issue,0,5,open,HR Benefits
-REQ-0013,E0547,insurance_query,2,3,resolved,Facilities
-REQ-0014,E5943,visa_query,6,5,resolved,Facilities
-REQ-0015,E8409,visa_query,1,2,open,Facilities
-REQ-0016,E5278,insurance_query,0,5,open,HR Mobility
-REQ-0017,E9279,payroll_query,30,5,resolved,HR Benefits
-REQ-0018,E0126,visa_query,2,3,open,HR Onboarding
-REQ-0019,E0127,it_ticket,10,3,resolved,IT Service Desk
-REQ-0020,E1252,it_ticket,18,3,resolved,Facilities
-REQ-0021,E7566,leave_query,6,5,resolved,IT Service Desk
-REQ-0022,E0312,payroll_query,0,5,resolved,Payroll
-REQ-0023,E5781,visa_query,31,5,resolved,HR Benefits
+REQ-0003,E7518,payroll_query,4,2,resolved,HR Mobility
+REQ-0004,E3982,laptop_issue,3,3,open,Facilities
+REQ-0005,E4326,medical_booking,3,2,resolved,Facilities
+REQ-0006,E2926,it_ticket,13,3,open,Payroll
+REQ-0007,E6692,access_request,18,2,open,IT Service Desk
+REQ-0008,E5280,access_request,8,3,open,Payroll
+REQ-0009,E0401,visa_query,27,3,resolved,Payroll
+REQ-0010,E7374,laptop_issue,0,5,open,HR Benefits
+REQ-0011,E0442,insurance_query,11,3,resolved,Facilities
+REQ-0012,E6072,laptop_issue,5,5,resolved,Facilities
+REQ-0013,E3631,visa_query,15,2,open,Facilities
+REQ-0014,E1959,insurance_query,0,5,open,HR Mobility
+REQ-0015,E8698,it_ticket,23,2,open,Facilities
+REQ-0016,E6087,access_request,25,5,open,HR Benefits
+REQ-0017,E3363,payroll_query,7,5,resolved,HR Mobility
+REQ-0018,E9495,leave_query,1,5,open,HR Mobility
+REQ-0019,E5494,medical_booking,5,3,resolved,Facilities
+REQ-0020,E9940,insurance_query,15,5,resolved,HR Benefits

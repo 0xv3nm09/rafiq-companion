@@ -47,6 +47,11 @@ class ConsentBody(BaseModel):
     consent_pulse: bool
 
 
+@app.get("/favicon.ico")
+async def favicon() -> FileResponse:
+    return FileResponse(STATIC / "favicon.svg", media_type="image/svg+xml")
+
+
 @app.get("/health")
 async def health() -> dict:
     return {"ok": True, "source": get_store().source, "chunks": len(get_store().policy_chunks)}

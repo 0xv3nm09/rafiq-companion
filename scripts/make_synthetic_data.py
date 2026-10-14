@@ -77,9 +77,11 @@ REQUEST_TYPES = ["laptop_issue", "access_request", "visa_query", "payroll_query"
                  "insurance_query", "leave_query", "it_ticket", "relocation_support", "medical_booking"]
 
 E0421 = dict(employee_id="E0421", name="Aisha Al Mansoori", role="Finance Analyst", department="Finance",
-             journey="onboarding", start_day=0, mobility_start_day="", lang_pref="en", emirati=True)
+             journey="onboarding", start_day=0, mobility_start_day="", lang_pref="en", emirati=True,
+             location="Dubai - HQ")
 E0422 = dict(employee_id="E0422", name="Omar Haddad", role="IT Support Specialist", department="IT",
-             journey="mobility", start_day=-420, mobility_start_day=-13, lang_pref="en", emirati=False)
+             journey="mobility", start_day=-420, mobility_start_day=-13, lang_pref="en", emirati=False,
+             location="Dubai - Airport")
 
 # Organisation spine: line managers + HRBPs are people rows too (E99xx), so the
 # manager/HR personas in the UI read real synthetic relationships, not fixtures.
@@ -105,6 +107,9 @@ def org_assign(index: int) -> tuple[str, str]:
     return manager, hrbp
 
 
+LOCATIONS = ["Dubai - HQ", "Dubai - DNATA", "Dubai - Airport", "Abu Dhabi", "Al Ain", "Sharjah"]
+
+
 def make_employees(n: int, sim_day: int, rng: random.Random) -> list[dict]:
     people = [dict(E0421), dict(E0422)]
     seen = {"E0421", "E0422"}
@@ -117,20 +122,21 @@ def make_employees(n: int, sim_day: int, rng: random.Random) -> list[dict]:
         emirati = rng.random() < 0.18
         idx = len(people) - 2  # stable assignment order over the cohort
         mgr, hrbp = org_assign(idx)
+        location = rng.choice(LOCATIONS)
         if rng.random() < 0.4:  # mobility cohort
             md = rng.randint(-5, 40)                    # mobility day now
             people.append(dict(employee_id=eid, name=f"{rng.choice(FIRST)} {rng.choice(LAST)}",
                                role=role, department=dept, journey="mobility",
                                start_day=rng.randint(-800, -200), mobility_start_day=sim_day - md,
                                lang_pref=rng.choice(["en", "en", "ar"]), emirati=emirati,
-                               line_manager_id=mgr, hrbp_id=hrbp))
+                               line_manager_id=mgr, hrbp_id=hrbp, location=location))
         else:
             jd = rng.choice([rng.randint(-20, -1), rng.randint(0, 35)])
             people.append(dict(employee_id=eid, name=f"{rng.choice(FIRST)} {rng.choice(LAST)}",
                                role=role, department=dept, journey="onboarding",
                                start_day=sim_day - jd, mobility_start_day="",
                                lang_pref=rng.choice(["en", "en", "ar"]), emirati=emirati,
-                               line_manager_id=mgr, hrbp_id=hrbp))
+                               line_manager_id=mgr, hrbp_id=hrbp, location=location))
     # demo stars get fixed, named relationships for the judge script
     for p in people:
         if p["employee_id"] == "E0421":
@@ -139,7 +145,8 @@ def make_employees(n: int, sim_day: int, rng: random.Random) -> list[dict]:
             p["line_manager_id"], p["hrbp_id"] = "E9902", "E9912"
     for m in MANAGERS + HRBPS:
         people.append(dict(m, journey="", start_day="", mobility_start_day="",
-                           lang_pref="en", emirati=False, line_manager_id="", hrbp_id=""))
+                           lang_pref="en", emirati=False, line_manager_id="", hrbp_id="",
+                           location="Dubai - HQ"))
     return people
 
 

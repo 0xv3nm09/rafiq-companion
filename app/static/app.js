@@ -93,8 +93,48 @@ async function boot() {
   ]);
   buildViewAs();
   buildNav();
+  bindQuickRoles();
   await refreshJourney();
   route();
+  // if the judge clicked into a screen before boot finished, re-render now that data is in
+  if (state.screen === "chat" && !$("#thread").children.length) welcome();
+}
+
+function bindQuickRoles() {
+  const defaults = {
+    employee: () => ["employee", "E0421"],
+    manager: () => ["manager", state.managers.find((m) => m.department === "IT")?.id || state.managers[0]?.id],
+    hr: () => ["hrbp", state.hrbps[0]?.id],
+    owner: () => ["owner", "IT Service Desk"],
+  };
+  $$("#quick-roles button").forEach((b) => {
+    b.dataset.active = b.dataset.role === (state.viewRole === "hrbp" ? "hr" : state.viewRole) ? "1" : "0";
+    b.addEventListener("click", () => {
+      const [role, id] = defaults[b.dataset.role]();
+      switchPersona(role, id);
+      $$("#quick-roles button").forEach((x) => {
+        x.dataset.active = x.dataset.role === (role === "hrbp" ? "hr" : role) ? "1" : "0";
+      });
+    });
+  });
+}
+
+function switchPersona(role, id) {
+  state.viewRole = role;
+  state.personaId = id;
+  $("#thread").innerHTML = "";
+  if (role === "employee") {
+    state.employeeId = id;
+  } else {
+    state.persona = state.managers.find((m) => m.id === id)
+      || state.hrbps.find((h) => h.id === id)
+      || state.owners.find((o) => o.name === id);
+    $("#viewas-current").textContent = state.persona ? (state.persona.name || id) : id;
+  }
+  buildNav();
+  location.hash = `#/${SCREENS[role][0]}`;
+  if (location.hash === `#/${SCREENS[role][0]}`) route();  // same-hash click still re-routes
+  refreshNoticeBadge();
 }
 
 function buildNav() {
@@ -184,19 +224,8 @@ function buildViewAs() {
     });
   });
   $$(".viewas-item", menu).forEach((b) => b.addEventListener("click", async () => {
-    state.viewRole = b.dataset.role;
-    state.personaId = b.dataset.emp;
     $("#viewas-menu").hidden = true;
-    $("#thread").innerHTML = "";
-    await refreshJourney();
-    if (state.viewRole !== "employee") {
-      state.persona = state.managers.find((m) => m.id === state.personaId)
-        || state.hrbps.find((h) => h.id === state.personaId)
-        || state.owners.find((o) => o.name === state.personaId);
-      $("#viewas-current").textContent = state.persona ? (state.persona.name || state.personaId) : state.personaId;
-    }
-    buildNav();
-    route();
+    switchPersona(b.dataset.role, b.dataset.emp);
     if (state.screen === "chat") welcome();
   }));
 }
@@ -235,6 +264,40 @@ async function renderHome() {
                      "لا عوائق في رحلتك اليوم. ستظهر التنبيهات هنا إذا تغيّر ذلك.")}
        </p><a class="ghost-link" href="#/notices">${langPick("All notices →", "كل التنبيهات ←")}</a>`;
   bindChaseButtons($("#home-blocker"));
+  renderPulseCard();
+}
+
+/* opt-in pulse check-in — single question, clearly optional, dismissible */
+async function renderPulseCard() {
+  const host = $("#home-pulse");
+  if (!host) return;
+  const dismissed = sessionStorage.getItem(`pulse-dismissed-${state.employeeId}`) === "1";
+  if (dismissed) { host.innerHTML = ""; return; }
+  const me = await api(`/me/data?employee_id=${state.employeeId}`).catch(() => null);
+  const consented = !!(me && me.consent && me.consent.pulse);
+  host.innerHTML = `
+    <h3>${langPick("Quick pulse — optional", "نبضة سريعة — اختيارية")}</h3>
+    <p>${langPick("How is your week going?", "كيف يسير أسبوعك؟")}</p>
+    <div class="pulse-row">
+      ${[["😟", 1], ["😕", 2], ["🙂", 3], ["😊", 4], ["😄", 5]].map(([e, n]) =>
+        `<button class="pulse-btn" data-score="${n}" aria-label="${n}/5">${e}</button>`).join("")}
+    </div>
+    <div class="note ${consented ? "" : "warn"}">${consented
+      ? langPick("Shared with your consent ON — revocable any time in My data.",
+                 "تُشارك بموافقتك المفتوحة — يمكن إلغاؤها في أي وقت من بياناتي.")
+      : langPick("Answering is acknowledged but NOT used — pulse signals need your consent (My data).",
+                 "إجابتك تُسجَّل كإشعار فقط ولا تُستخدم — إشارات النبض تحتاج موافقتك (من بياناتي).")}</div>
+    <button class="ghost-link" id="pulse-dismiss">${langPick("Dismiss — no pressure", "إخفاء — بدون إلحاح")}</button>`;
+  $$(".pulse-btn", host).forEach((b) => b.addEventListener("click", async () => {
+    const r = await post("/pulse", { employee_id: state.employeeId, score: Number(b.dataset.score), consent: consented });
+    toast(r.message);
+    sessionStorage.setItem(`pulse-dismissed-${state.employeeId}`, "1");
+    renderPulseCard();
+  }));
+  $("#pulse-dismiss").addEventListener("click", () => {
+    sessionStorage.setItem(`pulse-dismissed-${state.employeeId}`, "1");
+    renderPulseCard();
+  });
 }
 
 function bindChaseButtons(scope) {
@@ -396,7 +459,9 @@ async function renderHandoffs() {
             <button class="cta secondary" data-status="acknowledged" data-id="${esc(c.handoff_id)}">${langPick("Acknowledge", "إشعار بالاستلام")}</button>
             <button class="cta" data-status="resolved" data-id="${esc(c.handoff_id)}">${langPick("Resolve", "تم الحل")}</button>
           </div>` : ""}
-      </div>`).join("") : `<div class="note">${t.none}</div>`}`;
+      </div>`).join("")
+    : emptyState("No open handoffs — requests are arriving complete and correctly routed. When one needs you, it lands here with everything attached.",
+                 "لا إحالات مفتوحة — الطلبات تصل مكتملة وموجهة بشكل صحيح. وعندما تحتاج إليك واحدة، تصل هنا بكل تفاصيلها.")}`;
   $$("[data-status]", $("#handoffs-card")).forEach((b) => b.addEventListener("click", async () => {
     await post(`/handoff/${b.dataset.id}/status`, { status: b.dataset.status });
     toast(langPick("Handoff updated — the employee's audit log shows it.",
@@ -472,7 +537,9 @@ async function renderAudit() {
       <span class="audit-action">${esc(r.action.replaceAll("_", " "))}</span>
       <span class="audit-detail" dir="auto">${esc(JSON.stringify(r.detail || {}))}</span>
       <span class="audit-ts">${esc((r.ts || "").replace("T", " ").slice(0, 19))} UTC</span>
-    </div>`).join("") : `<div class="note">${t.none}</div>`);
+    </div>`).join("")
+    : emptyState("Nothing recorded yet. Every action Rafiq takes for you will appear here — nothing is hidden.",
+                 "لا شيء مسجل بعد. كل ما يقوم به رفيق نيابة عنك سيظهر هنا — لا شيء مخفي."));
 }
 
 async function renderNotices() {
@@ -482,8 +549,14 @@ async function renderNotices() {
     <div class="notice-row ${esc(n.kind)}">
       <div class="notice-title" dir="auto">${esc(n.title)}</div>
       <div class="notice-detail" dir="auto">${esc(n.detail)}</div>
-    </div>`).join("") : `<div class="note">${t.none}</div>`);
+    </div>`).join("")
+    : emptyState("You're all caught up — no action needed. We check your journey every few hours and will flag anything here.",
+                 "أنت على ما يرام — لا يوجد إجراء مطلوب. نفحص رحلتك كل بضع ساعات وسننبهك هنا لأي شيء."));
   refreshNoticeBadge();
+}
+
+function emptyState(en, ar) {
+  return `<div class="empty-state"><div class="empty-emoji">🌤️</div><p dir="auto">${langPick(en, ar)}</p></div>`;
 }
 
 function refreshNoticeBadge() {
@@ -523,14 +596,32 @@ document.addEventListener("click", (e) => {
 
 /* ---------------- chat ---------------- */
 function welcome() {
+  if (!state.journey) return;   // boot race — refreshed in boot() when data lands
   const s = state.journey.state;
-  if (!s.blockers.length) return;
-  const b = s.blockers[0];
+  if (s.blockers.length) {
+    const b = s.blockers[0];
+    pushRafiqHTML(`<div class="answer-text" dir="auto">${langPick(
+      `Day ${s.day} check-in: “${esc(eventLabel(b))}” is ${b.days_overdue} day(s) overdue (target day ${b.due_day}).
+       The owner is ${esc(b.owner.name)}. Want me to chase them for you?`,
+      `يوم ${s.day}: «${esc(eventLabel(b))}» متأخر ${b.days_overdue} يوم (المستهدف يوم ${b.due_day}) والمالك ${esc(b.owner.name)}. أتابعه نيابة عنك؟`
+    )}</div><div class="answer-actions"><button class="cta" data-chase="${esc(b.event)}">${T().chase}</button></div>`);
+    return;
+  }
+  // no blockers — still never a blank thread: greeting + what Rafiq can help with
   pushRafiqHTML(`<div class="answer-text" dir="auto">${langPick(
-    `Day ${s.day} check-in: “${esc(eventLabel(b))}” is ${b.days_overdue} day(s) overdue (target day ${b.due_day}).
-     The owner is ${esc(b.owner.name)}. Want me to chase them for you?`,
-    `يوم ${s.day}: «${esc(eventLabel(b))}» متأخر ${b.days_overdue} يوم (المستهدف يوم ${b.due_day}) والمالك ${esc(b.owner.name)}. أتابعه نيابة عنك؟`
-  )}</div><div class="answer-actions"><button class="cta" data-chase="${esc(b.event)}">${T().chase}</button></div>`);
+    `Welcome — I'm Rafiq, your journey companion. Here's what I can help with:
+     · “Where is my laptop?” — status of anything on your journey
+     · “Book my medical fitness test” — start or route a request (HR, IT, learning, facilities)
+     · “How many annual leave days do I get?” — cited policy answers
+     · Anything sensitive (grievance, visa problem) goes straight to a person.
+     I also check your journey every few hours and flag anything stuck — you'll see it here first.`,
+    `أهلًا — أنا رفيق، رفيقك في رحلتك. إليك ما أستطيع المساعدة فيه:
+     · «وين حاسوبي؟» — حالة أي شيء في رحلتك
+     · «احجز الفحص الطبي» — بدء طلب وتحويله (الموارد البشرية، التقنية، التعلّم، المرافق)
+     · «كم رصيد إجازاتي؟» — إجابات موثقة من السياسات
+     · أي موضوع حساس (شكوى، مشكلة تأشيرة) يذهب مباشرة إلى شخص.
+     وأفحص رحلتك كل بضع ساعات وأنبّه لأي تعثر — ستراه هنا أولًا.`)
+  }</div>`);
 }
 
 function pushUser(text) {

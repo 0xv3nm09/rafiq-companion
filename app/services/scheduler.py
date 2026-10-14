@@ -102,10 +102,9 @@ def seed_runtime(store: DataStore) -> dict:
         audit_log.append(eid, "companion_enabled",
                          {"day": 0, "note": "Consent-first companion assigned to your journey"})
     for eid, entries in {
-        "E0421": [("companion_enabled", {"day": 0}), ("consent_changed", {"consent": "pulse", "value": True}),
-                  ("pulse_submitted", {"score": 4, "consent": True, "day": 3}),
+        "E0421": [("companion_enabled", {"day": 0}),
                   ("sweep_notice", {"flag": "Laptop issued: due day 3, 2 day(s) overdue"})],
-        "E0422": [("companion_enabled", {"day": 0}), ("consent_changed", {"consent": "pulse", "value": True}),
+        "E0422": [("companion_enabled", {"day": 0}),
                   ("sweep_notice", {"flag": "Receiving-team sign-off: due day 15, 3 day(s) overdue"})],
     }.items():
         for action, detail in entries:

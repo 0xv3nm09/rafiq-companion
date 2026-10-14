@@ -72,7 +72,7 @@ def held_data(store, employee_id: str) -> dict:
     mgr = store.person(str(emp.get("line_manager_id") or "")) if emp.get("line_manager_id") else None
     hrbp = store.person(str(emp.get("hrbp_id") or "")) if emp.get("hrbp_id") else None
     return {
-        "employee": {k: emp.get(k) for k in ("employee_id", "name", "role", "department", "journey", "lang_pref")},
+        "employee": {k: emp.get(k) for k in ("employee_id", "name", "role", "department", "journey", "lang_pref", "location")},
         "line_manager": {"id": emp.get("line_manager_id"), "name": mgr.get("name")} if mgr else None,
         "hrbp": {"id": emp.get("hrbp_id"), "name": hrbp.get("name")} if hrbp else None,
         "journey": {"stage": state.stage, "day": state.day, "blockers": len(state.blockers)},
