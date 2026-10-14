@@ -1,0 +1,15 @@
+request_id,employee_id,type,created_day,sla_days,status,owner
+REQ-0001,E0421,laptop_issue,2,2,open,IT Service Desk
+REQ-0002,E0422,transfer_approval,12,5,open,Receiving Manager
+REQ-0003,E9814,it_ticket,8,2,open,Payroll
+REQ-0004,E2926,payroll_query,0,2,open,IT Service Desk
+REQ-0005,E3998,insurance_query,1,2,resolved,Facilities
+REQ-0006,E9273,laptop_issue,3,5,open,HR Onboarding
+REQ-0007,E8549,transfer_approval,19,3,open,HR Benefits
+REQ-0008,E8043,relocation_support,21,3,open,HR Mobility
+REQ-0009,E4709,medical_booking,1,5,resolved,HR Onboarding
+REQ-0010,E7047,medical_booking,18,2,open,Facilities
+REQ-0011,E4382,visa_query,4,3,open,Facilities
+REQ-0012,E0127,insurance_query,5,2,resolved,IT Service Desk
+REQ-0013,E7171,laptop_issue,20,2,open,HR Benefits
+REQ-0014,E6082,relocation_support,4,2,resolved,IT Service Desk
