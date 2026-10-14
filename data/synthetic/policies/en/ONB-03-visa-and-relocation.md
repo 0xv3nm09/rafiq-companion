@@ -12,7 +12,7 @@ For relocating hires the entry permit is sponsored by the employer and normally 
 
 ## Medical Fitness and Emirates ID
 
-After entry, the medical fitness test is booked by the Visa and Immigration team with a target of day 15, and the Emirates ID application follows with a target of day 20. The employee attends in person; the employer arranges appointments. Status of both steps is visible in the journey timeline.
+After entry, the medical fitness test is booked by the Visa and Immigration team with a target of day 15, and the Emirates ID application follows with a target of day 20. Both are commonly completed at the same visit — the medical at the visa window, the Emirates ID biometrics immediately after — so either step may be marked complete well ahead of its target. The employee attends in person; the employer arranges appointments. Status of both steps is visible in the journey timeline.
 
 ## Residence Visa Stamping
 

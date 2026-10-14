@@ -9,7 +9,7 @@ POLICIES: dict[str, dict] = {
         "title": "Pre-boarding and Day One",
         "title_ar": "ما قبل الانضمام واليوم الأول",
         "sections": [
-            ("Before Day One", "New joiners receive a pre-boarding pack at offer acceptance covering documents to bring, first-week agenda, and their buddy assignment. HR Onboarding confirms building access and badge readiness before day one. Any document gap should be raised with HR Onboarding before the start date."),
+            ("Before Day One", "New joiners receive a pre-boarding pack at offer acceptance covering documents to bring, first-week agenda, and their buddy assignment. Joining is only possible once papers are submitted and the ID photo is shared with HR Onboarding, both normally before travel. HR Onboarding confirms building access and badge readiness before day one; any document gap should be raised with them before the start date."),
             ("Day One", "On day one the line manager welcomes the joiner and walks them through the org chart, desk and facilities. A badge with building access is issued by Facilities on day one. If a badge is not ready, the joiner should ask the companion to chase Facilities."),
         ],
     },
@@ -18,7 +18,7 @@ POLICIES: dict[str, dict] = {
         "title_ar": "التأشيرة والانتقال",
         "sections": [
             ("Entry Permit", "For relocating hires the entry permit is sponsored by the employer and normally takes up to 10 working days from document submission. The Visa and Immigration team owns this step and updates the journey once issued. Roughly half of relocating employees call the visa stage the hardest part of the move, so each step is tracked with a named owner."),
-            ("Medical Fitness and Emirates ID", "After entry, the medical fitness test is booked by the Visa and Immigration team with a target of day 15, and the Emirates ID application follows with a target of day 20. The employee attends in person; the employer arranges appointments. Status of both steps is visible in the journey timeline."),
+            ("Medical Fitness and Emirates ID", "After entry, the medical fitness test is booked by the Visa and Immigration team with a target of day 15, and the Emirates ID application follows with a target of day 20. Both are commonly completed at the same visit — the medical at the visa window, the Emirates ID biometrics immediately after — so either step may be marked complete well ahead of its target. The employee attends in person; the employer arranges appointments. Status of both steps is visible in the journey timeline."),
             ("Residence Visa Stamping", "Residence visa stamping is the final immigration step with a target of day 25, after which the passport is returned. Delays beyond target are escalated to the named owner. Family or dependent sponsorship can start once the residence visa is stamped."),
         ],
     },

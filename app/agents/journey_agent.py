@@ -12,6 +12,7 @@ EVENT_POLICY = {
     "it_account_created": ("ONB-07", "IT Provisioning"),
     "badge_building_access": ("ONB-01", "Pre-boarding and Day One"),
     "visa_entry_permit": ("ONB-03", "Visa and Relocation"),
+    "photo_shared": ("ONB-01", "Pre-boarding and Day One"),
     "medical_fitness_test": ("ONB-03", "Visa and Relocation"),
     "emirates_id_application": ("ONB-03", "Visa and Relocation"),
     "residence_visa_stamped": ("ONB-03", "Visa and Relocation"),
@@ -34,6 +35,7 @@ _AR = dict(stage="مرحلتك", day="اليوم", blockers="عناصر متعث
 # Arabic labels for journey events (UI + replies)
 EVENT_LABELS_AR = {
     "offer_accepted": "قبول العرض", "documents_submitted": "تقديم المستندات",
+    "photo_shared": "تقديم الأوراق والصورة",
     "badge_building_access": "بطاقة الدخول للمبنى", "it_account_created": "إنشاء حساب تقنية المعلومات",
     "laptop_issued": "تسليم الحاسوب المحمول", "first_manager_1on1": "أول لقاء مع المدير",
     "induction_training_booked": "حجز التدريب التمهيدي", "bank_wps_setup": "إعداد البنك ونظام حماية الأجور",

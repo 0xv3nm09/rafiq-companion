@@ -27,6 +27,7 @@ OUT = ROOT / "data" / "synthetic"
 JOURNEY_MAP = [
     ("onboarding", "Offer & Pre-boarding", "offer_accepted", 0, "Talent Acquisition"),
     ("onboarding", "Offer & Pre-boarding", "documents_submitted", 2, "HR Onboarding"),
+    ("onboarding", "Offer & Pre-boarding", "photo_shared", 2, "HR Onboarding"),
     ("onboarding", "Day One", "badge_building_access", 1, "Facilities"),
     ("onboarding", "IT Setup", "it_account_created", 2, "IT Service Desk"),
     ("onboarding", "IT Setup", "laptop_issued", 3, "IT Service Desk"),
@@ -113,30 +114,56 @@ def journey_day(person: dict, sim_day: int) -> int:
 
 def make_events(people: list[dict], rng: random.Random) -> list[dict]:
     rows: list[dict] = []
+
+    def rec(emp_id: str, event: str, day, status: str = "done") -> None:
+        rows.append(dict(employee_id=emp_id, event=event, completed_day=day, status=status))
+
     for p in people:
+        eid = p["employee_id"]
         jd = journey_day(p, 5)
-        if p["employee_id"] == "E0421":
-            done = [("offer_accepted", 0), ("documents_submitted", 1), ("badge_building_access", 1),
-                    ("it_account_created", 2), ("first_manager_1on1", 4)]
-            rows += [dict(employee_id=p["employee_id"], event=e, completed_day=d, status="done") for e, d in done]
+        if eid == "E0421":
+            for e, d in [("offer_accepted", 0), ("documents_submitted", 1), ("photo_shared", 1),
+                         ("badge_building_access", 1), ("it_account_created", 2), ("first_manager_1on1", 4)]:
+                rec(eid, e, d)
             continue
-        if p["employee_id"] == "E0422":
-            rows.append(dict(employee_id=p["employee_id"], event="transfer_request_approved", completed_day=8, status="done"))
+        if eid == "E0422":
+            rec(eid, "transfer_request_approved", 8)
             continue
         if p["journey"] == "onboarding":
-            if jd < 0:  # pre-boarding
+            if jd < 0:  # pre-boarding: papers + photo happen before joining
                 if jd <= -10 and rng.random() < 0.8:
-                    rows.append(dict(employee_id=p["employee_id"], event="offer_accepted", completed_day=0, status="done"))
+                    rec(eid, "offer_accepted", 0)
+                    rec(eid, "documents_submitted", 0)
+                    rec(eid, "photo_shared", 0)
                 continue
+            entry_day: int | None = None
+            medical_day: int | None = None
             for e in ONBOARDING_EVENTS:
                 if e in VISA_EVENTS and p["emirati"]:
                     if TARGETS[e] <= jd:
-                        rows.append(dict(employee_id=p["employee_id"], event=e, completed_day="", status="na"))
+                        rec(eid, e, "", "na")
                     continue
+                if e == "medical_fitness_test" and entry_day is not None and rng.random() < 0.75:
+                    # expat reality: the medical is done at the visa window, well ahead of target
+                    actual = entry_day + rng.randint(1, 4)
+                    if actual <= jd:
+                        rec(eid, e, actual)
+                        medical_day = actual
+                        continue
+                if e == "emirates_id_application" and medical_day is not None and rng.random() < 0.8:
+                    # Emirates ID biometrics usually happen at the same visit as the medical
+                    actual = medical_day + rng.randint(0, 1)
+                    if actual <= jd:
+                        rec(eid, e, actual)
+                        continue
                 if TARGETS[e] <= jd and rng.random() < 0.92:
                     actual = max(0, TARGETS[e] + rng.randint(-1, 2))
                     if actual <= jd:
-                        rows.append(dict(employee_id=p["employee_id"], event=e, completed_day=actual, status="done"))
+                        rec(eid, e, actual)
+                        if e == "visa_entry_permit":
+                            entry_day = actual
+                        if e == "medical_fitness_test":
+                            medical_day = actual
         else:  # mobility
             if jd < 0:
                 continue
@@ -144,7 +171,7 @@ def make_events(people: list[dict], rng: random.Random) -> list[dict]:
                 if TARGETS[e] <= jd and rng.random() < 0.92:
                     actual = max(0, TARGETS[e] + rng.randint(-1, 2))
                     if actual <= jd:
-                        rows.append(dict(employee_id=p["employee_id"], event=e, completed_day=actual, status="done"))
+                        rec(eid, e, actual)
     return rows
 
 

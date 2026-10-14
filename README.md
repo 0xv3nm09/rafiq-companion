@@ -96,8 +96,10 @@ changes — the same engine, thresholds and surfaces run on it.
 
 - **Scenario performance (30%)** — deterministic SLA engine nails day-5-laptop and stalled
   transfer/visa; grounded answers cite; low confidence never guesses (tested).
-- **Employee experience (25%)** — one companion for both journeys, bilingual RTL, proactive
-  cold-open, calm status colours, journey timeline with one-tap chase.
+- **Employee experience (25%)** — one companion for both journeys, bilingual RTL, a Home landing
+  with the employee's live stage and blocker, corner navigation (Home / Chat / Journey / My data /
+  Audit log / Notices), "Viewing as" switcher, calm status colours, timeline with one-tap chase —
+  and journey steps that complete early at the visa window read like the real process, not a checklist.
 - **Responsible AI & privacy (25%)** — opt-in consent, employee-visible data panel, audit log,
   named human owner on every escalation, sensitive topics routed to humans, PII redaction —
   all live in the demo, not a slide.

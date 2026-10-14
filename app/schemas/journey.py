@@ -31,3 +31,4 @@ class TimelineStep(BaseModel):
     owner: str
     completed_day: int | None = None
     days_overdue: int | None = None
+    note: str | None = None         # e.g. "can be completed early, at the visa visit"

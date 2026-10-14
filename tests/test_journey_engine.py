@@ -56,3 +56,26 @@ def test_employee_not_found_gives_day_zero(store):
     from app.core.journey_engine import journey_state
     state = journey_state(store, "NOPE")
     assert state.day == 0
+
+
+def test_early_completion_is_honoured(store):
+    """Medical/EID complete early at the visa window -> done, never a blocker."""
+    from app.core.journey_engine import timeline
+    ev = store.events[store.events["event"] == "medical_fitness_test"].merge(
+        store.employees[["employee_id", "journey", "emirati"]], on="employee_id")
+    ev = ev[(ev["journey"] == "onboarding") & (ev["emirati"] == False)]  # noqa: E712
+    ev["completed_day"] = ev["completed_day"].astype(float)
+    early = ev[ev["completed_day"] < 15]
+    assert len(early) > 0, "generator should pair some medicals with the visa visit"
+    emp = str(early.iloc[0]["employee_id"])
+    step = {s.event: s for s in timeline(store, emp)}["medical_fitness_test"]
+    assert step.status == "done" and step.completed_day == early.iloc[0]["completed_day"]
+
+
+def test_upcoming_steps_carry_pair_hint(store):
+    from app.core.journey_engine import timeline
+    steps = {s.event: s for s in timeline(store, "E0421")}
+    note = steps["medical_fitness_test"].note or ""
+    assert "early" in note or "visit" in note
+    done = {s.event: s for s in timeline(store, "E0421")}["photo_shared"]
+    assert done.status == "done"

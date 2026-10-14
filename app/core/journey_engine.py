@@ -25,6 +25,7 @@ _LABELS = {
     "residence_visa_stamped": "Residence visa stamping",
     "medical_fitness_test": "Medical fitness test",
     "visa_entry_permit": "Entry permit issued",
+    "photo_shared": "Papers & photo submitted",
     "probation_review_30": "Probation review (day 30)",
     "health_insurance_enrolled": "Health insurance enrolled",
     "access_reprovisioned": "Access re-provisioned",
@@ -32,6 +33,13 @@ _LABELS = {
     "transfer_request_approved": "Transfer request approved",
     "receiving_team_signoff": "Receiving-team sign-off",
     "release_from_current_team": "Release from current team",
+}
+
+# Steps that can lawfully complete ahead of their target — shown as a hint so the
+# timeline reads like the real process, not a rigid checklist.
+PAIR_HINTS = {
+    "medical_fitness_test": "can be completed early — usually at the visa-window visit",
+    "emirates_id_application": "biometrics usually happen at the same visit as the medical test",
 }
 
 
@@ -114,7 +122,8 @@ def timeline(store: DataStore, employee_id: str) -> list[TimelineStep]:
         steps.append(TimelineStep(event=r.event, label=_label(r.event), stage=r.stage, target_day=r.target_day,
                                   status=status, owner=r.owner.name,
                                   completed_day=day_of.get(r.event) if r.event in done else None,
-                                  days_overdue=(day - r.target_day) if status == "overdue" else None))
+                                  days_overdue=(day - r.target_day) if status == "overdue" else None,
+                                  note=PAIR_HINTS.get(r.event) if status == "upcoming" else None))
     return steps
 
 

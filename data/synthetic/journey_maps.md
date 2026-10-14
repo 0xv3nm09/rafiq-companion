@@ -7,6 +7,7 @@ the employee's current journey (onboarding: from start; mobility: from transfer 
 | --- | --- | --- | --- | --- |
 | onboarding | Offer & Pre-boarding | offer_accepted | 0 | Talent Acquisition |
 | onboarding | Offer & Pre-boarding | documents_submitted | 2 | HR Onboarding |
+| onboarding | Offer & Pre-boarding | photo_shared | 2 | HR Onboarding |
 | onboarding | Day One | badge_building_access | 1 | Facilities |
 | onboarding | IT Setup | it_account_created | 2 | IT Service Desk |
 | onboarding | IT Setup | laptop_issued | 3 | IT Service Desk |

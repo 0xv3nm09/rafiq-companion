@@ -7,77 +7,122 @@
 <link rel="stylesheet" href="/static/app.css">
 </head>
 <body>
-<div id="app" class="app">
 
-  <aside class="rail">
-    <div class="brand">
-      <div class="brand-mark">ر</div>
+<header class="topbar">
+  <a class="brand" href="#/home">
+    <span class="brand-mark">ر</span>
+    <span class="brand-text">
+      <span class="brand-name">Rafiq</span>
+      <span class="brand-sub t-en">Employee AI Companion</span>
+      <span class="brand-sub t-ar">رفيق — رفيق الموظف الذكي</span>
+    </span>
+  </a>
+
+  <nav class="nav" id="nav">
+    <a class="nav-pill" href="#/home" data-screen="home"><span class="t-en">Home</span><span class="t-ar">الرئيسية</span></a>
+    <a class="nav-pill" href="#/chat" data-screen="chat"><span class="t-en">Chat</span><span class="t-ar">المحادثة</span></a>
+    <a class="nav-pill" href="#/journey" data-screen="journey"><span class="t-en">Journey</span><span class="t-ar">الرحلة</span></a>
+    <a class="nav-pill" href="#/me" data-screen="me"><span class="t-en">My data</span><span class="t-ar">بياناتي</span></a>
+    <a class="nav-pill" href="#/audit" data-screen="audit"><span class="t-en">Audit log</span><span class="t-ar">سجل النشاط</span></a>
+    <a class="nav-pill" href="#/notices" data-screen="notices"><span class="t-en">Notices</span><span class="t-ar">التنبيهات</span><span class="badge" id="notice-badge" hidden></span></a>
+  </nav>
+
+  <div class="topbar-right">
+    <div class="viewas" id="viewas">
+      <button class="viewas-btn" id="viewas-btn" aria-haspopup="listbox">
+        <span class="viewas-label t-en">Viewing as</span><span class="viewas-label t-ar">تتصفح باسم</span>
+        <span class="viewas-current" id="viewas-current">…</span>
+        <span class="caret">▾</span>
+      </button>
+      <div class="viewas-menu" id="viewas-menu" hidden></div>
+    </div>
+    <div class="lang-toggle" id="lang-toggle" role="switch" aria-checked="false" tabindex="0">
+      <span class="lang-opt is-active" data-lang="en">EN</span>
+      <span class="lang-opt" data-lang="ar">ع</span>
+    </div>
+  </div>
+</header>
+
+<main id="screen">
+  <!-- HOME -->
+  <section class="screen" id="screen-home">
+    <div class="home-hero">
       <div>
-        <div class="brand-name">Rafiq</div>
-        <div class="brand-sub t-en">Employee AI Companion</div>
-        <div class="brand-sub t-ar">رفيق — رفيق الموظف الذكي</div>
+        <h1 class="t-en">Your journey, one companion.</h1>
+        <h1 class="t-ar">رحلتك، رفيق واحد.</h1>
+        <p class="hero-sub t-en" id="home-greet">…</p>
+        <p class="hero-sub t-ar" id="home-greet-ar">…</p>
+        <div class="hero-actions">
+          <a class="cta" href="#/chat"><span class="t-en">Ask Rafiq</span><span class="t-ar">اسأل رفيق</span></a>
+          <a class="cta secondary" href="#/journey"><span class="t-en">My journey</span><span class="t-ar">رحلتي</span></a>
+          <a class="cta secondary" href="#/me"><span class="t-en">My data</span><span class="t-ar">بياناتي</span></a>
+        </div>
       </div>
+      <div class="hero-stage" id="home-stage"></div>
     </div>
 
-    <label class="field">
-      <span class="field-label t-en">Viewing as</span><span class="field-label t-ar">تتصفح باسم</span>
-      <select id="employee-select"></select>
-    </label>
-
-    <div class="stage-card" id="stage-card">
-      <div class="stage-label t-en">Current stage</div>
-      <div class="stage-label t-ar">المرحلة الحالية</div>
-      <div class="stage-value" id="stage-value">—</div>
-      <div class="stage-meta" id="stage-meta"></div>
-    </div>
-
-    <nav class="tabs" id="rail-tabs">
-      <button class="tab is-active" data-tab="timeline"><span class="t-en">Journey</span><span class="t-ar">الرحلة</span></button>
-      <button class="tab" data-tab="data"><span class="t-en">My data</span><span class="t-ar">بياناتي</span></button>
-      <button class="tab" data-tab="audit"><span class="t-en">Audit log</span><span class="t-ar">سجل النشاط</span></button>
-      <button class="tab" data-tab="notices"><span class="t-en">Notices</span><span class="t-ar">التنبيهات</span><span class="badge" id="notice-badge" hidden></span></button>
-    </nav>
-
-    <div class="rail-foot">
-      <button id="sweep-btn" class="ghost-btn"><span class="t-en">Simulate proactive sweep</span><span class="t-ar">محاكاة الفحص الاستباقي</span></button>
-      <div class="consent-mini">
-        <span class="t-en">Pulse consent</span><span class="t-ar">موافقة نبضات الرأي</span>
-        <label class="switch"><input type="checkbox" id="consent-toggle"><span class="slider"></span></label>
+    <div class="home-grid">
+      <div class="home-block" id="home-blocker"></div>
+      <div class="home-block">
+        <h3 class="t-en">Trust by design</h3><h3 class="t-ar">ثقة بالتصميم</h3>
+        <p class="t-en">Everything Rafiq holds about you is visible, correctable and revocable.
+           Pulse signals work only with your consent — and nothing here is used for performance or discipline.</p>
+        <p class="t-ar">كل ما يحتفظ به رفيق عنك مرئي وقابل للتصحيح والإلغاء. تعمل إشارات النبض فقط بموافقتك — ولا يُستخدم أي شيء هنا للتقييم أو الانضباط.</p>
+        <a class="ghost-link" href="#/me"><span class="t-en">See what we hold →</span><span class="t-ar">اعرف ما نحتفظ به ←</span></a>
+      </div>
+      <div class="home-block">
+        <h3 class="t-en">Demo tip</h3><h3 class="t-ar">تلميح العرض</h3>
+        <p class="t-en">Switch the person from “Viewing as”: <b>E0421</b> is a day-5 joiner waiting on a laptop;
+           <b>E0422</b> is mid-transfer with a stalled approval. Both carry a proactive check-in on Home.</p>
+        <p class="t-ar">بدّل الشخص من «تتصفح باسم»: <b>E0421</b> مبتعث يوم 5 ينتظر حاسوبه، و<b>E0422</b> في نقل داخلي بموافقة متعثرة.</p>
       </div>
     </div>
-  </aside>
+  </section>
 
-  <main class="chat">
-    <header class="chat-head">
-      <div class="chat-title">
-        <span class="t-en">Talk to Rafiq</span><span class="t-ar">تحدث مع رفيق</span>
+  <!-- CHAT -->
+  <section class="screen" id="screen-chat">
+    <div class="chat-wrap">
+      <div class="chips" id="chips">
+        <button class="chip" data-msg="Where is my laptop?"><span class="t-en">Where is my laptop?</span><span class="t-ar">وين حاسوبي؟</span></button>
+        <button class="chip" data-msg="What is my status?"><span class="t-en">My status</span><span class="t-ar">حالتي</span></button>
+        <button class="chip" data-msg="Book my medical fitness test"><span class="t-en">Book medical</span><span class="t-ar">احجز الفحص الطبي</span></button>
+        <button class="chip" data-msg="How many annual leave days do I get?"><span class="t-en">Annual leave?</span><span class="t-ar">رصيد الإجازات؟</span></button>
       </div>
-      <div class="lang-toggle" id="lang-toggle" role="switch" aria-checked="false" tabindex="0">
-        <span class="lang-opt is-active" data-lang="en">EN</span>
-        <span class="lang-opt" data-lang="ar">ع</span>
-      </div>
-    </header>
-
-    <div class="chips" id="chips">
-      <button class="chip" data-msg="Where is my laptop?"><span class="t-en">Where is my laptop?</span><span class="t-ar">وين حاسوبي؟</span></button>
-      <button class="chip" data-msg="What is my status?"><span class="t-en">My status</span><span class="t-ar">حالتي</span></button>
-      <button class="chip" data-msg="Book my medical fitness test"><span class="t-en">Book medical</span><span class="t-ar">احجز الفحص الطبي</span></button>
-      <button class="chip" data-msg="How many annual leave days do I get?"><span class="t-en">Annual leave?</span><span class="t-ar">رصيد الإجازات؟</span></button>
+      <div class="thread" id="thread" aria-live="polite"></div>
+      <form class="composer" id="composer">
+        <input id="msg-input" autocomplete="off"
+               placeholder-en="Ask about your journey, a policy, or a request…"
+               placeholder-ar="اسأل عن رحلتك أو سياسة أو اطلب خدمة…">
+        <button type="submit" class="send-btn" aria-label="Send"><span class="t-en">Send</span><span class="t-ar">إرسال</span></button>
+      </form>
     </div>
+  </section>
 
-    <div class="thread" id="thread" aria-live="polite"></div>
+  <!-- JOURNEY -->
+  <section class="screen" id="screen-journey">
+    <div class="screen-card" id="journey-card"></div>
+  </section>
 
-    <form class="composer" id="composer">
-      <input id="msg-input" autocomplete="off"
-             placeholder-en="Ask about your journey, a policy, or a request…"
-             placeholder-ar="اسأل عن رحلتك أو سياسة أو اطلب خدمة…">
-      <button type="submit" class="send-btn" aria-label="Send"><span class="t-en">Send</span><span class="t-ar">إرسال</span></button>
-    </form>
-  </main>
+  <!-- MY DATA -->
+  <section class="screen" id="screen-me">
+    <div class="screen-card" id="me-card"></div>
+  </section>
 
-  <section class="panel" id="panel"></section>
-</div>
+  <!-- AUDIT -->
+  <section class="screen" id="screen-audit">
+    <div class="screen-card" id="audit-card"></div>
+  </section>
+
+  <!-- NOTICES -->
+  <section class="screen" id="screen-notices">
+    <div class="screen-card" id="notices-card"></div>
+  </section>
+</main>
+
 <div id="toast" class="toast" hidden></div>
+<div class="sweep-wrap">
+  <button id="sweep-btn" class="ghost-btn"><span class="t-en">Simulate proactive sweep</span><span class="t-ar">محاكاة الفحص الاستباقي</span></button>
+</div>
 <script src="/static/app.js"></script>
 </body>
 </html>

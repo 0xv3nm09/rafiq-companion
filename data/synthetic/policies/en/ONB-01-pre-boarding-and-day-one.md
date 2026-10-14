@@ -8,7 +8,7 @@ version: 2026.1
 
 ## Before Day One
 
-New joiners receive a pre-boarding pack at offer acceptance covering documents to bring, first-week agenda, and their buddy assignment. HR Onboarding confirms building access and badge readiness before day one. Any document gap should be raised with HR Onboarding before the start date.
+New joiners receive a pre-boarding pack at offer acceptance covering documents to bring, first-week agenda, and their buddy assignment. Joining is only possible once papers are submitted and the ID photo is shared with HR Onboarding, both normally before travel. HR Onboarding confirms building access and badge readiness before day one; any document gap should be raised with them before the start date.
 
 ## Day One
 
