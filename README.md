@@ -13,6 +13,8 @@ in your journey, cites the policy behind every answer, and flags a stall to the 
 before you have to chase it yourself.
 
 > Built for the Ignyte × Emirates "Employee AI Companion" challenge. All data is synthetic.
+>
+> **Muhammad Omaid — Magnus Mage (dev team)**
 
 ## Quick start
 

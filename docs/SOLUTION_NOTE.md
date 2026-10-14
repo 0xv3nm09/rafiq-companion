@@ -1,6 +1,7 @@
 # Solution note — Rafiq, the Employee AI Companion
 
-*Draft for the ≤2-page submission note. Two columns when formatted; this file is the source.*
+**Muhammad Omaid — Magnus Mage (dev team)**
+*Entry for the Ignyte × Emirates "Employee AI Companion" challenge*
 
 ## 1. Problem & scope
 
