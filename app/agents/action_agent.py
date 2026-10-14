@@ -8,6 +8,9 @@ from app.schemas.common import Citation, Owner
 from app.schemas.handoff import HandoffCard
 from app.services.notify import HandoffStore, RequestStore
 
+SERVICE_OWNERS = ["IT Service Desk", "HR Mobility", "HR Business Partner",
+                  "Visa & Immigration", "Payroll", "Facilities", "HR Service Desk"]
+
 # event/action -> (request type, owning team)
 _ACTION_TARGETS = {
     "laptop": ("laptop_issue", "IT Service Desk"),

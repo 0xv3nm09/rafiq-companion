@@ -38,12 +38,22 @@ Two scenario employees are seeded (`SIM_DAY=5`):
 
 Then show the trust surfaces — the 25% Responsible-AI criterion, made clickable:
 
-- **My data** — what we hold, with the line *"not used for performance or discipline — ever"*.
+- **My data** — what we hold, your named line manager and HRBP, and the line *"not used for
+  performance or discipline — ever"*.
 - **Pulse consent toggle** — off ⇒ pulse data is excluded from every signal (tested).
 - **Audit log** — everything Rafiq did, timestamped, employee-visible.
 - **Simulate sweep** — the proactive engine re-scans all 200 employees, notifies the employee
   first, and escalates persistent stalls to named owners (idempotent per employee/event/day).
 - **EN / ع** — full RTL flip (layout mirrors, Arabic answers, Arabic timeline labels).
+
+Then switch **Viewing as** to the other side of the org — the flows run on the same synthetic data:
+
+- **Line manager · Grace Okonkwo (IT)** — a risk-sorted team of 34 with each report's blockers
+  and named owners. Read-only help, not surveillance: pulse content is never visible to managers.
+- **HRBP · Fatima Al Hashimi** — an early-warning queue (only real stalls, each already seen by
+  the employee first) aggregated by owner, plus the **Handoff inbox**: complete cards (stage,
+  blocker, what's been tried, named owner) that the owner can acknowledge and resolve — which the
+  employee sees in their own audit log.
 
 ## Architecture (four parts + a trust layer)
 
@@ -58,24 +68,42 @@ Then show the trust surfaces — the 25% Responsible-AI criterion, made clickabl
 LLM calls live in exactly one file (`app/core/llm.py`) — swap in Falcon-H1 Arabic / JAIS
 on-premise for the sovereign production path without touching anything else.
 
-## Zoned architecture
+## Architecture
 
-Six deployment zones with a dot wherever personal data crosses a boundary — the guardrail is a
-full-width band because nothing bypasses it: not the employee's question, not an answer, not a
-proactive notice.
+Two views of the same system. Both SVGs are self-adapting: GitHub's dark and light
+readers each get the right colours from one file.
 
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/zone-architecture-dark.svg">
-    <img src="docs/diagrams/zone-architecture.svg" alt="Zoned architecture: employee zone above a full-width guardrail band (PII redaction, sensitive-topic guard, citation required, confidence gate, audit write), then the companion stack (orchestrator, journey/policy/action agents, friction radar, sweep), the AI zone (BM25 EN/AR, Arabic normalization, llm.py boundary with extractive default or Falcon-H1/JAIS on-prem), the data zone (journey events, requests, pulse, journey maps, bilingual policies, runtime stores) and the people zone of named owners. Dots mark each personal-data boundary crossing." width="820">
-  </picture>
+  <img src="docs/diagrams/architecture-overview.svg" alt="Overview: a proactive, agentic companion — employee asks by text or voice in Arabic or English, the orchestrator routes to the journey-state, policy (RAG) and action agents, a friction radar watches events, SLAs and pulse dips, a trust gate checks consent, citations, confidence and applies a human gate, and grounding comes from the journey-state store, cited policy store, HRIS/ITSM connectors, consent and pulse records, with named human owners (HRBP, IT, Facilities) for escalations" width="700">
 </p>
 
-The dots are the PDPL story made visible: the question crosses with identity, the guardrail
-redacts before the stack sees it, retrieval is row-scoped by `employee_id`, pulse counts only
-while consent is ON, and the handoff card that reaches a named owner carries the minimum needed
-to unblock — stage, blocker, what's been tried. Regenerate both variants:
-`uv run python docs/diagrams/make_zone_diagram.py`.
+**Overview — a proactive, agentic companion: grounded, gated, human-owned.** The left flow is
+the answer path (orchestrator → journey-state / policy / action agents); the friction radar
+watches events, SLAs and consented pulse dips and pushes in *before* the employee asks. Every
+answer and action passes the trust gate; grounding comes from the journey-state store, the cited
+policy store and (in a pilot) read-only HRIS/ITSM connectors; escalations always land with a
+named human owner.
+
+<p align="center">
+  <img src="docs/diagrams/architecture-zoned.svg" alt="Zoned architecture: zone 1 employee + channels (web or mobile, text or voice, AR + EN), zone 2 the AI companion (orchestrator router, journey-state events vs SLA, policy RAG cited answers, action + route, friction radar sweep, and a trust gate band of consent, citations, confidence, PII redaction and human gate on every answer and action), zone 3 data + people (journey and consent store, policy vector store, append-only audit log, HRIS/ITSM connectors synthetic now and live read-only in pilot, Emirates systems)" width="620">
+</p>
+
+**Zoned view — where data lives and where it may go.** Zone 1 is the employee and their
+channels; zone 2 is the companion with the trust gate drawn as a band because *every* answer and
+action crosses it; zone 3 is data + people: journey and consent stores, the cited policy corpus,
+an append-only audit log, and the Emirates systems reached through connectors that are synthetic
+in the build and read-only in a pilot. The posture in the subtitle — employee-owned, grounded +
+gated, in-region (PDPL), human-owned escalations — is enforced in code, not aspiration.
+
+## What the judge sees
+
+Three screens carry the demo; each maps to the criteria it serves.
+
+| Screen | What it shows | What was achieved |
+| --- | --- | --- |
+| ![Home — proactive cold-open](docs/screenshots/home.png) | **Home — the proactive cold-open.** Aisha, day 5 of onboarding: her stage, her open blocker and a one-tap chase are on screen *before she asks*. The trust line is plain text, not a footnote. | Friction caught before the complaint (30% scenario weight); employee-owned trust made visible (25% Responsible-AI weight). |
+| ![Chat — grounded, cited answer](docs/screenshots/chat-cited-answer.png) | **Chat — grounded and cited.** "Where is my laptop?" gets a deterministic journey answer citing policy **ONB-07** with the named owner (IT Service Desk); *Chase* raises a structured handoff card that lands in the owner's inbox. | Hidden-scenario reliability: cited answers, no hallucinated policy, complete correctly-routed handoffs (30% + 25%). |
+| ![Manager view — read-only team help](docs/screenshots/manager-team.png) | **Manager view — read-only team help.** Grace Okonkwo (IT) sees her 34 reports risk-sorted with journey facts only. Two notes say it outright: help, not surveillance — pulse content is never visible to managers. | The companion works in *both* directions without becoming a monitoring tool — the Responsible-AI line judges probe hardest (25%). |
 
 ## Data
 

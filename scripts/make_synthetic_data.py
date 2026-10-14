@@ -81,6 +81,29 @@ E0421 = dict(employee_id="E0421", name="Aisha Al Mansoori", role="Finance Analys
 E0422 = dict(employee_id="E0422", name="Omar Haddad", role="IT Support Specialist", department="IT",
              journey="mobility", start_day=-420, mobility_start_day=-13, lang_pref="en", emirati=False)
 
+# Organisation spine: line managers + HRBPs are people rows too (E99xx), so the
+# manager/HR personas in the UI read real synthetic relationships, not fixtures.
+MANAGERS = [
+    dict(employee_id="E9901", name="Khalid Al Suwaidi", role="Line Manager", department="Finance"),
+    dict(employee_id="E9902", name="Grace Okonkwo", role="Line Manager", department="IT"),
+    dict(employee_id="E9903", name="Rashid Al Zaabi", role="Line Manager", department="Airport Services"),
+    dict(employee_id="E9904", name="Elena Petrova", role="Line Manager", department="Engineering"),
+    dict(employee_id="E9905", name="Hassan Rahman", role="Line Manager", department="Commercial"),
+    dict(employee_id="E9906", name="Mei Lin", role="Line Manager", department="People & Culture"),
+]
+HRBPS = [
+    dict(employee_id="E9911", name="Fatima Al Hashimi", role="HR Business Partner", department="People & Culture"),
+    dict(employee_id="E9912", name="James Whitfield", role="HR Business Partner", department="People & Culture"),
+]
+SERVICE_OWNERS = ["IT Service Desk", "HR Mobility", "HR Business Partner",
+                  "Visa & Immigration", "Payroll", "Facilities", "HR Service Desk"]
+
+
+def org_assign(index: int) -> tuple[str, str]:
+    manager = MANAGERS[index % len(MANAGERS)]["employee_id"]
+    hrbp = HRBPS[(index // 30) % len(HRBPS)]["employee_id"]
+    return manager, hrbp
+
 
 def make_employees(n: int, sim_day: int, rng: random.Random) -> list[dict]:
     people = [dict(E0421), dict(E0422)]
@@ -92,23 +115,38 @@ def make_employees(n: int, sim_day: int, rng: random.Random) -> list[dict]:
         seen.add(eid)
         role, dept = rng.choice(ROLES_DEPTS)
         emirati = rng.random() < 0.18
+        idx = len(people) - 2  # stable assignment order over the cohort
+        mgr, hrbp = org_assign(idx)
         if rng.random() < 0.4:  # mobility cohort
             md = rng.randint(-5, 40)                    # mobility day now
             people.append(dict(employee_id=eid, name=f"{rng.choice(FIRST)} {rng.choice(LAST)}",
                                role=role, department=dept, journey="mobility",
                                start_day=rng.randint(-800, -200), mobility_start_day=sim_day - md,
-                               lang_pref=rng.choice(["en", "en", "ar"]), emirati=emirati))
+                               lang_pref=rng.choice(["en", "en", "ar"]), emirati=emirati,
+                               line_manager_id=mgr, hrbp_id=hrbp))
         else:
             jd = rng.choice([rng.randint(-20, -1), rng.randint(0, 35)])
             people.append(dict(employee_id=eid, name=f"{rng.choice(FIRST)} {rng.choice(LAST)}",
                                role=role, department=dept, journey="onboarding",
                                start_day=sim_day - jd, mobility_start_day="",
-                               lang_pref=rng.choice(["en", "en", "ar"]), emirati=emirati))
+                               lang_pref=rng.choice(["en", "en", "ar"]), emirati=emirati,
+                               line_manager_id=mgr, hrbp_id=hrbp))
+    # demo stars get fixed, named relationships for the judge script
+    for p in people:
+        if p["employee_id"] == "E0421":
+            p["line_manager_id"], p["hrbp_id"] = "E9901", "E9911"
+        if p["employee_id"] == "E0422":
+            p["line_manager_id"], p["hrbp_id"] = "E9902", "E9912"
+    for m in MANAGERS + HRBPS:
+        people.append(dict(m, journey="", start_day="", mobility_start_day="",
+                           lang_pref="en", emirati=False, line_manager_id="", hrbp_id=""))
     return people
 
 
 def journey_day(person: dict, sim_day: int) -> int:
     anchor = person["mobility_start_day"] if person["journey"] == "mobility" else person["start_day"]
+    if anchor == "" or anchor is None:
+        return -9999
     return sim_day - int(anchor)
 
 
@@ -119,6 +157,8 @@ def make_events(people: list[dict], rng: random.Random) -> list[dict]:
         rows.append(dict(employee_id=emp_id, event=event, completed_day=day, status=status))
 
     for p in people:
+        if not p.get("journey"):   # line managers / HRBPs are not on a journey
+            continue
         eid = p["employee_id"]
         jd = journey_day(p, 5)
         if eid == "E0421":

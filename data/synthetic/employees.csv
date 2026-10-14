@@ -1,201 +1,209 @@
-employee_id,name,role,department,journey,start_day,mobility_start_day,lang_pref,emirati
-E0421,Aisha Al Mansoori,Finance Analyst,Finance,onboarding,0,,en,True
-E0422,Omar Haddad,IT Support Specialist,IT,mobility,-420,-13,en,False
-E1825,Sara Ali,Cabin Crew,Flight Operations,mobility,-242,2,en,False
-E9675,Anna Okafor,Marketing Specialist,Marketing,mobility,-773,-4,ar,True
-E3258,Aisha Ibrahim,Training Coordinator,Learning & Development,onboarding,-23,,en,False
-E6925,Sara Al Suwaidi,HR Officer,People & Culture,mobility,-411,-11,en,False
-E5882,Vikram Al Suwaidi,HR Officer,People & Culture,onboarding,11,,ar,False
-E4804,Fatima Ali,Procurement Officer,Supply Chain,onboarding,7,,en,False
-E4742,Meera Sharma,Airport Services Agent,Airport Services,onboarding,-12,,en,False
-E5821,Layla Garcia,Finance Analyst,Finance,onboarding,23,,en,False
-E4423,Khalid Nair,Procurement Officer,Supply Chain,mobility,-768,-10,en,False
-E6573,Lucas Johnson,IT Support Specialist,IT,onboarding,7,,ar,True
-E7518,Nina Fernandez,Aircraft Engineer,Engineering,mobility,-202,-25,en,False
-E9561,Yousef Ibrahim,Marketing Specialist,Marketing,onboarding,-27,,en,False
-E1797,Vikram Okafor,Aircraft Engineer,Engineering,onboarding,1,,en,False
-E8670,Rahul Al Marzouqi,IT Support Specialist,IT,onboarding,-2,,en,False
-E7124,Anna Lim,Aircraft Engineer,Engineering,onboarding,17,,en,False
-E4890,Layla Silva,Procurement Officer,Supply Chain,mobility,-257,-13,en,False
-E9814,Majid Nair,HR Officer,People & Culture,mobility,-741,-13,en,False
-E9296,Noor Ali,Airport Services Agent,Airport Services,onboarding,23,,en,True
-E9008,Majid Johnson,Aircraft Engineer,Engineering,onboarding,12,,ar,False
-E6119,Rahul Al Mansoori,Ground Operations Officer,Ground Handling,onboarding,18,,ar,False
-E9076,Khalid Nair,Finance Analyst,Finance,mobility,-731,-35,en,False
-E5414,Faisal Silva,Airport Services Agent,Airport Services,mobility,-665,-21,ar,False
-E9356,Sara Ali,Data Analyst,Commercial,onboarding,12,,en,False
-E5805,Ananya Chowdhury,Marketing Specialist,Marketing,onboarding,24,,en,False
-E1791,Abdullah Garcia,Finance Analyst,Finance,onboarding,21,,en,False
-E1236,Yousef Lim,Ground Operations Officer,Ground Handling,onboarding,22,,en,False
-E2725,Khalid Sharma,Marketing Specialist,Marketing,mobility,-412,-15,en,False
-E6397,Rashid Patel,IT Support Specialist,IT,onboarding,-22,,en,False
-E3567,Samuel Mueller,Cabin Crew,Flight Operations,onboarding,15,,ar,False
-E8702,Saeed Johnson,Aircraft Engineer,Engineering,onboarding,20,,en,True
-E9334,Maria Ali,Finance Analyst,Finance,mobility,-203,5,ar,False
-E8566,Priya Nair,HR Officer,People & Culture,mobility,-529,-35,en,False
-E2145,Daniel Anderson,Procurement Officer,Supply Chain,onboarding,5,,en,False
-E1201,Mariam Tan,Cargo Agent,Cargo,mobility,-550,-12,en,False
-E4670,Peter Rossi,Aircraft Engineer,Engineering,onboarding,16,,ar,False
-E1698,Salma Okafor,Aircraft Engineer,Engineering,onboarding,-4,,en,False
-E5618,Khalid Al Suwaidi,Finance Analyst,Finance,onboarding,-26,,ar,False
-E6940,Dana Sharma,IT Support Specialist,IT,mobility,-348,2,ar,True
-E7008,Rashid Silva,Cargo Agent,Cargo,mobility,-764,-34,en,True
-E9544,Meera Tan,Cargo Agent,Cargo,mobility,-760,-9,en,True
-E3442,Maria Okafor,Procurement Officer,Supply Chain,mobility,-642,-25,en,False
-E2663,Maria Al Balushi,Aircraft Engineer,Engineering,mobility,-546,-11,en,False
-E2609,Marco Smith,Training Coordinator,Learning & Development,onboarding,10,,en,True
-E3729,Abdullah Kaur,Finance Analyst,Finance,mobility,-729,-11,en,True
-E5754,Hamdan Tan,Procurement Officer,Supply Chain,onboarding,8,,en,False
-E2926,Chloe Brown,Data Analyst,Commercial,mobility,-447,4,ar,False
-E5140,Fatima Rahman,Marketing Specialist,Marketing,onboarding,-7,,en,False
-E0028,Mariam Ali,Cargo Agent,Cargo,onboarding,-18,,en,False
-E5144,Maria Kowalski,Procurement Officer,Supply Chain,onboarding,-27,,en,False
-E4845,Ananya Silva,Cargo Agent,Cargo,onboarding,-6,,en,True
-E4979,Elena Garcia,IT Support Specialist,IT,onboarding,-15,,ar,False
-E3502,Anna Ali,Cargo Agent,Cargo,onboarding,0,,ar,False
-E5492,Rashid Al Mansoori,Airport Services Agent,Airport Services,onboarding,16,,en,False
-E4012,Vikram Mueller,Ground Operations Officer,Ground Handling,onboarding,11,,en,False
-E3998,James Nair,Aircraft Engineer,Engineering,mobility,-620,4,ar,False
-E8487,Marco Khan,Ground Operations Officer,Ground Handling,mobility,-325,3,ar,True
-E8703,Peter Garcia,Cargo Agent,Cargo,onboarding,-27,,en,False
-E7778,Abdullah Ibrahim,Ground Operations Officer,Ground Handling,mobility,-267,-30,en,False
-E3920,Priya Tan,IT Support Specialist,IT,onboarding,-12,,ar,False
-E1321,Faisal Al Suwaidi,Aircraft Engineer,Engineering,mobility,-376,1,en,True
-E5422,Vikram Tan,Cargo Agent,Cargo,mobility,-202,-16,ar,False
-E0321,Majid Ibrahim,Data Analyst,Commercial,mobility,-401,-12,en,False
-E8819,Abdullah Brown,Training Coordinator,Learning & Development,onboarding,18,,en,False
-E0476,Noor Okafor,Marketing Specialist,Marketing,onboarding,-5,,ar,False
-E0442,Marco Sharma,Marketing Specialist,Marketing,onboarding,23,,en,False
-E4263,Maria Fernandez,Marketing Specialist,Marketing,onboarding,-19,,en,False
-E7706,Hind Hassan,Cabin Crew,Flight Operations,mobility,-730,-12,ar,False
-E0660,Daniel Khan,Cabin Crew,Flight Operations,mobility,-556,9,en,False
-E7759,Layla Okafor,Procurement Officer,Supply Chain,onboarding,-11,,ar,True
-E1877,Majid Anderson,Aircraft Engineer,Engineering,mobility,-416,9,en,False
-E3250,Chloe Al Balushi,Airport Services Agent,Airport Services,onboarding,-1,,en,False
-E9273,Aisha Kaur,Cabin Crew,Flight Operations,onboarding,1,,en,False
-E8032,Rashid Brown,Airport Services Agent,Airport Services,mobility,-620,-19,ar,False
-E8549,James Al Zaabi,Procurement Officer,Supply Chain,onboarding,-25,,ar,False
-E9708,Abdullah Tan,IT Support Specialist,IT,mobility,-339,5,en,False
-E7614,Lucas Kaur,Data Analyst,Commercial,mobility,-468,9,en,False
-E7989,Chloe Rahman,Finance Analyst,Finance,mobility,-518,-7,ar,False
-E0167,Lucas Silva,Cargo Agent,Cargo,mobility,-554,-16,ar,False
-E7801,Hind Johnson,Procurement Officer,Supply Chain,onboarding,0,,ar,False
-E3987,David Smith,IT Support Specialist,IT,mobility,-365,-25,ar,False
-E9018,Hamdan Chowdhury,HR Officer,People & Culture,onboarding,16,,en,False
-E5170,Sofia Fernandez,Airport Services Agent,Airport Services,onboarding,20,,ar,False
-E9660,Meera Sharma,Cargo Agent,Cargo,onboarding,19,,en,False
-E0232,Peter Rossi,Training Coordinator,Learning & Development,mobility,-671,7,ar,False
-E8043,Rahul Sharma,Airport Services Agent,Airport Services,onboarding,-25,,en,False
-E4137,Mariam Anderson,Ground Operations Officer,Ground Handling,mobility,-746,-21,en,True
-E2445,Hamdan Silva,Data Analyst,Commercial,mobility,-374,-5,ar,False
-E9767,Samuel Brown,Data Analyst,Commercial,onboarding,-23,,en,False
-E9317,Dana Ali,Data Analyst,Commercial,onboarding,22,,en,True
-E2574,Maria Garcia,Finance Analyst,Finance,mobility,-319,10,en,True
-E0535,Mariam Ali,Finance Analyst,Finance,mobility,-561,-19,en,False
-E9664,Nina Nair,Procurement Officer,Supply Chain,mobility,-648,3,en,False
-E2331,Hamdan Garcia,Airport Services Agent,Airport Services,onboarding,-13,,ar,True
-E4983,Lucas Garcia,Training Coordinator,Learning & Development,mobility,-718,-24,ar,False
-E0654,Grace Anderson,Marketing Specialist,Marketing,onboarding,25,,en,False
-E4416,Abdullah Sharma,Data Analyst,Commercial,onboarding,-28,,ar,True
-E7142,Rahul Kowalski,Procurement Officer,Supply Chain,onboarding,-17,,ar,False
-E1714,Marco Al Suwaidi,Aircraft Engineer,Engineering,onboarding,16,,en,False
-E4136,Maria Haddad,HR Officer,People & Culture,onboarding,5,,en,True
-E8495,Abdullah Silva,HR Officer,People & Culture,onboarding,11,,en,False
-E4720,Majid Silva,Ground Operations Officer,Ground Handling,onboarding,25,,en,False
-E9049,Rashid Mueller,Marketing Specialist,Marketing,onboarding,22,,ar,True
-E4782,Marco Silva,Cargo Agent,Cargo,onboarding,10,,en,False
-E6285,Maria Kowalski,Finance Analyst,Finance,onboarding,1,,ar,False
-E4378,Samuel Ali,Cabin Crew,Flight Operations,mobility,-299,-27,en,False
-E7317,Vikram Garcia,Cargo Agent,Cargo,mobility,-471,-24,en,False
-E3913,Sofia Rahman,Data Analyst,Commercial,onboarding,3,,en,False
-E6326,Noor Dubois,Procurement Officer,Supply Chain,onboarding,21,,ar,False
-E5440,Rashid Brown,Airport Services Agent,Airport Services,onboarding,9,,ar,False
-E2530,Rahul Kaur,Airport Services Agent,Airport Services,onboarding,15,,ar,False
-E8743,Daniel Al Suwaidi,Marketing Specialist,Marketing,onboarding,10,,en,False
-E4709,Layla Rahman,Finance Analyst,Finance,onboarding,-1,,en,False
-E0475,Meera Brown,Cabin Crew,Flight Operations,mobility,-651,-12,en,False
-E6752,Yousef Okafor,Data Analyst,Commercial,mobility,-409,-1,ar,False
-E3946,Dana Garcia,Ground Operations Officer,Ground Handling,mobility,-539,-19,ar,False
-E0154,Arjun Anderson,Ground Operations Officer,Ground Handling,onboarding,1,,en,False
-E6952,Sara Nair,Training Coordinator,Learning & Development,onboarding,-19,,en,False
-E9371,Abdullah Al Mansoori,HR Officer,People & Culture,onboarding,4,,ar,False
-E0804,Hind Hassan,Data Analyst,Commercial,onboarding,-9,,en,False
-E4107,Majid Al Balushi,Procurement Officer,Supply Chain,onboarding,21,,en,False
-E0547,Priya Chowdhury,Data Analyst,Commercial,mobility,-375,-8,en,False
-E3290,Layla Fernandez,Aircraft Engineer,Engineering,onboarding,-28,,en,False
-E4836,Hind Kaur,Training Coordinator,Learning & Development,onboarding,11,,ar,False
-E6512,Marco Smith,Cargo Agent,Cargo,onboarding,25,,ar,False
-E4296,Sofia Al Mansoori,Data Analyst,Commercial,onboarding,14,,ar,False
-E9199,Marco Lim,HR Officer,People & Culture,mobility,-491,6,ar,False
-E6690,Sara Nair,Airport Services Agent,Airport Services,onboarding,16,,ar,True
-E2223,Maria Hassan,Marketing Specialist,Marketing,onboarding,8,,en,False
-E8018,Elena Garcia,Data Analyst,Commercial,onboarding,24,,en,False
-E5943,Arjun Haddad,Airport Services Agent,Airport Services,mobility,-393,-31,en,False
-E3110,Khalid Al Balushi,Airport Services Agent,Airport Services,onboarding,23,,en,False
-E3991,Faisal Anderson,Aircraft Engineer,Engineering,mobility,-579,-25,en,False
-E5384,Nina Fernandez,Aircraft Engineer,Engineering,onboarding,17,,en,False
-E1802,Saeed Anderson,Procurement Officer,Supply Chain,mobility,-469,-12,en,False
-E2855,Sofia Garcia,IT Support Specialist,IT,onboarding,9,,en,True
-E8409,Marco Hassan,Data Analyst,Commercial,onboarding,3,,en,True
-E0997,Mariam Tan,Ground Operations Officer,Ground Handling,onboarding,-26,,en,False
-E5278,Samuel Silva,Data Analyst,Commercial,mobility,-468,-29,en,True
-E9788,Peter Chowdhury,Cargo Agent,Cargo,onboarding,12,,en,False
-E7047,Sara Kowalski,Ground Operations Officer,Ground Handling,onboarding,-20,,en,False
-E5121,Yousef Al Suwaidi,Procurement Officer,Supply Chain,onboarding,10,,en,False
-E1583,Hamdan Brown,Training Coordinator,Learning & Development,onboarding,2,,en,False
-E6930,Arjun Al Marzouqi,Training Coordinator,Learning & Development,mobility,-209,-9,ar,True
-E3486,Arjun Kaur,Aircraft Engineer,Engineering,mobility,-231,4,en,False
-E1883,Chloe Lim,IT Support Specialist,IT,onboarding,8,,ar,False
-E4382,Aisha Sharma,Cabin Crew,Flight Operations,onboarding,-16,,en,False
-E9279,Omar Al Suwaidi,Procurement Officer,Supply Chain,mobility,-257,-30,en,False
-E6164,Priya Ibrahim,Marketing Specialist,Marketing,mobility,-219,-9,ar,False
-E1392,Elena Ali,Cabin Crew,Flight Operations,onboarding,0,,en,True
-E7958,Hamdan Smith,Data Analyst,Commercial,mobility,-360,-22,en,False
-E4641,Ananya Okafor,Procurement Officer,Supply Chain,onboarding,16,,en,False
-E0126,Dana Rossi,Finance Analyst,Finance,mobility,-465,2,en,False
-E0127,Nina Rahman,Ground Operations Officer,Ground Handling,mobility,-565,-14,ar,False
-E9155,James Al Mansoori,Procurement Officer,Supply Chain,mobility,-330,8,en,False
-E5130,Ananya Al Mansoori,Data Analyst,Commercial,onboarding,12,,en,False
-E2816,Sara Nair,Data Analyst,Commercial,onboarding,0,,en,False
-E9649,Rahul Nair,Marketing Specialist,Marketing,mobility,-459,-9,en,False
-E1252,Rashid Nair,Cargo Agent,Cargo,onboarding,-17,,en,False
-E2400,Marco Ibrahim,IT Support Specialist,IT,onboarding,-6,,ar,False
-E9495,Rashid Garcia,Ground Operations Officer,Ground Handling,onboarding,-15,,en,False
-E7683,Anna Al Suwaidi,Ground Operations Officer,Ground Handling,onboarding,2,,en,False
-E7566,Mariam Hassan,Ground Operations Officer,Ground Handling,mobility,-708,-8,ar,True
-E9734,Priya Okafor,Cargo Agent,Cargo,onboarding,24,,en,False
-E8215,Fatima Nair,Aircraft Engineer,Engineering,onboarding,15,,ar,False
-E7173,Vikram Brown,Ground Operations Officer,Ground Handling,onboarding,-18,,en,False
-E9796,Peter Ali,Cabin Crew,Flight Operations,onboarding,23,,en,False
-E4656,Yousef Anderson,IT Support Specialist,IT,onboarding,-4,,ar,False
-E2318,Majid Silva,HR Officer,People & Culture,onboarding,13,,en,False
-E5382,Anna Smith,Aircraft Engineer,Engineering,onboarding,0,,en,False
-E5941,Zainab Nair,IT Support Specialist,IT,mobility,-660,-21,en,False
-E1265,David Haddad,IT Support Specialist,IT,mobility,-456,-24,ar,False
-E2148,Daniel Al Balushi,Data Analyst,Commercial,mobility,-631,-34,ar,False
-E7171,Elena Nair,Cabin Crew,Flight Operations,onboarding,-23,,ar,False
-E3919,Marco Ibrahim,IT Support Specialist,IT,onboarding,-18,,en,False
-E6257,Khalid Hassan,Cargo Agent,Cargo,onboarding,-3,,en,False
-E6082,Yousef Ibrahim,Cargo Agent,Cargo,onboarding,-2,,en,False
-E4470,Yousef Lim,Ground Operations Officer,Ground Handling,mobility,-573,-17,en,False
-E5728,Saeed Johnson,Cabin Crew,Flight Operations,mobility,-717,-13,en,False
-E3679,Rahul Al Balushi,Cabin Crew,Flight Operations,mobility,-651,-35,en,False
-E0628,Daniel Al Mansoori,IT Support Specialist,IT,onboarding,-25,,en,False
-E0312,David Brown,IT Support Specialist,IT,mobility,-687,-28,en,False
-E3894,Daniel Garcia,IT Support Specialist,IT,mobility,-736,-30,en,True
-E8190,Salma Brown,Data Analyst,Commercial,onboarding,7,,en,False
-E5781,Yousef Dubois,Finance Analyst,Finance,mobility,-431,-32,en,False
-E8619,Sofia Haddad,Cargo Agent,Cargo,onboarding,4,,ar,False
-E6339,Arjun Nair,HR Officer,People & Culture,mobility,-694,6,ar,False
-E5448,Tariq Al Balushi,Aircraft Engineer,Engineering,onboarding,-24,,en,True
-E1034,Zainab Tan,Training Coordinator,Learning & Development,onboarding,16,,en,False
-E5171,Fatima Ibrahim,IT Support Specialist,IT,onboarding,-25,,ar,False
-E3132,Meera Brown,IT Support Specialist,IT,onboarding,15,,en,False
-E7205,Lucas Smith,Marketing Specialist,Marketing,mobility,-269,-34,en,False
-E1354,Priya Al Marzouqi,Training Coordinator,Learning & Development,onboarding,-29,,en,False
-E5373,Arjun Garcia,Procurement Officer,Supply Chain,onboarding,-5,,en,False
-E5777,Mariam Ali,Data Analyst,Commercial,mobility,-385,7,en,False
-E8407,Noor Al Suwaidi,Training Coordinator,Learning & Development,onboarding,21,,en,False
-E6002,Meera Smith,HR Officer,People & Culture,onboarding,-4,,en,False
-E1260,Abdullah Nair,Data Analyst,Commercial,mobility,-684,-10,en,True
-E3049,Elena Patel,Ground Operations Officer,Ground Handling,onboarding,-11,,ar,False
+employee_id,name,role,department,journey,start_day,mobility_start_day,lang_pref,emirati,line_manager_id,hrbp_id
+E0421,Aisha Al Mansoori,Finance Analyst,Finance,onboarding,0,,en,True,E9901,E9911
+E0422,Omar Haddad,IT Support Specialist,IT,mobility,-420,-13,en,False,E9902,E9912
+E1825,Sara Ali,Cabin Crew,Flight Operations,mobility,-242,2,en,False,E9901,E9911
+E9675,Anna Okafor,Marketing Specialist,Marketing,mobility,-773,-4,ar,True,E9902,E9911
+E3258,Aisha Ibrahim,Training Coordinator,Learning & Development,onboarding,-23,,en,False,E9903,E9911
+E6925,Sara Al Suwaidi,HR Officer,People & Culture,mobility,-411,-11,en,False,E9904,E9911
+E5882,Vikram Al Suwaidi,HR Officer,People & Culture,onboarding,11,,ar,False,E9905,E9911
+E4804,Fatima Ali,Procurement Officer,Supply Chain,onboarding,7,,en,False,E9906,E9911
+E4742,Meera Sharma,Airport Services Agent,Airport Services,onboarding,-12,,en,False,E9901,E9911
+E5821,Layla Garcia,Finance Analyst,Finance,onboarding,23,,en,False,E9902,E9911
+E4423,Khalid Nair,Procurement Officer,Supply Chain,mobility,-768,-10,en,False,E9903,E9911
+E6573,Lucas Johnson,IT Support Specialist,IT,onboarding,7,,ar,True,E9904,E9911
+E7518,Nina Fernandez,Aircraft Engineer,Engineering,mobility,-202,-25,en,False,E9905,E9911
+E9561,Yousef Ibrahim,Marketing Specialist,Marketing,onboarding,-27,,en,False,E9906,E9911
+E1797,Vikram Okafor,Aircraft Engineer,Engineering,onboarding,1,,en,False,E9901,E9911
+E8670,Rahul Al Marzouqi,IT Support Specialist,IT,onboarding,-2,,en,False,E9902,E9911
+E7124,Anna Lim,Aircraft Engineer,Engineering,onboarding,17,,en,False,E9903,E9911
+E4890,Layla Silva,Procurement Officer,Supply Chain,mobility,-257,-13,en,False,E9904,E9911
+E9814,Majid Nair,HR Officer,People & Culture,mobility,-741,-13,en,False,E9905,E9911
+E9296,Noor Ali,Airport Services Agent,Airport Services,onboarding,23,,en,True,E9906,E9911
+E9008,Majid Johnson,Aircraft Engineer,Engineering,onboarding,12,,ar,False,E9901,E9911
+E6119,Rahul Al Mansoori,Ground Operations Officer,Ground Handling,onboarding,18,,ar,False,E9902,E9911
+E9076,Khalid Nair,Finance Analyst,Finance,mobility,-731,-35,en,False,E9903,E9911
+E5414,Faisal Silva,Airport Services Agent,Airport Services,mobility,-665,-21,ar,False,E9904,E9911
+E9356,Sara Ali,Data Analyst,Commercial,onboarding,12,,en,False,E9905,E9911
+E5805,Ananya Chowdhury,Marketing Specialist,Marketing,onboarding,24,,en,False,E9906,E9911
+E1791,Abdullah Garcia,Finance Analyst,Finance,onboarding,21,,en,False,E9901,E9911
+E1236,Yousef Lim,Ground Operations Officer,Ground Handling,onboarding,22,,en,False,E9902,E9911
+E2725,Khalid Sharma,Marketing Specialist,Marketing,mobility,-412,-15,en,False,E9903,E9911
+E6397,Rashid Patel,IT Support Specialist,IT,onboarding,-22,,en,False,E9904,E9911
+E3567,Samuel Mueller,Cabin Crew,Flight Operations,onboarding,15,,ar,False,E9905,E9911
+E8702,Saeed Johnson,Aircraft Engineer,Engineering,onboarding,20,,en,True,E9906,E9911
+E9334,Maria Ali,Finance Analyst,Finance,mobility,-203,5,ar,False,E9901,E9912
+E8566,Priya Nair,HR Officer,People & Culture,mobility,-529,-35,en,False,E9902,E9912
+E2145,Daniel Anderson,Procurement Officer,Supply Chain,onboarding,5,,en,False,E9903,E9912
+E1201,Mariam Tan,Cargo Agent,Cargo,mobility,-550,-12,en,False,E9904,E9912
+E4670,Peter Rossi,Aircraft Engineer,Engineering,onboarding,16,,ar,False,E9905,E9912
+E1698,Salma Okafor,Aircraft Engineer,Engineering,onboarding,-4,,en,False,E9906,E9912
+E5618,Khalid Al Suwaidi,Finance Analyst,Finance,onboarding,-26,,ar,False,E9901,E9912
+E6940,Dana Sharma,IT Support Specialist,IT,mobility,-348,2,ar,True,E9902,E9912
+E7008,Rashid Silva,Cargo Agent,Cargo,mobility,-764,-34,en,True,E9903,E9912
+E9544,Meera Tan,Cargo Agent,Cargo,mobility,-760,-9,en,True,E9904,E9912
+E3442,Maria Okafor,Procurement Officer,Supply Chain,mobility,-642,-25,en,False,E9905,E9912
+E2663,Maria Al Balushi,Aircraft Engineer,Engineering,mobility,-546,-11,en,False,E9906,E9912
+E2609,Marco Smith,Training Coordinator,Learning & Development,onboarding,10,,en,True,E9901,E9912
+E3729,Abdullah Kaur,Finance Analyst,Finance,mobility,-729,-11,en,True,E9902,E9912
+E5754,Hamdan Tan,Procurement Officer,Supply Chain,onboarding,8,,en,False,E9903,E9912
+E2926,Chloe Brown,Data Analyst,Commercial,mobility,-447,4,ar,False,E9904,E9912
+E5140,Fatima Rahman,Marketing Specialist,Marketing,onboarding,-7,,en,False,E9905,E9912
+E0028,Mariam Ali,Cargo Agent,Cargo,onboarding,-18,,en,False,E9906,E9912
+E5144,Maria Kowalski,Procurement Officer,Supply Chain,onboarding,-27,,en,False,E9901,E9912
+E4845,Ananya Silva,Cargo Agent,Cargo,onboarding,-6,,en,True,E9902,E9912
+E4979,Elena Garcia,IT Support Specialist,IT,onboarding,-15,,ar,False,E9903,E9912
+E3502,Anna Ali,Cargo Agent,Cargo,onboarding,0,,ar,False,E9904,E9912
+E5492,Rashid Al Mansoori,Airport Services Agent,Airport Services,onboarding,16,,en,False,E9905,E9912
+E4012,Vikram Mueller,Ground Operations Officer,Ground Handling,onboarding,11,,en,False,E9906,E9912
+E3998,James Nair,Aircraft Engineer,Engineering,mobility,-620,4,ar,False,E9901,E9912
+E8487,Marco Khan,Ground Operations Officer,Ground Handling,mobility,-325,3,ar,True,E9902,E9912
+E8703,Peter Garcia,Cargo Agent,Cargo,onboarding,-27,,en,False,E9903,E9912
+E7778,Abdullah Ibrahim,Ground Operations Officer,Ground Handling,mobility,-267,-30,en,False,E9904,E9912
+E3920,Priya Tan,IT Support Specialist,IT,onboarding,-12,,ar,False,E9905,E9912
+E1321,Faisal Al Suwaidi,Aircraft Engineer,Engineering,mobility,-376,1,en,True,E9906,E9912
+E5422,Vikram Tan,Cargo Agent,Cargo,mobility,-202,-16,ar,False,E9901,E9911
+E0321,Majid Ibrahim,Data Analyst,Commercial,mobility,-401,-12,en,False,E9902,E9911
+E8819,Abdullah Brown,Training Coordinator,Learning & Development,onboarding,18,,en,False,E9903,E9911
+E0476,Noor Okafor,Marketing Specialist,Marketing,onboarding,-5,,ar,False,E9904,E9911
+E0442,Marco Sharma,Marketing Specialist,Marketing,onboarding,23,,en,False,E9905,E9911
+E4263,Maria Fernandez,Marketing Specialist,Marketing,onboarding,-19,,en,False,E9906,E9911
+E7706,Hind Hassan,Cabin Crew,Flight Operations,mobility,-730,-12,ar,False,E9901,E9911
+E0660,Daniel Khan,Cabin Crew,Flight Operations,mobility,-556,9,en,False,E9902,E9911
+E7759,Layla Okafor,Procurement Officer,Supply Chain,onboarding,-11,,ar,True,E9903,E9911
+E1877,Majid Anderson,Aircraft Engineer,Engineering,mobility,-416,9,en,False,E9904,E9911
+E3250,Chloe Al Balushi,Airport Services Agent,Airport Services,onboarding,-1,,en,False,E9905,E9911
+E9273,Aisha Kaur,Cabin Crew,Flight Operations,onboarding,1,,en,False,E9906,E9911
+E8032,Rashid Brown,Airport Services Agent,Airport Services,mobility,-620,-19,ar,False,E9901,E9911
+E8549,James Al Zaabi,Procurement Officer,Supply Chain,onboarding,-25,,ar,False,E9902,E9911
+E9708,Abdullah Tan,IT Support Specialist,IT,mobility,-339,5,en,False,E9903,E9911
+E7614,Lucas Kaur,Data Analyst,Commercial,mobility,-468,9,en,False,E9904,E9911
+E7989,Chloe Rahman,Finance Analyst,Finance,mobility,-518,-7,ar,False,E9905,E9911
+E0167,Lucas Silva,Cargo Agent,Cargo,mobility,-554,-16,ar,False,E9906,E9911
+E7801,Hind Johnson,Procurement Officer,Supply Chain,onboarding,0,,ar,False,E9901,E9911
+E3987,David Smith,IT Support Specialist,IT,mobility,-365,-25,ar,False,E9902,E9911
+E9018,Hamdan Chowdhury,HR Officer,People & Culture,onboarding,16,,en,False,E9903,E9911
+E5170,Sofia Fernandez,Airport Services Agent,Airport Services,onboarding,20,,ar,False,E9904,E9911
+E9660,Meera Sharma,Cargo Agent,Cargo,onboarding,19,,en,False,E9905,E9911
+E0232,Peter Rossi,Training Coordinator,Learning & Development,mobility,-671,7,ar,False,E9906,E9911
+E8043,Rahul Sharma,Airport Services Agent,Airport Services,onboarding,-25,,en,False,E9901,E9911
+E4137,Mariam Anderson,Ground Operations Officer,Ground Handling,mobility,-746,-21,en,True,E9902,E9911
+E2445,Hamdan Silva,Data Analyst,Commercial,mobility,-374,-5,ar,False,E9903,E9911
+E9767,Samuel Brown,Data Analyst,Commercial,onboarding,-23,,en,False,E9904,E9911
+E9317,Dana Ali,Data Analyst,Commercial,onboarding,22,,en,True,E9905,E9911
+E2574,Maria Garcia,Finance Analyst,Finance,mobility,-319,10,en,True,E9906,E9911
+E0535,Mariam Ali,Finance Analyst,Finance,mobility,-561,-19,en,False,E9901,E9912
+E9664,Nina Nair,Procurement Officer,Supply Chain,mobility,-648,3,en,False,E9902,E9912
+E2331,Hamdan Garcia,Airport Services Agent,Airport Services,onboarding,-13,,ar,True,E9903,E9912
+E4983,Lucas Garcia,Training Coordinator,Learning & Development,mobility,-718,-24,ar,False,E9904,E9912
+E0654,Grace Anderson,Marketing Specialist,Marketing,onboarding,25,,en,False,E9905,E9912
+E4416,Abdullah Sharma,Data Analyst,Commercial,onboarding,-28,,ar,True,E9906,E9912
+E7142,Rahul Kowalski,Procurement Officer,Supply Chain,onboarding,-17,,ar,False,E9901,E9912
+E1714,Marco Al Suwaidi,Aircraft Engineer,Engineering,onboarding,16,,en,False,E9902,E9912
+E4136,Maria Haddad,HR Officer,People & Culture,onboarding,5,,en,True,E9903,E9912
+E8495,Abdullah Silva,HR Officer,People & Culture,onboarding,11,,en,False,E9904,E9912
+E4720,Majid Silva,Ground Operations Officer,Ground Handling,onboarding,25,,en,False,E9905,E9912
+E9049,Rashid Mueller,Marketing Specialist,Marketing,onboarding,22,,ar,True,E9906,E9912
+E4782,Marco Silva,Cargo Agent,Cargo,onboarding,10,,en,False,E9901,E9912
+E6285,Maria Kowalski,Finance Analyst,Finance,onboarding,1,,ar,False,E9902,E9912
+E4378,Samuel Ali,Cabin Crew,Flight Operations,mobility,-299,-27,en,False,E9903,E9912
+E7317,Vikram Garcia,Cargo Agent,Cargo,mobility,-471,-24,en,False,E9904,E9912
+E3913,Sofia Rahman,Data Analyst,Commercial,onboarding,3,,en,False,E9905,E9912
+E6326,Noor Dubois,Procurement Officer,Supply Chain,onboarding,21,,ar,False,E9906,E9912
+E5440,Rashid Brown,Airport Services Agent,Airport Services,onboarding,9,,ar,False,E9901,E9912
+E2530,Rahul Kaur,Airport Services Agent,Airport Services,onboarding,15,,ar,False,E9902,E9912
+E8743,Daniel Al Suwaidi,Marketing Specialist,Marketing,onboarding,10,,en,False,E9903,E9912
+E4709,Layla Rahman,Finance Analyst,Finance,onboarding,-1,,en,False,E9904,E9912
+E0475,Meera Brown,Cabin Crew,Flight Operations,mobility,-651,-12,en,False,E9905,E9912
+E6752,Yousef Okafor,Data Analyst,Commercial,mobility,-409,-1,ar,False,E9906,E9912
+E3946,Dana Garcia,Ground Operations Officer,Ground Handling,mobility,-539,-19,ar,False,E9901,E9912
+E0154,Arjun Anderson,Ground Operations Officer,Ground Handling,onboarding,1,,en,False,E9902,E9912
+E6952,Sara Nair,Training Coordinator,Learning & Development,onboarding,-19,,en,False,E9903,E9912
+E9371,Abdullah Al Mansoori,HR Officer,People & Culture,onboarding,4,,ar,False,E9904,E9912
+E0804,Hind Hassan,Data Analyst,Commercial,onboarding,-9,,en,False,E9905,E9912
+E4107,Majid Al Balushi,Procurement Officer,Supply Chain,onboarding,21,,en,False,E9906,E9912
+E0547,Priya Chowdhury,Data Analyst,Commercial,mobility,-375,-8,en,False,E9901,E9911
+E3290,Layla Fernandez,Aircraft Engineer,Engineering,onboarding,-28,,en,False,E9902,E9911
+E4836,Hind Kaur,Training Coordinator,Learning & Development,onboarding,11,,ar,False,E9903,E9911
+E6512,Marco Smith,Cargo Agent,Cargo,onboarding,25,,ar,False,E9904,E9911
+E4296,Sofia Al Mansoori,Data Analyst,Commercial,onboarding,14,,ar,False,E9905,E9911
+E9199,Marco Lim,HR Officer,People & Culture,mobility,-491,6,ar,False,E9906,E9911
+E6690,Sara Nair,Airport Services Agent,Airport Services,onboarding,16,,ar,True,E9901,E9911
+E2223,Maria Hassan,Marketing Specialist,Marketing,onboarding,8,,en,False,E9902,E9911
+E8018,Elena Garcia,Data Analyst,Commercial,onboarding,24,,en,False,E9903,E9911
+E5943,Arjun Haddad,Airport Services Agent,Airport Services,mobility,-393,-31,en,False,E9904,E9911
+E3110,Khalid Al Balushi,Airport Services Agent,Airport Services,onboarding,23,,en,False,E9905,E9911
+E3991,Faisal Anderson,Aircraft Engineer,Engineering,mobility,-579,-25,en,False,E9906,E9911
+E5384,Nina Fernandez,Aircraft Engineer,Engineering,onboarding,17,,en,False,E9901,E9911
+E1802,Saeed Anderson,Procurement Officer,Supply Chain,mobility,-469,-12,en,False,E9902,E9911
+E2855,Sofia Garcia,IT Support Specialist,IT,onboarding,9,,en,True,E9903,E9911
+E8409,Marco Hassan,Data Analyst,Commercial,onboarding,3,,en,True,E9904,E9911
+E0997,Mariam Tan,Ground Operations Officer,Ground Handling,onboarding,-26,,en,False,E9905,E9911
+E5278,Samuel Silva,Data Analyst,Commercial,mobility,-468,-29,en,True,E9906,E9911
+E9788,Peter Chowdhury,Cargo Agent,Cargo,onboarding,12,,en,False,E9901,E9911
+E7047,Sara Kowalski,Ground Operations Officer,Ground Handling,onboarding,-20,,en,False,E9902,E9911
+E5121,Yousef Al Suwaidi,Procurement Officer,Supply Chain,onboarding,10,,en,False,E9903,E9911
+E1583,Hamdan Brown,Training Coordinator,Learning & Development,onboarding,2,,en,False,E9904,E9911
+E6930,Arjun Al Marzouqi,Training Coordinator,Learning & Development,mobility,-209,-9,ar,True,E9905,E9911
+E3486,Arjun Kaur,Aircraft Engineer,Engineering,mobility,-231,4,en,False,E9906,E9911
+E1883,Chloe Lim,IT Support Specialist,IT,onboarding,8,,ar,False,E9901,E9911
+E4382,Aisha Sharma,Cabin Crew,Flight Operations,onboarding,-16,,en,False,E9902,E9911
+E9279,Omar Al Suwaidi,Procurement Officer,Supply Chain,mobility,-257,-30,en,False,E9903,E9911
+E6164,Priya Ibrahim,Marketing Specialist,Marketing,mobility,-219,-9,ar,False,E9904,E9911
+E1392,Elena Ali,Cabin Crew,Flight Operations,onboarding,0,,en,True,E9905,E9911
+E7958,Hamdan Smith,Data Analyst,Commercial,mobility,-360,-22,en,False,E9906,E9911
+E4641,Ananya Okafor,Procurement Officer,Supply Chain,onboarding,16,,en,False,E9901,E9912
+E0126,Dana Rossi,Finance Analyst,Finance,mobility,-465,2,en,False,E9902,E9912
+E0127,Nina Rahman,Ground Operations Officer,Ground Handling,mobility,-565,-14,ar,False,E9903,E9912
+E9155,James Al Mansoori,Procurement Officer,Supply Chain,mobility,-330,8,en,False,E9904,E9912
+E5130,Ananya Al Mansoori,Data Analyst,Commercial,onboarding,12,,en,False,E9905,E9912
+E2816,Sara Nair,Data Analyst,Commercial,onboarding,0,,en,False,E9906,E9912
+E9649,Rahul Nair,Marketing Specialist,Marketing,mobility,-459,-9,en,False,E9901,E9912
+E1252,Rashid Nair,Cargo Agent,Cargo,onboarding,-17,,en,False,E9902,E9912
+E2400,Marco Ibrahim,IT Support Specialist,IT,onboarding,-6,,ar,False,E9903,E9912
+E9495,Rashid Garcia,Ground Operations Officer,Ground Handling,onboarding,-15,,en,False,E9904,E9912
+E7683,Anna Al Suwaidi,Ground Operations Officer,Ground Handling,onboarding,2,,en,False,E9905,E9912
+E7566,Mariam Hassan,Ground Operations Officer,Ground Handling,mobility,-708,-8,ar,True,E9906,E9912
+E9734,Priya Okafor,Cargo Agent,Cargo,onboarding,24,,en,False,E9901,E9912
+E8215,Fatima Nair,Aircraft Engineer,Engineering,onboarding,15,,ar,False,E9902,E9912
+E7173,Vikram Brown,Ground Operations Officer,Ground Handling,onboarding,-18,,en,False,E9903,E9912
+E9796,Peter Ali,Cabin Crew,Flight Operations,onboarding,23,,en,False,E9904,E9912
+E4656,Yousef Anderson,IT Support Specialist,IT,onboarding,-4,,ar,False,E9905,E9912
+E2318,Majid Silva,HR Officer,People & Culture,onboarding,13,,en,False,E9906,E9912
+E5382,Anna Smith,Aircraft Engineer,Engineering,onboarding,0,,en,False,E9901,E9912
+E5941,Zainab Nair,IT Support Specialist,IT,mobility,-660,-21,en,False,E9902,E9912
+E1265,David Haddad,IT Support Specialist,IT,mobility,-456,-24,ar,False,E9903,E9912
+E2148,Daniel Al Balushi,Data Analyst,Commercial,mobility,-631,-34,ar,False,E9904,E9912
+E7171,Elena Nair,Cabin Crew,Flight Operations,onboarding,-23,,ar,False,E9905,E9912
+E3919,Marco Ibrahim,IT Support Specialist,IT,onboarding,-18,,en,False,E9906,E9912
+E6257,Khalid Hassan,Cargo Agent,Cargo,onboarding,-3,,en,False,E9901,E9912
+E6082,Yousef Ibrahim,Cargo Agent,Cargo,onboarding,-2,,en,False,E9902,E9912
+E4470,Yousef Lim,Ground Operations Officer,Ground Handling,mobility,-573,-17,en,False,E9903,E9912
+E5728,Saeed Johnson,Cabin Crew,Flight Operations,mobility,-717,-13,en,False,E9904,E9912
+E3679,Rahul Al Balushi,Cabin Crew,Flight Operations,mobility,-651,-35,en,False,E9905,E9912
+E0628,Daniel Al Mansoori,IT Support Specialist,IT,onboarding,-25,,en,False,E9906,E9912
+E0312,David Brown,IT Support Specialist,IT,mobility,-687,-28,en,False,E9901,E9911
+E3894,Daniel Garcia,IT Support Specialist,IT,mobility,-736,-30,en,True,E9902,E9911
+E8190,Salma Brown,Data Analyst,Commercial,onboarding,7,,en,False,E9903,E9911
+E5781,Yousef Dubois,Finance Analyst,Finance,mobility,-431,-32,en,False,E9904,E9911
+E8619,Sofia Haddad,Cargo Agent,Cargo,onboarding,4,,ar,False,E9905,E9911
+E6339,Arjun Nair,HR Officer,People & Culture,mobility,-694,6,ar,False,E9906,E9911
+E5448,Tariq Al Balushi,Aircraft Engineer,Engineering,onboarding,-24,,en,True,E9901,E9911
+E1034,Zainab Tan,Training Coordinator,Learning & Development,onboarding,16,,en,False,E9902,E9911
+E5171,Fatima Ibrahim,IT Support Specialist,IT,onboarding,-25,,ar,False,E9903,E9911
+E3132,Meera Brown,IT Support Specialist,IT,onboarding,15,,en,False,E9904,E9911
+E7205,Lucas Smith,Marketing Specialist,Marketing,mobility,-269,-34,en,False,E9905,E9911
+E1354,Priya Al Marzouqi,Training Coordinator,Learning & Development,onboarding,-29,,en,False,E9906,E9911
+E5373,Arjun Garcia,Procurement Officer,Supply Chain,onboarding,-5,,en,False,E9901,E9911
+E5777,Mariam Ali,Data Analyst,Commercial,mobility,-385,7,en,False,E9902,E9911
+E8407,Noor Al Suwaidi,Training Coordinator,Learning & Development,onboarding,21,,en,False,E9903,E9911
+E6002,Meera Smith,HR Officer,People & Culture,onboarding,-4,,en,False,E9904,E9911
+E1260,Abdullah Nair,Data Analyst,Commercial,mobility,-684,-10,en,True,E9905,E9911
+E3049,Elena Patel,Ground Operations Officer,Ground Handling,onboarding,-11,,ar,False,E9906,E9911
+E9901,Khalid Al Suwaidi,Line Manager,Finance,,,,en,False,,
+E9902,Grace Okonkwo,Line Manager,IT,,,,en,False,,
+E9903,Rashid Al Zaabi,Line Manager,Airport Services,,,,en,False,,
+E9904,Elena Petrova,Line Manager,Engineering,,,,en,False,,
+E9905,Hassan Rahman,Line Manager,Commercial,,,,en,False,,
+E9906,Mei Lin,Line Manager,People & Culture,,,,en,False,,
+E9911,Fatima Al Hashimi,HR Business Partner,People & Culture,,,,en,False,,
+E9912,James Whitfield,HR Business Partner,People & Culture,,,,en,False,,

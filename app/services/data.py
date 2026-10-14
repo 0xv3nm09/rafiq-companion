@@ -221,12 +221,27 @@ class DataStore:
         emp = self.employee(employee_id)
         if emp is None:
             return 0
-        if str(emp.get("journey", "onboarding")) == Journey.MOBILITY.value:
-            anchor = emp.get("mobility_start_day")
-            anchor = 0 if pd.isna(anchor) else int(anchor)
-        else:
-            anchor = int(emp.get("start_day", 0) or 0)
-        return int(get_settings().sim_day) - anchor
+        anchor = (emp.get("mobility_start_day")
+                  if str(emp.get("journey", "onboarding")) == Journey.MOBILITY.value
+                  else emp.get("start_day", 0))
+        try:
+            if anchor is None or pd.isna(anchor) or str(anchor).strip() == "":
+                return 0
+            return int(get_settings().sim_day) - int(float(anchor))
+        except (TypeError, ValueError):
+            return 0
+
+    # -- organisation spine ----------------------------------------------------
+    def person(self, person_id: str) -> dict | None:
+        return self.employee(person_id)
+
+    def team_of(self, manager_id: str) -> pd.DataFrame:
+        df = self.employees
+        return df[df.get("line_manager_id", pd.Series(dtype=object)) == manager_id]
+
+    def hrbp_caseload(self, hrbp_id: str) -> pd.DataFrame:
+        df = self.employees
+        return df[df.get("hrbp_id", pd.Series(dtype=object)) == hrbp_id]
 
 
 def _load_csv(directory: Path, filename: str, columns: list[str]) -> pd.DataFrame:

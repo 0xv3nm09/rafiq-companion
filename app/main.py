@@ -78,17 +78,124 @@ async def get_handoff(handoff_id: str) -> dict:
 
 @app.get("/employees")
 async def list_employees() -> list[dict]:
-    """Demo switcher: the two scenario stars first, then a sample of the cohort."""
+    """Demo switcher: the two scenario stars first, then a sample of the cohort.
+    Line managers / HRBPs are people rows but not companion users — excluded here."""
     import pandas as pd
     store = get_store()
     df = store.employees
-    stars = df[df["employee_id"].isin(["E0421", "E0422"])]
-    rest = df[~df["employee_id"].isin(["E0421", "E0422"])].head(40)
+    staff = df[df["journey"].isin(["onboarding", "mobility"])]
+    stars = staff[staff["employee_id"].isin(["E0421", "E0422"])]
+    rest = staff[~staff["employee_id"].isin(["E0421", "E0422"])].head(40)
     out = []
     for _, r in pd.concat([stars, rest]).iterrows():
         out.append({"employee_id": str(r["employee_id"]),
                     "label": f"{r['employee_id']} · {r['name']} ({r['journey']})"})
     return out
+
+
+@app.get("/people/managers")
+async def list_managers() -> list[dict]:
+    store = get_store()
+    out = []
+    for _, m in store.employees[store.employees["role"] == "Line Manager"].iterrows():
+        out.append({"id": str(m["employee_id"]), "name": str(m["name"]),
+                    "department": str(m["department"]),
+                    "team_size": int(len(store.team_of(str(m["employee_id"]))))})
+    return out
+
+
+@app.get("/people/hrbps")
+async def list_hrbps() -> list[dict]:
+    store = get_store()
+    out = []
+    for _, h in store.employees[store.employees["role"] == "HR Business Partner"].iterrows():
+        out.append({"id": str(h["employee_id"]), "name": str(h["name"]),
+                    "caseload": int(len(store.hrbp_caseload(str(h["employee_id"]))))})
+    return out
+
+
+@app.get("/people/owners")
+async def list_owners() -> list[dict]:
+    from app.agents.action_agent import SERVICE_OWNERS
+    return [{"name": o} for o in SERVICE_OWNERS]
+
+
+@app.get("/team/{manager_id}")
+async def get_team(manager_id: str) -> dict:
+    """Manager view — read-only help, never surveillance: NO pulse data here."""
+    from app.core.friction import scan
+    from app.core.journey_engine import journey_state
+    store = get_store()
+    mgr = store.person(manager_id)
+    if mgr is None or str(mgr.get("role")) != "Line Manager":
+        raise HTTPException(404, "manager not found")
+    reports = []
+    for _, r in store.team_of(manager_id).iterrows():
+        eid = str(r["employee_id"])
+        state = journey_state(store, eid)
+        report = scan(store, eid, consented=False)   # consent-independent: no pulse signal
+        reports.append({
+            "employee_id": eid, "name": str(r["name"]), "role": str(r["role"]),
+            "journey": state.journey.value, "stage": state.stage, "day": state.day,
+            "risk": round(report.risk, 2),
+            "blockers": [{"label": b.label, "days_overdue": b.days_overdue,
+                          "owner": b.owner.name} for b in state.blockers],
+        })
+    reports.sort(key=lambda x: (-x["risk"], x["name"]))
+    return {"manager": {"id": manager_id, "name": str(mgr["name"]),
+                        "department": str(mgr["department"])},
+            "team_size": len(reports),
+            "privacy": "Pulse content is never visible to managers — blockers shown are journey facts.",
+            "reports": reports}
+
+
+@app.get("/queue/{hrbp_id}")
+async def get_queue(hrbp_id: str) -> dict:
+    """HRBP early-warning queue: only real stalls, each with a summary."""
+    from app.core.friction import scan
+    from app.core.journey_engine import journey_state
+    from app.services.notify import HandoffStore, NoticeStore
+    store = get_store()
+    hrbp = store.person(hrbp_id)
+    if hrbp is None or str(hrbp.get("role")) != "HR Business Partner":
+        raise HTTPException(404, "hrbp not found")
+    handoffs = HandoffStore()
+    flagged = []
+    for _, r in store.hrbp_caseload(hrbp_id).iterrows():
+        eid = str(r["employee_id"])
+        report = scan(store, eid, consented=False)
+        if report.risk < 0.25:
+            continue
+        state = journey_state(store, eid)
+        open_card = next((c for c in handoffs.for_employee(eid) if c.status == "open"), None)
+        notices = NoticeStore().for_employee(eid, limit=1)
+        flagged.append({
+            "employee_id": eid, "name": str(r["name"]), "journey": state.journey.value,
+            "stage": state.stage, "day": state.day, "risk": round(report.risk, 2),
+            "blockers": [{"label": b.label, "days_overdue": b.days_overdue,
+                          "owner": b.owner.name} for b in state.blockers],
+            "employee_notified": bool(notices),
+            "open_handoff_id": open_card.handoff_id if open_card else None,
+        })
+    flagged.sort(key=lambda x: -x["risk"])
+    by_owner: dict[str, int] = {}
+    for f in flagged:
+        for b in f["blockers"]:
+            by_owner[b["owner"]] = by_owner.get(b["owner"], 0) + 1
+    return {"hrbp": {"id": hrbp_id, "name": str(hrbp["name"])},
+            "caseload": int(len(store.hrbp_caseload(hrbp_id))),
+            "flagged": flagged, "blocked_total": len(flagged),
+            "stalls_by_owner": by_owner}
+
+
+@app.post("/handoff/{handoff_id}/status")
+async def update_handoff(handoff_id: str, body: dict) -> dict:
+    card = HandoffStore().update_status(handoff_id, str(body.get("status", "acknowledged")))
+    if card is None:
+        raise HTTPException(404, "handoff not found")
+    AuditLog().append(card.employee_id, "handoff_status",
+                      {"handoff_id": handoff_id, "status": card.status})
+    return card.model_dump()
 
 
 @app.get("/policy/{policy_id}")

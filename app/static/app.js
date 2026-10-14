@@ -3,7 +3,8 @@
 
 const state = {
   employeeId: "E0421", lang: "en", journey: null,
-  employees: [], screen: "home",
+  employees: [], viewRole: "employee", personaId: null, persona: null,
+  managers: [], hrbps: [], owners: [],
 };
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -78,15 +79,39 @@ async function api(path, opts = {}) {
 }
 const post = (path, body) => api(path, { method: "POST", body: JSON.stringify(body) });
 
+const SCREENS = {
+  employee: ["home", "chat", "journey", "me", "audit", "notices"],
+  manager: ["team"],
+  hrbp: ["queue", "handoffs"],
+  owner: ["handoffs"],
+};
+
 /* ---------------- boot + router ---------------- */
 async function boot() {
-  state.employees = await api("/employees");
+  [state.employees, state.managers, state.hrbps, state.owners] = await Promise.all([
+    api("/employees"), api("/people/managers"), api("/people/hrbps"), api("/people/owners"),
+  ]);
   buildViewAs();
+  buildNav();
   await refreshJourney();
   route();
 }
 
+function buildNav() {
+  const labels = {
+    home: ["Home", "الرئيسية"], chat: ["Chat", "المحادثة"], journey: ["Journey", "الرحلة"],
+    me: ["My data", "بياناتي"], audit: ["Audit log", "سجل النشاط"],
+    notices: ["Notices", "التنبيهات"], team: ["Team", "الفريق"],
+    queue: ["Early-warning queue", "قائمة الإنذار المبكر"], handoffs: ["Handoffs", "الإحالات"],
+  };
+  $("#nav").innerHTML = SCREENS[state.viewRole].map((s) => {
+    const badge = s === "notices" ? '<span class="badge" id="notice-badge" hidden></span>' : "";
+    return `<a class="nav-pill" href="#/${s}" data-screen="${s}">${langPick(labels[s][0], labels[s][1])}${badge}</a>`;
+  }).join("");
+}
+
 async function refreshJourney() {
+  if (state.viewRole !== "employee") return;
   state.journey = await api(`/journey/${state.employeeId}`);
   const emp = state.employees.find((e) => e.employee_id === state.employeeId);
   $("#viewas-current").textContent = emp ? emp.employee_id : state.employeeId;
@@ -95,8 +120,8 @@ async function refreshJourney() {
 
 function route() {
   const name = (location.hash.replace(/^#\//, "") || "home").split("?")[0];
-  const known = ["home", "chat", "journey", "me", "audit", "notices"];
-  state.screen = known.includes(name) ? name : "home";
+  const known = SCREENS[state.viewRole];
+  state.screen = known.includes(name) ? name : known[0];
   $$(".screen").forEach((s) => s.classList.remove("is-active"));
   $(`#screen-${state.screen}`).classList.add("is-active");
   $$("#nav .nav-pill").forEach((p) => p.classList.toggle("is-active", p.dataset.screen === state.screen));
@@ -107,6 +132,12 @@ function route() {
 window.addEventListener("hashchange", route);
 
 async function renderScreen() {
+  if (state.viewRole === "manager") return renderTeam();
+  if (state.viewRole === "hrbp") {
+    if (state.screen === "queue") return renderQueue();
+    return renderHandoffs();
+  }
+  if (state.viewRole === "owner") return renderHandoffs();
   if (state.screen === "home") await renderHome();
   if (state.screen === "journey") renderJourney();
   if (state.screen === "me") await renderMe();
@@ -115,19 +146,44 @@ async function renderScreen() {
   if (state.screen === "chat") applyLangInput();
 }
 
-/* ---------------- view as ---------------- */
+/* ---------------- view as (employees, managers, HR & owners) ---------------- */
 function buildViewAs() {
   const menu = $("#viewas-menu");
-  menu.innerHTML = state.employees.map((e) => `
-    <button class="viewas-item ${e.employee_id === state.employeeId ? "is-current" : ""}"
-            data-emp="${esc(e.employee_id)}">
-      <span>${esc(e.label)}</span>
-    </button>`).join("");
+  const empItems = state.employees.map((e) => `
+    <button class="viewas-item ${state.viewRole === "employee" && e.employee_id === state.employeeId ? "is-current" : ""}"
+            data-role="employee" data-emp="${esc(e.employee_id)}"><span>${esc(e.label)}</span></button>`).join("");
+  const mgrItems = state.managers.map((m) => `
+    <button class="viewas-item ${state.viewRole === "manager" && m.id === state.personaId ? "is-current" : ""}"
+            data-role="manager" data-emp="${esc(m.id)}">
+      <span>${esc(m.name)} · ${esc(m.department)} — team of ${m.team_size}</span></button>`).join("");
+  const hrItems = state.hrbps.map((h) => `
+    <button class="viewas-item ${state.viewRole === "hrbp" && h.id === state.personaId ? "is-current" : ""}"
+            data-role="hrbp" data-emp="${esc(h.id)}">
+      <span>${esc(h.name)} · HRBP — caseload ${h.caseload}</span></button>`).join("")
+    + state.owners.map((o) => `
+    <button class="viewas-item ${state.viewRole === "owner" && o.name === state.personaId ? "is-current" : ""}"
+            data-role="owner" data-emp="${esc(o.name)}">
+      <span>${esc(o.name)} · service owner</span></button>`).join("");
+  menu.innerHTML = `
+    <div class="viewas-section t-en">Employees</div><div class="viewas-section t-ar">الموظفون</div>
+    ${empItems}
+    <div class="viewas-section t-en">Line managers</div><div class="viewas-section t-ar">المديرون المباشرون</div>
+    ${mgrItems}
+    <div class="viewas-section t-en">HR & service owners</div><div class="viewas-section t-ar">الموارد البشرية ومالكو الخدمة</div>
+    ${hrItems}`;
   $$(".viewas-item", menu).forEach((b) => b.addEventListener("click", async () => {
-    state.employeeId = b.dataset.emp;
+    state.viewRole = b.dataset.role;
+    state.personaId = b.dataset.emp;
     $("#viewas-menu").hidden = true;
     $("#thread").innerHTML = "";
     await refreshJourney();
+    if (state.viewRole !== "employee") {
+      state.persona = state.managers.find((m) => m.id === state.personaId)
+        || state.hrbps.find((h) => h.id === state.personaId)
+        || state.owners.find((o) => o.name === state.personaId);
+      $("#viewas-current").textContent = state.persona ? (state.persona.name || state.personaId) : state.personaId;
+    }
+    buildNav();
     route();
     if (state.screen === "chat") welcome();
   }));
@@ -177,6 +233,109 @@ function bindChaseButtons(scope) {
   }));
 }
 
+/* ---------------- persona dashboards (manager / HRBP / service owner) ---------------- */
+const riskPill = (r) => `<span class="pill ${r >= 0.5 ? "low" : r >= 0.25 ? "med" : "high"}">${Math.round(r * 100)}%</span>`;
+
+async function renderTeam() {
+  const d = await api(`/team/${state.personaId}`);
+  const rows = d.reports.map((r) => `
+    <div class="person-row">
+      <div class="person-main">
+        <span class="person-name" dir="auto">${esc(r.name)}</span>
+        <span class="person-sub">${esc(r.role)} · ${esc(r.journey)} · ${t_day(r.day)}</span>
+        ${r.blockers.length ? r.blockers.map((b) => `
+          <div class="person-blocker"><b dir="auto">${esc(b.label)}</b>
+            <span class="tl-status overdue">+${b.days_overdue} ${T().overdue}</span>
+            <span class="person-owner">${T().owner}: ${esc(b.owner)}</span></div>`).join("")
+          : `<div class="person-blocker ok">${langPick("On track", "على المسار الصحيح")}</div>`}
+      </div>
+      ${riskPill(r.risk)}
+    </div>`).join("");
+  $("#team-card").innerHTML = `
+    <h3>${langPick("Team", "الفريق")} — ${esc(d.manager.name)} · ${esc(d.manager.department)}</h3>
+    <div class="note">${langPick("Read-only help, not surveillance: blockers shown are journey facts.",
+      "مساعدة للقراءة فقط وليست مراقبة: العوائق المعروضة حقائق رحلة.")}</div>
+    <div class="note warn">${esc(d.privacy)}</div>
+    <div class="person-list">${rows}</div>`;
+}
+const t_day = (n) => langPick(`day ${n}`, `اليوم ${n}`);
+
+async function renderQueue() {
+  const d = await api(`/queue/${state.personaId}`);
+  const strip = Object.entries(d.stalls_by_owner).map(([o, n]) =>
+    `<span class="chip static">${esc(o)} × ${n}</span>`).join("");
+  const rows = d.flagged.map((f) => `
+    <div class="person-row">
+      <div class="person-main">
+        <span class="person-name" dir="auto">${esc(f.name)}</span>
+        <span class="person-sub">${esc(f.journey)} · ${t_day(f.day)} · ${T().risk} ${Math.round(f.risk * 100)}%</span>
+        ${f.blockers.map((b) => `
+          <div class="person-blocker"><b dir="auto">${esc(b.label)}</b>
+            <span class="tl-status overdue">+${b.days_overdue} ${T().overdue}</span>
+            <span class="person-owner">${T().owner}: ${esc(b.owner)}</span></div>`).join("")}
+        <div class="person-blocker ok">${f.employee_notified
+          ? langPick("✓ Employee notified first (companion)", "✓ تم تنبيه الموظف أولًا (الرفيق)")
+          : langPick("Not yet notified", "لم يتم التنبيه بعد")}</div>
+      </div>
+      <div class="person-side">${f.open_handoff_id
+        ? `<button class="cta secondary" data-open-handoff="${esc(f.open_handoff_id)}">${T().viewHandoff}</button>`
+        : ""}</div>
+    </div>`).join("");
+  $("#queue-card").innerHTML = `
+    <h3>${langPick("Early-warning queue", "قائمة الإنذار المبكر")} — ${esc(d.hrbp.name)}</h3>
+    <div class="kv-strip"><b>${d.blocked_total}/${d.caseload}</b> ${langPick("people blocked", "أشخاص متعثرون")}</div>
+    <div class="chips-row">${strip}</div>
+    <div class="note">${langPick("Only real stalls land here — the employee always saw theirs first.",
+      "التعثرات الحقيقية فقط تصل هنا — الموظف رأى تعثره أولًا دائمًا.")}</div>
+    <div class="person-list">${rows || `<div class="note">${T().none}</div>`}</div>`;
+  $$("[data-open-handoff]", $("#queue-card")).forEach((b) =>
+    b.addEventListener("click", () => expandHandoff(b.dataset.openHandoff)));
+}
+
+async function renderHandoffs() {
+  const all = await api("/handoffs");
+  const mine = state.viewRole === "owner"
+    ? all.filter((c) => c.suggested_owner.name === state.personaId)
+    : all;
+  const t = T();
+  $("#handoffs-card").innerHTML = `
+    <h3>${langPick("Handoff inbox", "صندوق الإحالات")}${state.persona ? ` — ${esc(state.persona.name || state.personaId)}` : ""}</h3>
+    <div class="note">${langPick("Complete requests: employee + stage, the blocker, what's been tried, the named owner.",
+      "طلبات مكتملة: الموظف والمرحلة والعائق وما جُرِّب والمالك المحدد بالاسم.")}</div>
+    ${mine.length ? mine.map((c) => `
+      <div class="handoff-card">
+        <div class="handoff-head">
+          <b>${esc(c.handoff_id)}</b>
+          <span class="pill ${c.status === "open" ? "med" : "high"}">${esc(c.status)}</span>
+        </div>
+        <div class="handoff-grid">
+          <div><span class="kv-key">${langPick("Employee", "الموظف")}</span><b dir="auto"> ${esc(c.employee_id)}</b></div>
+          <div><span class="kv-key">${t.stage}</span> ${esc(c.stage)}</div>
+          <div><span class="kv-key">${langPick("Owner", "المالك")}</span><b dir="auto"> ${esc(c.suggested_owner.name)}</b></div>
+          <div><span class="kv-key">${t.blockers}</span><span dir="auto"> ${esc(c.blocker)}</span></div>
+          <div><span class="kv-key">${langPick("Tried", "ما جُرِّب")}</span><span dir="auto"> ${esc((c.tried || []).join(" · "))}</span></div>
+          <div class="handoff-summary" dir="auto">${esc(c.summary)}</div>
+        </div>
+        ${c.status === "open" ? `
+          <div class="handoff-actions">
+            <button class="cta secondary" data-status="acknowledged" data-id="${esc(c.handoff_id)}">${langPick("Acknowledge", "إشعار بالاستلام")}</button>
+            <button class="cta" data-status="resolved" data-id="${esc(c.handoff_id)}">${langPick("Resolve", "تم الحل")}</button>
+          </div>` : ""}
+      </div>`).join("") : `<div class="note">${t.none}</div>`}`;
+  $$("[data-status]", $("#handoffs-card")).forEach((b) => b.addEventListener("click", async () => {
+    await post(`/handoff/${b.dataset.id}/status`, { status: b.dataset.status });
+    toast(langPick("Handoff updated — the employee's audit log shows it.",
+                   "تم تحديث الإحالة — يظهر ذلك في سجل نشاط الموظف."));
+    renderHandoffs();
+  }));
+}
+
+async function expandHandoff(id) {
+  location.hash = "#/handoffs";
+  if (state.viewRole === "employee") return;
+  renderHandoffs();
+}
+
 /* ---------------- journey ---------------- */
 function renderJourney() {
   const t = T();
@@ -207,6 +366,8 @@ async function renderMe() {
       ${kv(t.profile, esc(d.employee?.name || ""))}
       ${kv(t.role, esc(d.employee?.role || ""))}
       ${kv(t.dept, esc(d.employee?.department || ""))}
+      ${kv(langPick("Line manager", "المدير المباشر"), d.line_manager ? esc(d.line_manager.name) : "—")}
+      ${kv(langPick("HR Business Partner", "شريك الموارد البشرية"), d.hrbp ? esc(d.hrbp.name) : "—")}
       ${kv(t.journey, esc(d.employee?.journey || ""))}
       ${kv(t.stage, esc(d.journey.stage))}
       ${kv(t.day, d.journey.day)}

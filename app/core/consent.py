@@ -69,8 +69,12 @@ def held_data(store, employee_id: str) -> dict:
         {"day": int(r["day"]), "score": int(r["score"])} for _, r in pulse.iterrows()
     ]
     reqs = store.requests_for(employee_id)
+    mgr = store.person(str(emp.get("line_manager_id") or "")) if emp.get("line_manager_id") else None
+    hrbp = store.person(str(emp.get("hrbp_id") or "")) if emp.get("hrbp_id") else None
     return {
         "employee": {k: emp.get(k) for k in ("employee_id", "name", "role", "department", "journey", "lang_pref")},
+        "line_manager": {"id": emp.get("line_manager_id"), "name": mgr.get("name")} if mgr else None,
+        "hrbp": {"id": emp.get("hrbp_id"), "name": hrbp.get("name")} if hrbp else None,
         "journey": {"stage": state.stage, "day": state.day, "blockers": len(state.blockers)},
         "service_requests": 0 if reqs.empty else len(reqs),
         "pulse_entries": len(pulse_rows),
