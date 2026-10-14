@@ -53,7 +53,7 @@ def on_page(canvas, doc):
     canvas.rect(0, 0, W, H, fill=1, stroke=0)
     canvas.setFillColor(MUTED)
     canvas.setFont("Helvetica", 7.5)
-    canvas.drawString(M, 9 * mm, "Rafiq — Employee AI Companion · submission one-pager")
+    canvas.drawString(M, 9 * mm, "Rafiq — Employee AI Companion · submission one-pager")
     canvas.drawRightString(W - M, 9 * mm, "Muhammad Omaid — Magnus Mage (dev team)")
     canvas.restoreState()
 
@@ -68,10 +68,10 @@ doc.addPageTemplates([PageTemplate(id="p", frames=[
     Frame(M, 14 * mm, AVAIL, H - 13 * mm - 14 * mm, id="f")], onPage=on_page)])
 
 story = []
-story.append(P("Rafiq — Employee AI Companion · Submission", "title"))
+story.append(P("Rafiq — Employee AI Companion · Submission", "title"))
 story.append(Spacer(1, 3))
-story.append(P("<b>Team:</b> Muhammad Omaid — Magnus Mage (dev team) · "
-               "<b>Challenge:</b> Ignyte × Emirates — Employee AI Companion · "
+story.append(P("<b>Team:</b> Muhammad Omaid — Magnus Mage (dev team) · "
+               "<b>Challenge:</b> Ignyte × Emirates — Employee AI Companion · "
                "<b>Repository:</b> " + link(REPO) + " <i>(private during review)</i>", "meta"))
 story.append(Spacer(1, 6))
 
@@ -87,12 +87,12 @@ story.append(P("What the submission contains", "h2"))
 rows = [
     ["Deliverable", "Where / link"],
     ["Working prototype — runnable repo with setup steps",
-     link(REPO) + " · start guide below · CI runs the 39-test suite on every push"],
+     link(REPO) + " · start guide below · CI runs the 39-test suite on every push"],
     ["Demo video — 1:46 (≤3:00), both required scenarios, narration + burned captions",
      "Web link: " + link(REPO + "/releases/tag/demo-video") +
-     " · also uploaded as a file with this entry"],
+     " · also uploaded as a file with this entry"],
     ["Solution note — 2 pages incl. consent, privacy, human oversight",
-     "Web link: " + link(REL) + " · also uploaded as a file with this entry"],
+     "Web link: " + link(REL) + " · also uploaded as a file with this entry"],
 ]
 t = Table([[P(c, "cellb" if r == 0 else "cell") for c in row] for r, row in enumerate(rows)],
           colWidths=[AVAIL * 0.42, AVAIL * 0.58], repeatRows=1, hAlign="CENTER")
@@ -126,9 +126,9 @@ story += [
         "<i>Chase it for me</i> → a complete handoff card goes to the named owner.",
         "<b>My journey</b> — SLA timeline with real-process hints; <b>My data</b> → toggle pulse "
         "consent live; the audit log records every action.",
-        "Role buttons: <b>Manager</b> (risk-sorted team, pulse-free) · <b>HR</b> (early-warning "
-        "queue + handoff inbox) · <b>Owner</b> (IT Service Desk inbox, acknowledge/resolve).",
-        "<b>Where journeys stall</b> — the aggregate view · <b>AR</b> — full Arabic RTL flip · "
+        "Role buttons: <b>Manager</b> (risk-sorted team, pulse-free) · <b>HR</b> (early-warning "
+        "queue + handoff inbox) · <b>Owner</b> (IT Service Desk inbox, acknowledge/resolve).",
+        "<b>Where journeys stall</b> — the aggregate view · <b>AR</b> — full Arabic RTL flip · "
         "<b>Viewing as → E0422</b> — the stalled-transfer scenario citing MOB-01.",
     ]]
 story.append(Spacer(1, 4))
