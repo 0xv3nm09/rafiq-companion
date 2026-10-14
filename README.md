@@ -14,7 +14,7 @@ before you have to chase it yourself.
 
 > Built for the Ignyte × Emirates "Employee AI Companion" challenge. All data is synthetic.
 
-## Try it in two minutes
+## Quick start
 
 ```bash
 uv sync                                   # or: pip install -e ".[dev]"
@@ -22,13 +22,19 @@ uv run uvicorn app.main:app --port 8000   # or simply: make run
 uv run pytest -q                          # 39 tests: engine, RAG grounding, consent, sweep
 ```
 
-Then, in order — every step is one click from the side rail:
+No API keys are required — without one, answers are composed **extractively from retrieved
+policy text** (still cited, zero hallucination surface). To add generative polish, copy
+`.env.example` → `.env` and set `OPENROUTER_API_KEY` or `GROQ_API_KEY`.
+
+## The two-minute tour
+
+With the app open, in order — every step is one click from the side rail:
 
 1. **Home** opens on E0421 (Aisha, onboarding day 5): her laptop blocker is already flagged.
-2. **Chat** → tap *Where is my laptop?* → deterministic answer citing **ONB-07** → *Chase it
-   for me* → a handoff card is raised (see it land in the owner's inbox in step 5).
-3. **Journey** — the SLA timeline with owners and real-process hints (the medical can be done
-   at the visa window; Emirates ID biometrics at the same visit).
+2. **Ask Rafiq** → tap *Where is my laptop?* → deterministic answer citing **ONB-07** →
+   *Chase it for me* → a handoff card is raised (see it land in the owner's inbox in step 5).
+3. **My journey** — the SLA timeline with owners and real-process hints (the medical can be
+   done at the visa window; Emirates ID biometrics at the same visit).
 4. **My data** → toggle *pulse consent* live; the audit log records it, and with consent OFF
    the pulse signal is excluded everywhere (asserted by a test).
 5. Role buttons: **Manager** (Grace Okonkwo's risk-sorted team of 34), **HR** (Fatima's
@@ -36,10 +42,6 @@ Then, in order — every step is one click from the side rail:
    **Owner** (the IT Service Desk inbox).
 6. **Where journeys stall** — the aggregate view; **ع** — the full RTL flip; **Viewing as →
    E0422** — the stalled-transfer scenario citing **MOB-01**.
-
-No API keys are required — without one, answers are composed **extractively from retrieved
-policy text** (still cited, zero hallucination surface). To add generative polish, copy
-`.env.example` → `.env` and set `OPENROUTER_API_KEY` or `GROQ_API_KEY`.
 
 ## The problem today — and what this prototype covers
 
@@ -115,35 +117,16 @@ Employee-side quality-of-life: a **notification bell** in the side rail (unread 
 **search** in the View-as switcher, **filters** on the team/queue lists, and seeded history so
 the audit log and notices are never empty on a fresh open.
 
-## Known limitations & what we'd build next
+## See it in action
 
-- The prototype reads the pack read-only: request status changes live in runtime stores, not in
-  the pack files; a pilot writes back through connectors (the zoned diagram's synthetic adapters).
-- Retrieval is BM25 over 17 policies — deliberately dependency-free for the demo. A pilot adds
-  hybrid search + a cross-encoder reranker before the corpus grows past ~50 documents.
-- Intent routing is rules-first; a small fine-tuned router is the next step once real phrasings
-  exist (rules keep the demo deterministic and auditable today).
-- Voice is designed for (same agent stack, transcript confirm-before-act) but not built — the
-  brief lists it as an optional channel, and text keeps every answer cited and auditable.
-- The Arabic corpus is concise by design; a pilot review by UAE HR counsel comes before any
-  employee-facing deployment.
+Four screens carry the demo.
 
-> **Out of scope (per brief):** the full employee lifecycle, connection to live Emirates
-> systems, and any use in performance or disciplinary decisions — enforced by design (pack
-> files read-only, synthetic adapters, pulse excluded from every signal without consent).
-
-## Code map — the four parts and the trust layer
-
-| Part | What it does | Where |
+| Screen | What it shows | What was achieved |
 | --- | --- | --- |
-| Journey-state engine | Deterministic: joins journey events against `journey_maps.md` target days → stage, blockers, timeline. A rule anyone can verify by hand. | `app/core/journey_engine.py` |
-| Grounded answer layer | BM25 retrieval with Arabic-aware normalization + heading anchors over a bilingual policy corpus; every answer cited (`policy_id · section`); below threshold ⇒ "I'm not sure" + handoff. | `app/core/rag.py`, `app/agents/policy_agent.py` |
-| Action & routing | Rules-first orchestrator (sensitive → human, status → journey, verbs → action, else policy); chases and request creation produce structured handoff cards. | `app/agents/orchestrator.py`, `action_agent.py` |
-| Friction radar | Explainable weights: +0.25/overdue event, +0.15/past-SLA request, +0.10 consented pulse dip. Employee sees it first; only persistent stalls escalate. | `app/core/friction.py`, `app/services/scheduler.py` |
-| Trust layer | Consent store, employee-visible audit log, PII redaction, sensitive-topic guard, one `trust_gate` wrapping every answer. | `app/core/consent.py`, `guardrails.py` |
-
-LLM calls live in exactly one file (`app/core/llm.py`) — swap in Falcon-H1 Arabic / JAIS
-on-premise for the sovereign production path without touching anything else.
+| ![Home — proactive cold-open](docs/screenshots/home.png) | **Home — the proactive cold-open.** Aisha, day 5 of onboarding: her stage, her open blocker and a one-tap chase are on screen *before she asks*. The optional pulse check-in sits beside the trust statement, dismissible, with an honest note that unanswered consent means the answer is acknowledged but not used. | Friction surfaced before the complaint; trust expressed in the interface itself — the blocker is the employee's own, the pulse is opt-in and honest about its limits. |
+| ![Chat — grounded, cited answer](docs/screenshots/chat-cited-answer.png) | **Chat — grounded and cited.** "Where is my laptop?" gets a deterministic journey answer citing policy **ONB-07** with the named owner (IT Service Desk); *Chase* raises a structured handoff card that lands in the owner's inbox. | Reliability under unfamiliar questions: the answer is computed from events vs targets, not generated; the citation is real corpus text; the handoff is complete and correctly routed. |
+| ![Manager view — read-only team help](docs/screenshots/manager-team.png) | **Manager view — read-only team help.** Grace Okonkwo (IT) sees her 34 reports risk-sorted with journey facts only. Two notes say it outright: help, not surveillance — pulse content is never visible to managers. | The companion works in *both* directions without becoming a monitoring tool: the manager endpoint structurally cannot read pulse data, and the privacy line is enforced in code, shown on screen. |
+| ![Handoff inbox — service owner](docs/screenshots/handoff-inbox.png) | **Handoff inbox — the service owner's side.** The IT Service Desk owner receives complete cards: employee and stage, the blocker, what's already been tried, a summary, and acknowledge/resolve actions — each status change landing back in the employee's audit log. | Requests arrive complete and correctly routed, as the brief asks of service owners; the loop closes with the employee able to see every step taken on their behalf. |
 
 ## Architecture
 
@@ -171,16 +154,18 @@ an append-only audit log, and the Emirates systems reached through connectors th
 in the build and read-only in a pilot. The subtitle is the operating posture — employee-owned,
 grounded and gated, in-region (PDPL), human-owned escalations — enforced in code.
 
-## See it in action
+## Code map — the four parts and the trust layer
 
-Four screens carry the demo.
-
-| Screen | What it shows | What was achieved |
+| Part | What it does | Where |
 | --- | --- | --- |
-| ![Home — proactive cold-open](docs/screenshots/home.png) | **Home — the proactive cold-open.** Aisha, day 5 of onboarding: her stage, her open blocker and a one-tap chase are on screen *before she asks*. The optional pulse check-in sits beside the trust statement, dismissible, with an honest note that unanswered consent means the answer is acknowledged but not used. | Friction surfaced before the complaint; trust expressed in the interface itself — the blocker is the employee's own, the pulse is opt-in and honest about its limits. |
-| ![Chat — grounded, cited answer](docs/screenshots/chat-cited-answer.png) | **Chat — grounded and cited.** "Where is my laptop?" gets a deterministic journey answer citing policy **ONB-07** with the named owner (IT Service Desk); *Chase* raises a structured handoff card that lands in the owner's inbox. | Hidden-scenario reliability: the answer is computed from events vs targets, not generated; the citation is real corpus text; the handoff is complete and correctly routed. |
-| ![Manager view — read-only team help](docs/screenshots/manager-team.png) | **Manager view — read-only team help.** Grace Okonkwo (IT) sees her 34 reports risk-sorted with journey facts only. Two notes say it outright: help, not surveillance — pulse content is never visible to managers. | The companion works in *both* directions without becoming a monitoring tool: the manager endpoint structurally cannot read pulse data, and the privacy line is enforced in code, shown on screen. |
-| ![Handoff inbox — service owner](docs/screenshots/handoff-inbox.png) | **Handoff inbox — the service owner's side.** The IT Service Desk owner receives complete cards: employee and stage, the blocker, what's already been tried, a summary, and acknowledge/resolve actions — each status change landing back in the employee's audit log. | Requests arrive complete and correctly routed, as the brief asks of service owners; the loop closes with the employee able to see every step taken on their behalf. |
+| Journey-state engine | Deterministic: joins journey events against `journey_maps.md` target days → stage, blockers, timeline. A rule anyone can verify by hand. | `app/core/journey_engine.py` |
+| Grounded answer layer | BM25 retrieval with Arabic-aware normalization + heading anchors over a bilingual policy corpus; every answer cited (`policy_id · section`); below threshold ⇒ "I'm not sure" + handoff. | `app/core/rag.py`, `app/agents/policy_agent.py` |
+| Action & routing | Rules-first orchestrator (sensitive → human, status → journey, verbs → action, else policy); chases and request creation produce structured handoff cards. | `app/agents/orchestrator.py`, `action_agent.py` |
+| Friction radar | Explainable weights: +0.25/overdue event, +0.15/past-SLA request, +0.10 consented pulse dip. Employee sees it first; only persistent stalls escalate. | `app/core/friction.py`, `app/services/scheduler.py` |
+| Trust layer | Consent store, employee-visible audit log, PII redaction, sensitive-topic guard, one `trust_gate` wrapping every answer. | `app/core/consent.py`, `guardrails.py` |
+
+LLM calls live in exactly one file (`app/core/llm.py`) — swap in Falcon-H1 Arabic / JAIS
+on-premise for the sovereign production path without touching anything else.
 
 ## Data
 
@@ -221,7 +206,7 @@ changes — the same engine, thresholds and surfaces run on it.
 **Task accomplished: an employee can live in this app — easy, helpful, trustworthy in a live demo.**
 
 - No cold start: Home opens on the employee's live stage and blocker; Chat always opens with
-  content (check-in or a capability guide); eight quick chips cover every request type in the brief.
+  content (check-in or a capability guide); nine quick chips cover every request type in the brief.
 - A notification bell with an unread tray; the journey timeline mirrors the real process —
   early-completion hints ("medical at the visa window", "Emirates ID biometrics at the same visit")
   instead of a rigid checklist — with one-tap chase on overdue steps.
@@ -260,6 +245,19 @@ changes — the same engine, thresholds and surfaces run on it.
   consent/audit trust surfaces and the org views — the guardrails are asserted, not promised.
 - Every tunable (confidence floor, escalate-after, sweep interval) is configuration in `.env`;
   the pilot swap is data + connectors while the deterministic core stays as is.
+
+## Known limitations & what we'd build next
+
+- The prototype reads the pack read-only: request status changes live in runtime stores, not in
+  the pack files; a pilot writes back through connectors (the zoned diagram's synthetic adapters).
+- Retrieval is BM25 over 17 policies — deliberately dependency-free for the demo. A pilot adds
+  hybrid search + a cross-encoder reranker before the corpus grows past ~50 documents.
+- Intent routing is rules-first; a small fine-tuned router is the next step once real phrasings
+  exist (rules keep the demo deterministic and auditable today).
+- Voice is designed for (same agent stack, transcript confirm-before-act) but not built — the
+  brief lists it as an optional channel, and text keeps every answer cited and auditable.
+- The Arabic corpus is concise by design; a pilot review by UAE HR counsel comes before any
+  employee-facing deployment.
 
 ## Production notes (described, not needed for the demo)
 
