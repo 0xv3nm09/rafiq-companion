@@ -88,12 +88,11 @@ rows = [
     ["Working prototype — runnable repo with setup steps",
      link(REPO) + " · start guide below · CI runs the 39-test suite on every push"],
     ["Demo video — 1:46 (≤3:00), both required scenarios, narration + burned captions",
-     "Uploaded with this entry · also in the repo at <font face='Courier' size='8.4'>"
-     "submission/rafiq-demo.mp4</font> · local copy: " + link("rafiq-demo.mp4", "rafiq-demo.mp4")],
+     "Web link: " + link(REPO + "/blob/master/submission/rafiq-demo.mp4") +
+     " · also uploaded as a file with this entry"],
     ["Solution note — 2 pages incl. consent, privacy, human oversight",
-     "Uploaded with this entry · also in the repo at <font face='Courier' size='8.4'>"
-     "docs/rafiq-solution-note.pdf</font> · local copy: "
-     + link("rafiq-solution-note.pdf", "rafiq-solution-note.pdf")],
+     "Web link: " + link(REPO + "/blob/master/docs/rafiq-solution-note.pdf") +
+     " · also uploaded as a file with this entry"],
 ]
 t = Table([[P(c, "cellb" if r == 0 else "cell") for c in row] for r, row in enumerate(rows)],
           colWidths=[AVAIL * 0.42, AVAIL * 0.58], repeatRows=1, hAlign="CENTER")
