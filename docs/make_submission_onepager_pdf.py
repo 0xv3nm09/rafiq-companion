@@ -88,7 +88,7 @@ rows = [
     ["Working prototype — runnable repo with setup steps",
      link(REPO) + " · start guide below · CI runs the 39-test suite on every push"],
     ["Demo video — 1:46 (≤3:00), both required scenarios, narration + burned captions",
-     "Web link: " + link(REPO + "/blob/master/submission/rafiq-demo.mp4") +
+     "Web link: " + link(REPO + "/releases/tag/demo-video") +
      " · also uploaded as a file with this entry"],
     ["Solution note — 2 pages incl. consent, privacy, human oversight",
      "Web link: " + link(REPO + "/blob/master/docs/rafiq-solution-note.pdf") +
