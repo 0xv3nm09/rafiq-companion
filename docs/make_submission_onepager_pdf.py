@@ -84,26 +84,26 @@ story.append(P("An employee-owned AI companion that carries a person through <b>
 story.append(Spacer(1, 4))
 
 story.append(P("What the submission contains", "h2"))
-rows = [
-    ["Deliverable", "Where / link"],
-    ["Working prototype — runnable repo with setup steps",
-     link(REPO) + " · start guide below · CI runs the 39-test suite on every push"],
-    ["Demo video — 1:46 (≤3:00), both required scenarios, narration + burned captions",
-     "Web link: " + link(REPO + "/releases/tag/demo-video") +
-     " · also uploaded as a file with this entry"],
-    ["Solution note — 2 pages incl. consent, privacy, human oversight",
-     "Web link: " + link(REL) + " · also uploaded as a file with this entry"],
-]
-t = Table([[P(c, "cellb" if r == 0 else "cell") for c in row] for r, row in enumerate(rows)],
-          colWidths=[AVAIL * 0.42, AVAIL * 0.58], repeatRows=1, hAlign="CENTER")
-t.setStyle(TableStyle([
-    ("BACKGROUND", (0, 0), (-1, 0), HEADER),
-    ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, STRIPE]),
-    ("GRID", (0, 0), (-1, -1), 0.5, BORDER),
-    ("VALIGN", (0, 0), (-1, -1), "TOP"),
-    ("TOPPADDING", (0, 0), (-1, -1), 3), ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
-]))
-story.append(t)
+LINK = 'fontName=Courier,fontSize=8.6,textColor=#277da8'
+story.append(P("<b>1 · Working prototype</b> — runnable repo with setup steps; CI runs the "
+               "39-test suite on every push", "body"))
+story.append(Paragraph(f'<a href="{REPO}">{REPO}</a>',
+               ParagraphStyle("l1", fontName="Courier", fontSize=8.6, leading=12,
+                              textColor=colors.HexColor("#277da8"), leftIndent=12)))
+story.append(Spacer(1, 5))
+story.append(P("<b>2 · Demo video</b> — 1:46 (≤3:00), both required scenarios, narration + "
+               "burned captions · also uploaded as a file with this entry", "body"))
+VURL = REPO + "/releases/tag/demo-video"
+story.append(Paragraph(f'<a href="{VURL}">{VURL}</a>',
+               ParagraphStyle("l2", fontName="Courier", fontSize=8.6, leading=12,
+                              textColor=colors.HexColor("#277da8"), leftIndent=12)))
+story.append(Spacer(1, 5))
+story.append(P("<b>3 · Solution note</b> — 2 pages incl. consent, privacy, human oversight · "
+               "also uploaded as a file with this entry", "body"))
+NURL = REPO + "/releases/tag/demo-video"
+story.append(Paragraph(f'<a href="{NURL}">{NURL}</a>',
+               ParagraphStyle("l3", fontName="Courier", fontSize=8.6, leading=12,
+                              textColor=colors.HexColor("#277da8"), leftIndent=12)))
 story.append(Spacer(1, 4))
 
 story.append(P("60-second start guide", "h2"))
