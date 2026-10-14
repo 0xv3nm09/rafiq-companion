@@ -15,6 +15,8 @@ before you have to chase it yourself.
 > Built for the Ignyte × Emirates "Employee AI Companion" challenge. All data is synthetic.
 >
 > **Muhammad Omaid — Magnus Mage (dev team)**
+>
+> Submitting or reviewing? Start with [SUBMISSION.md](SUBMISSION.md) — the one-page summary with links (also as [SUBMISSION.pdf](SUBMISSION.pdf), clickable).
 
 ## Quick start
 
