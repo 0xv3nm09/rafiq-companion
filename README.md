@@ -288,3 +288,9 @@ changes — the same engine, thresholds and surfaces run on it.
 Hybrid retrieval + cross-encoder rerankers, NeMo/Presidio guardrail stack, Docker compose with
 Qdrant/Redis/Ollama, ISO 42001 / NIST AI RMF governance mapping, and the UAE PDPL data-residency
 posture are covered in `docs/Employee AI Engineering Workbook.md`, which this build follows.
+
+## License
+
+MIT — see [LICENSE](LICENSE). © 2026 Muhammad Omaid — Magnus Mage.
+The submission pack and synthetic data remain governed by the challenge rules
+(see SUBMISSION.md); the license covers the prototype code.
