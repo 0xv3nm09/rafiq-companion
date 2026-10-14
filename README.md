@@ -58,6 +58,25 @@ Then show the trust surfaces — the 25% Responsible-AI criterion, made clickabl
 LLM calls live in exactly one file (`app/core/llm.py`) — swap in Falcon-H1 Arabic / JAIS
 on-premise for the sovereign production path without touching anything else.
 
+## Zoned architecture
+
+Six deployment zones with a dot wherever personal data crosses a boundary — the guardrail is a
+full-width band because nothing bypasses it: not the employee's question, not an answer, not a
+proactive notice.
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/zone-architecture-dark.svg">
+    <img src="docs/diagrams/zone-architecture.svg" alt="Zoned architecture: employee zone above a full-width guardrail band (PII redaction, sensitive-topic guard, citation required, confidence gate, audit write), then the companion stack (orchestrator, journey/policy/action agents, friction radar, sweep), the AI zone (BM25 EN/AR, Arabic normalization, llm.py boundary with extractive default or Falcon-H1/JAIS on-prem), the data zone (journey events, requests, pulse, journey maps, bilingual policies, runtime stores) and the people zone of named owners. Dots mark each personal-data boundary crossing." width="820">
+  </picture>
+</p>
+
+The dots are the PDPL story made visible: the question crosses with identity, the guardrail
+redacts before the stack sees it, retrieval is row-scoped by `employee_id`, pulse counts only
+while consent is ON, and the handoff card that reaches a named owner carries the minimum needed
+to unblock — stage, blocker, what's been tried. Regenerate both variants:
+`uv run python docs/diagrams/make_zone_diagram.py`.
+
 ## Data
 
 `app/services/data.py` loads from **`data/pack/`** (the official challenge pack) and falls back to

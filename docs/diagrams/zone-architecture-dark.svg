@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1102" viewBox="0 0 900 1102">
+<rect width="900" height="1102" fill="#0e1417"/>
+<text x="450.0" y="38" font-family="Helvetica,Arial,sans-serif" font-size="11.5" font-weight="700" fill="#5d757c" text-anchor="middle" letter-spacing="2.4">RAFIQ · ZONED ARCHITECTURE — PERSONAL DATA CROSSES A BOUNDARY AT EACH DOT</text>
+<rect x="40" y="56" width="820" height="128" rx="10" fill="#17252a" stroke="#2c4046" stroke-width="1.5"/>
+<rect x="56" y="66" width="24" height="22" rx="5" fill="#e8f1f2"/>
+<text x="68" y="81.5" font-family="Helvetica,Arial,sans-serif" font-size="12" font-weight="700" fill="#0e1417" text-anchor="middle">1</text>
+<text x="90" y="81.5" font-family="Helvetica,Arial,sans-serif" font-size="15.5" font-weight="700" fill="#e8f1f2" text-anchor="start">EMPLOYEE ZONE</text>
+<text x="90" y="98" font-family="Menlo,Consolas,monospace" font-size="10.5" fill="#93abb1" text-anchor="start">what the employee sees — mobile-first · EN/AR RTL</text>
+<rect x="56" y="114" width="38.2" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="63" y="128.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">chat</text>
+<rect x="102.2" y="114" width="110.8" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="109.2" y="128.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">journey timeline</text>
+<rect x="221.0" y="114" width="116.8" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="228.0" y="128.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">my data + consent</text>
+<rect x="345.85" y="114" width="68.4" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="352.85" y="128.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">audit log</text>
+<rect x="422.3" y="114" width="56.4" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="429.3" y="128.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">notices</text>
+<text x="56" y="170" font-family="Helvetica,Arial,sans-serif" font-size="12.5" fill="#c3d5d9" text-anchor="start">Employee-owned surfaces: everything Rafiq holds or did is viewable and revocable here.</text>
+<line x1="450.0" y1="192" x2="450.0" y2="222" stroke="#54707a" stroke-width="1.5"/>
+<polygon points="444.0,221 456.0,221 450.0,231" fill="#54707a"/>
+<circle cx="450.0" cy="207.0" r="5.5" fill="#e8a13c" stroke="#0e1417" stroke-width="2"/>
+<rect x="40" y="230" width="820" height="122" rx="10" fill="#221c0e" stroke="#66511a" stroke-width="1.5"/>
+<rect x="56" y="240" width="24" height="22" rx="5" fill="#e8f1f2"/>
+<text x="68" y="255.5" font-family="Helvetica,Arial,sans-serif" font-size="12" font-weight="700" fill="#0e1417" text-anchor="middle">2</text>
+<text x="90" y="255.5" font-family="Helvetica,Arial,sans-serif" font-size="15.5" font-weight="700" fill="#e8f1f2" text-anchor="start">GUARDRAIL ZONE</text>
+<text x="90" y="272" font-family="Menlo,Consolas,monospace" font-size="10.5" fill="#93abb1" text-anchor="start">one trust gate — nothing bypasses it</text>
+<rect x="56" y="288" width="116.8" height="21" rx="4" fill="#0e1417" stroke="#66511a" stroke-width="1"/>
+<text x="63" y="302.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#e6c887" text-anchor="start">in: PII redaction</text>
+<rect x="180.85" y="288" width="165.2" height="21" rx="4" fill="#0e1417" stroke="#66511a" stroke-width="1"/>
+<text x="187.85" y="302.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#e6c887" text-anchor="start">in: sensitive-topic guard</text>
+<rect x="354.1" y="288" width="147.1" height="21" rx="4" fill="#0e1417" stroke="#66511a" stroke-width="1"/>
+<text x="361.1" y="302.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#e6c887" text-anchor="start">out: citation required</text>
+<rect x="509.20000000000005" y="288" width="135.0" height="21" rx="4" fill="#0e1417" stroke="#66511a" stroke-width="1"/>
+<text x="516.2" y="302.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#e6c887" text-anchor="start">out: confidence gate</text>
+<rect x="652.2" y="288" width="110.8" height="21" rx="4" fill="#0e1417" stroke="#66511a" stroke-width="1"/>
+<text x="659.2" y="302.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#e6c887" text-anchor="start">out: audit write</text>
+<text x="56" y="338" font-family="Helvetica,Arial,sans-serif" font-size="12.5" fill="#c3d5d9" text-anchor="start">No source, no claim: below the confidence floor the answer becomes a human handoff.</text>
+<line x1="450.0" y1="360" x2="450.0" y2="390" stroke="#54707a" stroke-width="1.5"/>
+<polygon points="444.0,389 456.0,389 450.0,399" fill="#54707a"/>
+<circle cx="450.0" cy="375.0" r="5.5" fill="#e8a13c" stroke="#0e1417" stroke-width="2"/>
+<path d="M 128 390 V 360" stroke="#54707a" stroke-width="1.5" fill="none" stroke-dasharray="5 4"/><polygon points="122,370 134,370 128,360" fill="#54707a"/>
+<text x="140" y="379.0" font-family="Menlo,Consolas,monospace" font-size="10.5" fill="#93abb1" text-anchor="start">cited answer</text>
+<path d="M 772 360 V 390" stroke="#54707a" stroke-width="1.5" fill="none" stroke-dasharray="5 4"/><polygon points="766,389 778,389 772,399" fill="#54707a"/>
+<text x="760" y="379.0" font-family="Menlo,Consolas,monospace" font-size="10.5" fill="#93abb1" text-anchor="end">proactive notice</text>
+<rect x="40" y="398" width="820" height="150" rx="10" fill="#17252a" stroke="#2c4046" stroke-width="1.5"/>
+<rect x="56" y="408" width="24" height="22" rx="5" fill="#e8f1f2"/>
+<text x="68" y="423.5" font-family="Helvetica,Arial,sans-serif" font-size="12" font-weight="700" fill="#0e1417" text-anchor="middle">3</text>
+<text x="90" y="423.5" font-family="Helvetica,Arial,sans-serif" font-size="15.5" font-weight="700" fill="#e8f1f2" text-anchor="start">COMPANION STACK ZONE</text>
+<text x="90" y="440" font-family="Menlo,Consolas,monospace" font-size="10.5" fill="#93abb1" text-anchor="start">FastAPI · rules-first orchestration</text>
+<rect x="56" y="456" width="68.4" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="63" y="470.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">POST /ask</text>
+<rect x="132.45" y="456" width="86.6" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="139.45" y="470.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">orchestrator</text>
+<rect x="227.04999999999998" y="456" width="92.6" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="234.04999999999998" y="470.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">journey agent</text>
+<rect x="327.7" y="456" width="86.6" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="334.7" y="470.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">policy agent</text>
+<rect x="422.29999999999995" y="456" width="86.6" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="429.29999999999995" y="470.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">action agent</text>
+<rect x="516.9" y="456" width="98.7" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="523.9" y="470.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">friction radar</text>
+<rect x="623.6" y="456" width="104.8" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="630.6" y="470.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">proactive sweep</text>
+<text x="56" y="534" font-family="Helvetica,Arial,sans-serif" font-size="12.5" fill="#c3d5d9" text-anchor="start">Deterministic journey engine (events vs journey_maps targets) + grounded answers + chases.</text>
+<line x1="450.0" y1="556" x2="450.0" y2="586" stroke="#54707a" stroke-width="1.5"/>
+<polygon points="444.0,585 456.0,585 450.0,595" fill="#54707a"/>
+<circle cx="450.0" cy="571.0" r="5.5" fill="#e8a13c" stroke="#0e1417" stroke-width="2"/>
+<rect x="40" y="594" width="820" height="122" rx="10" fill="#17252a" stroke="#2c4046" stroke-width="1.5"/>
+<rect x="56" y="604" width="24" height="22" rx="5" fill="#e8f1f2"/>
+<text x="68" y="619.5" font-family="Helvetica,Arial,sans-serif" font-size="12" font-weight="700" fill="#0e1417" text-anchor="middle">4</text>
+<text x="90" y="619.5" font-family="Helvetica,Arial,sans-serif" font-size="15.5" font-weight="700" fill="#e8f1f2" text-anchor="start">AI ZONE</text>
+<text x="90" y="636" font-family="Menlo,Consolas,monospace" font-size="10.5" fill="#93abb1" text-anchor="start">the only place a model is called — llm.py</text>
+<rect x="56" y="652" width="74.5" height="21" rx="4" fill="#0f2825" stroke="#2b544d" stroke-width="1"/>
+<text x="63" y="666.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#8fd9cc" text-anchor="start">BM25 EN/AR</text>
+<rect x="138.5" y="652" width="135.0" height="21" rx="4" fill="#0f2825" stroke="#2b544d" stroke-width="1"/>
+<text x="145.5" y="666.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#8fd9cc" text-anchor="start">Arabic normalization</text>
+<rect x="281.5" y="652" width="104.8" height="21" rx="4" fill="#0f2825" stroke="#2b544d" stroke-width="1"/>
+<text x="288.5" y="666.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#8fd9cc" text-anchor="start">heading anchors</text>
+<rect x="394.25" y="652" width="122.9" height="21" rx="4" fill="#0f2825" stroke="#2b544d" stroke-width="1"/>
+<text x="401.25" y="666.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#8fd9cc" text-anchor="start">extractive default</text>
+<rect x="525.15" y="652" width="201.5" height="21" rx="4" fill="#0f2825" stroke="#2b544d" stroke-width="1"/>
+<text x="532.15" y="666.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#8fd9cc" text-anchor="start">Falcon-H1 / JAIS on-prem · prod</text>
+<text x="56" y="702" font-family="Helvetica,Arial,sans-serif" font-size="12.5" fill="#c3d5d9" text-anchor="start">Retrieval is local and dependency-free; the sovereign path swaps one file, nothing else.</text>
+<line x1="450.0" y1="724" x2="450.0" y2="754" stroke="#54707a" stroke-width="1.5"/>
+<polygon points="444.0,753 456.0,753 450.0,763" fill="#54707a"/>
+<circle cx="450.0" cy="739.0" r="5.5" fill="#e8a13c" stroke="#0e1417" stroke-width="2"/>
+<rect x="40" y="762" width="820" height="122" rx="10" fill="#17252a" stroke="#2c4046" stroke-width="1.5"/>
+<rect x="56" y="772" width="24" height="22" rx="5" fill="#e8f1f2"/>
+<text x="68" y="787.5" font-family="Helvetica,Arial,sans-serif" font-size="12" font-weight="700" fill="#0e1417" text-anchor="middle">5</text>
+<text x="90" y="787.5" font-family="Helvetica,Arial,sans-serif" font-size="15.5" font-weight="700" fill="#e8f1f2" text-anchor="start">DATA ZONE</text>
+<text x="90" y="804" font-family="Menlo,Consolas,monospace" font-size="10.5" fill="#93abb1" text-anchor="start">challenge pack in / synthetic pack mirrors it</text>
+<rect x="56" y="820" width="98.7" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="63" y="834.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">journey_events</text>
+<rect x="162.7" y="820" width="110.8" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="169.7" y="834.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">service_requests</text>
+<rect x="281.5" y="820" width="98.7" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="288.5" y="834.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">pulse_feedback</text>
+<rect x="388.2" y="820" width="104.8" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="395.2" y="834.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">journey_maps.md</text>
+<rect x="500.95" y="820" width="98.7" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="507.95" y="834.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">policies EN/AR</text>
+<rect x="607.65" y="820" width="201.5" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="614.65" y="834.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">runtime: consent·audit·handoffs</text>
+<text x="56" y="870" font-family="Helvetica,Arial,sans-serif" font-size="12.5" fill="#c3d5d9" text-anchor="start">Row-scoped by employee_id; pulse used only while consent is ON; pack stays read-only.</text>
+<line x1="450.0" y1="892" x2="450.0" y2="922" stroke="#54707a" stroke-width="1.5"/>
+<polygon points="444.0,921 456.0,921 450.0,931" fill="#54707a"/>
+<circle cx="450.0" cy="907.0" r="5.5" fill="#e8a13c" stroke="#0e1417" stroke-width="2"/>
+<text x="462.0" y="911.0" font-family="Menlo,Consolas,monospace" font-size="10.5" fill="#93abb1" text-anchor="start">handoff card</text>
+<rect x="40" y="930" width="820" height="116" rx="10" fill="#17252a" stroke="#2c4046" stroke-width="1.5"/>
+<rect x="56" y="940" width="24" height="22" rx="5" fill="#e8f1f2"/>
+<text x="68" y="955.5" font-family="Helvetica,Arial,sans-serif" font-size="12" font-weight="700" fill="#0e1417" text-anchor="middle">6</text>
+<text x="90" y="955.5" font-family="Helvetica,Arial,sans-serif" font-size="15.5" font-weight="700" fill="#e8f1f2" text-anchor="start">PEOPLE ZONE</text>
+<text x="90" y="972" font-family="Menlo,Consolas,monospace" font-size="10.5" fill="#93abb1" text-anchor="start">named owners — every escalation has one</text>
+<rect x="56" y="988" width="104.8" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="63" y="1002.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">IT Service Desk</text>
+<rect x="168.75" y="988" width="80.5" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="175.75" y="1002.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">HR Mobility</text>
+<rect x="257.3" y="988" width="128.9" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="264.3" y="1002.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">HR Business Partner</text>
+<rect x="394.25" y="988" width="86.6" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="401.25" y="1002.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">Line Manager</text>
+<rect x="488.85" y="988" width="122.9" height="21" rx="4" fill="#0e1417" stroke="#2c4046" stroke-width="1"/>
+<text x="495.85" y="1002.5" font-family="Menlo,Consolas,monospace" font-size="11" fill="#93abb1" text-anchor="start">Visa &amp; Immigration</text>
+<text x="56" y="1032" font-family="Helvetica,Arial,sans-serif" font-size="12.5" fill="#c3d5d9" text-anchor="start">Handoff cards land complete: stage, blocker, what's been tried, named owner.</text>
+<text x="450.0" y="1080" font-family="Helvetica,Arial,sans-serif" font-size="11.5" fill="#93abb1" text-anchor="middle">● dot = personal data crossing a zone boundary (PDPL: consent-gated · in-region · audited)</text>
+</svg>
