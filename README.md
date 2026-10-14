@@ -14,7 +14,7 @@ before you have to chase it yourself.
 
 > Built for the Ignyte × Emirates "Employee AI Companion" challenge. All data is synthetic.
 
-## Judge fast path (2 minutes)
+## Try it in two minutes
 
 ```bash
 uv sync                                   # or: pip install -e ".[dev]"
@@ -171,7 +171,7 @@ an append-only audit log, and the Emirates systems reached through connectors th
 in the build and read-only in a pilot. The subtitle is the operating posture — employee-owned,
 grounded and gated, in-region (PDPL), human-owned escalations — enforced in code.
 
-## What the judge sees
+## See it in action
 
 Four screens carry the demo.
 
@@ -197,7 +197,7 @@ uv run python scripts/make_synthetic_data.py --employees 200 --sim-day 5
 To plug in the official pack: create `data/pack/`, drop the files in, restart. Nothing else
 changes — the same engine, thresholds and surfaces run on it.
 
-## What was accomplished — in detail for the judges
+## What was accomplished — in detail
 
 **Task accomplished: hidden scenarios resolved or routed correctly, with accurate policy answers.**
 
