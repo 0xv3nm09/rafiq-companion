@@ -55,6 +55,27 @@ Then switch **Viewing as** to the other side of the org — the flows run on the
   blocker, what's been tried, named owner) that the owner can acknowledge and resolve — which the
   employee sees in their own audit log.
 
+**Brief coverage** (What to Build → where it lives):
+
+| Brief requirement | Where it is |
+| --- | --- |
+| Knows the journey stage and what's next (day 5, laptop not issued) | Journey engine + timeline + proactive check-ins |
+| Answers policy questions, citing the source policy | Grounded RAG answer cards with `policy_id · section` chips |
+| Completes/starts routine requests, handing to HR, IT, learning workflows | Request routing to Payroll, IT Service Desk, Learning & Development, Facilities, HR — with handoff cards |
+| Spots friction early (events, request delays, opt-in pulse) | Friction radar + idempotent sweep |
+| Escalates to the right human owner with a summary | Handoff inbox with named owner, acknowledge/resolve |
+| Nice to have: Arabic + English | Full RTL flip, Arabic corpus, Arabic answers/timeline |
+| Nice to have: manager view for new joiners | Team view, risk-sorted, pulse never visible |
+| Nice to have: where journeys stall most often | **Stall map** — aggregate bars by stage + owner chips, never an individual |
+
+Employee-side quality-of-life: a **notification bell** in the top bar (unread count + tray),
+**search** in the View-as switcher, **filters** on the team/queue lists, and seeded history so
+the audit log and notices are never empty on a fresh open.
+
+> **Out of scope (per brief):** the full employee lifecycle, connection to live Emirates
+> systems, and any use in performance or disciplinary decisions — enforced by design (pack
+> files read-only, synthetic adapters, pulse excluded from every signal without consent).
+
 ## Architecture (four parts + a trust layer)
 
 | Part | What it does | Where |

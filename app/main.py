@@ -17,7 +17,7 @@ from app.core.journey_engine import journey_state, timeline
 from app.services.data import load_store
 from app.state import get_store
 from app.services.notify import HandoffStore, NoticeStore
-from app.services.scheduler import run_sweep, start_background_sweep
+from app.services.scheduler import run_sweep, seed_runtime, start_background_sweep
 
 settings = get_settings()
 
@@ -27,6 +27,7 @@ ml = None  # set in lifespan; keeps startup lazy and testable
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     store = get_store()
+    seed_runtime(store)
     task = await start_background_sweep(store)
     yield
     task.cancel()
@@ -235,6 +236,12 @@ async def me_notices(employee_id: str = Query(...)) -> list[dict]:
     return NoticeStore().for_employee(employee_id)
 
 
+@app.post("/me/notices/read")
+async def notices_read(body: dict) -> dict:
+    NoticeStore().mark_read(str(body.get("employee_id", "")))
+    return {"read": True}
+
+
 @app.post("/pulse")
 async def pulse(body: PulseBody) -> dict:
     store = get_store()
@@ -265,6 +272,42 @@ async def consent(body: ConsentBody) -> dict:
 @app.post("/sweep")
 async def sweep() -> dict:
     return await run_sweep(get_store())
+
+
+@app.get("/stalls")
+async def stalls() -> dict:
+    """Where journeys stall most — aggregate and privacy-safe (no individuals)."""
+    from app.core.journey_engine import journey_state
+    store = get_store()
+    companion_users = store.employees[store.employees["journey"].isin(["onboarding", "mobility"])]
+    by_stage: dict[str, int] = {}
+    by_owner: dict[str, int] = {}
+    by_type: dict[str, int] = {}
+    blocked = 0
+    for _, r in companion_users.iterrows():
+        state = journey_state(store, str(r["employee_id"]))
+        if not state.blockers:
+            continue
+        blocked += 1
+        for b in state.blockers:
+            by_stage[b.event] = by_stage.get(b.event, 0) + 1
+            by_owner[b.owner.name] = by_owner.get(b.owner.name, 0) + 1
+    reqs = store.requests
+    if not reqs.empty:
+        open_reqs = reqs[reqs["status"].astype(str).str.lower() == "open"]
+        day = int(get_settings().sim_day)
+        for _, req in open_reqs.iterrows():
+            if day - int(req.get("created_day", 0)) > int(req.get("sla_days", 0)):
+                t = str(req.get("type", "other"))
+                by_type[t] = by_type.get(t, 0) + 1
+    top_stages = sorted(by_stage.items(), key=lambda x: -x[1])[:10]
+    top_owners = sorted(by_owner.items(), key=lambda x: -x[1])[:10]
+    top_types = sorted(by_type.items(), key=lambda x: -x[1])[:10]
+    from app.core.journey_engine import _label as event_label
+    return {"blocked_total": blocked, "journeys_scanned": int(len(companion_users)),
+            "by_stage": [{"event": k, "label": event_label(k), "count": v} for k, v in top_stages],
+            "by_owner": [{"owner": k, "count": v} for k, v in top_owners],
+            "overdue_requests_by_type": [{"type": k, "count": v} for k, v in top_types]}
 
 
 @app.post("/reset-demo")

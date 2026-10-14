@@ -80,6 +80,40 @@ def _build_card(store: DataStore, employee_id: str, event_key: str, flag, day: i
     )
 
 
+def seed_runtime(store: DataStore) -> dict:
+    """First-boot fill: every companion user gets a welcome notice and an audit
+    entry, so no employee screen is ever empty; the demo stars get a short history."""
+    from app.core.consent import AuditLog, ConsentStore
+    from app.services.notify import NoticeStore
+
+    notices = get_settings().runtime_dir / "notices.json"
+    audit = get_settings().runtime_dir / "audit.json"
+    if notices.exists() or audit.exists():
+        return {"seeded": False}
+
+    notice_store, audit_log = NoticeStore(), AuditLog()
+    audit_log.append("", "system_boot", {"note": "Rafiq demo session started"})
+    for _, r in store.employees[store.employees["journey"].isin(["onboarding", "mobility"])].iterrows():
+        eid = str(r["employee_id"])
+        notice_store.add(eid, "welcome",
+                         "Rafiq is on your side",
+                         "I follow your journey and will flag anything stuck here — you always see it first.",
+                         day=0)
+        audit_log.append(eid, "companion_enabled",
+                         {"day": 0, "note": "Consent-first companion assigned to your journey"})
+    for eid, entries in {
+        "E0421": [("companion_enabled", {"day": 0}), ("consent_changed", {"consent": "pulse", "value": True}),
+                  ("pulse_submitted", {"score": 4, "consent": True, "day": 3}),
+                  ("sweep_notice", {"flag": "Laptop issued: due day 3, 2 day(s) overdue"})],
+        "E0422": [("companion_enabled", {"day": 0}), ("consent_changed", {"consent": "pulse", "value": True}),
+                  ("sweep_notice", {"flag": "Receiving-team sign-off: due day 15, 3 day(s) overdue"})],
+    }.items():
+        for action, detail in entries:
+            audit_log.append(eid, action, detail)
+    ConsentStore.default()  # touch so the runtime dir exists
+    return {"seeded": True}
+
+
 async def run_sweep(store: DataStore) -> dict:
     return await asyncio.to_thread(sweep_once, store)
 

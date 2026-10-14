@@ -25,6 +25,15 @@ _ACTION_TARGETS = {
     "transfer": ("transfer_approval", "HR Mobility"),
     "نقل": ("transfer_approval", "HR Mobility"),
     "leave": ("leave_query", "Line Manager"),
+    "training": ("training_request", "Learning & Development"),
+    "induction": ("training_request", "Learning & Development"),
+    "تدريب": ("training_request", "التعلّم والتطوير"),
+    "desk": ("facilities_request", "Facilities"),
+    "parking": ("facilities_request", "Facilities"),
+    "facilities": ("facilities_request", "Facilities"),
+    "مكتب": ("facilities_request", "المرافق"),
+    "letter": ("hr_letter", "HR Service Desk"),
+    "خطاب": ("hr_letter", "مكتب خدمات الموارد البشرية"),
 }
 _TYPE_POLICY = {
     "medical_booking": ("ONB-03", "Visa and Relocation"),

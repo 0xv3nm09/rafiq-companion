@@ -80,9 +80,9 @@ async function api(path, opts = {}) {
 const post = (path, body) => api(path, { method: "POST", body: JSON.stringify(body) });
 
 const SCREENS = {
-  employee: ["home", "chat", "journey", "me", "audit", "notices"],
-  manager: ["team"],
-  hrbp: ["queue", "handoffs"],
+  employee: ["home", "chat", "journey", "me", "audit", "notices", "stalls"],
+  manager: ["team", "stalls"],
+  hrbp: ["queue", "handoffs", "stalls"],
   owner: ["handoffs"],
 };
 
@@ -103,6 +103,7 @@ function buildNav() {
     me: ["My data", "بياناتي"], audit: ["Audit log", "سجل النشاط"],
     notices: ["Notices", "التنبيهات"], team: ["Team", "الفريق"],
     queue: ["Early-warning queue", "قائمة الإنذار المبكر"], handoffs: ["Handoffs", "الإحالات"],
+    stalls: ["Where journeys stall", "أكثر مواضع التعثر"],
   };
   $("#nav").innerHTML = SCREENS[state.viewRole].map((s) => {
     const badge = s === "notices" ? '<span class="badge" id="notice-badge" hidden></span>' : "";
@@ -143,6 +144,7 @@ async function renderScreen() {
   if (state.screen === "me") await renderMe();
   if (state.screen === "audit") await renderAudit();
   if (state.screen === "notices") await renderNotices();
+  if (state.screen === "stalls") await renderStalls();
   if (state.screen === "chat") applyLangInput();
 }
 
@@ -151,26 +153,36 @@ function buildViewAs() {
   const menu = $("#viewas-menu");
   const empItems = state.employees.map((e) => `
     <button class="viewas-item ${state.viewRole === "employee" && e.employee_id === state.employeeId ? "is-current" : ""}"
-            data-role="employee" data-emp="${esc(e.employee_id)}"><span>${esc(e.label)}</span></button>`).join("");
+            data-role="employee" data-emp="${esc(e.employee_id)}" data-text="${esc(e.label.toLowerCase())}"><span>${esc(e.label)}</span></button>`).join("");
   const mgrItems = state.managers.map((m) => `
     <button class="viewas-item ${state.viewRole === "manager" && m.id === state.personaId ? "is-current" : ""}"
-            data-role="manager" data-emp="${esc(m.id)}">
+            data-role="manager" data-emp="${esc(m.id)}" data-text="${esc(m.name.toLowerCase())} ${esc(m.department.toLowerCase())}">
       <span>${esc(m.name)} · ${esc(m.department)} — team of ${m.team_size}</span></button>`).join("");
   const hrItems = state.hrbps.map((h) => `
     <button class="viewas-item ${state.viewRole === "hrbp" && h.id === state.personaId ? "is-current" : ""}"
-            data-role="hrbp" data-emp="${esc(h.id)}">
+            data-role="hrbp" data-emp="${esc(h.id)}" data-text="${esc(h.name.toLowerCase())}">
       <span>${esc(h.name)} · HRBP — caseload ${h.caseload}</span></button>`).join("")
     + state.owners.map((o) => `
     <button class="viewas-item ${state.viewRole === "owner" && o.name === state.personaId ? "is-current" : ""}"
-            data-role="owner" data-emp="${esc(o.name)}">
+            data-role="owner" data-emp="${esc(o.name)}" data-text="${esc(o.name.toLowerCase())}">
       <span>${esc(o.name)} · service owner</span></button>`).join("");
   menu.innerHTML = `
+    <input class="viewas-search" id="viewas-search" type="search"
+           placeholder-en="Search people…" placeholder-ar="ابحث عن شخص…">
+    <div id="viewas-list">
     <div class="viewas-section t-en">Employees</div><div class="viewas-section t-ar">الموظفون</div>
     ${empItems}
     <div class="viewas-section t-en">Line managers</div><div class="viewas-section t-ar">المديرون المباشرون</div>
     ${mgrItems}
     <div class="viewas-section t-en">HR & service owners</div><div class="viewas-section t-ar">الموارد البشرية ومالكو الخدمة</div>
-    ${hrItems}`;
+    ${hrItems}
+    </div>`;
+  $("#viewas-search").addEventListener("input", (e) => {
+    const q = e.target.value.trim().toLowerCase();
+    $$(".viewas-item", menu).forEach((b) => {
+      b.style.display = !q || b.dataset.text.includes(q) ? "" : "none";
+    });
+  });
   $$(".viewas-item", menu).forEach((b) => b.addEventListener("click", async () => {
     state.viewRole = b.dataset.role;
     state.personaId = b.dataset.emp;
@@ -238,58 +250,121 @@ const riskPill = (r) => `<span class="pill ${r >= 0.5 ? "low" : r >= 0.25 ? "med
 
 async function renderTeam() {
   const d = await api(`/team/${state.personaId}`);
-  const rows = d.reports.map((r) => `
-    <div class="person-row">
-      <div class="person-main">
-        <span class="person-name" dir="auto">${esc(r.name)}</span>
-        <span class="person-sub">${esc(r.role)} · ${esc(r.journey)} · ${t_day(r.day)}</span>
-        ${r.blockers.length ? r.blockers.map((b) => `
-          <div class="person-blocker"><b dir="auto">${esc(b.label)}</b>
-            <span class="tl-status overdue">+${b.days_overdue} ${T().overdue}</span>
-            <span class="person-owner">${T().owner}: ${esc(b.owner)}</span></div>`).join("")
-          : `<div class="person-blocker ok">${langPick("On track", "على المسار الصحيح")}</div>`}
-      </div>
-      ${riskPill(r.risk)}
-    </div>`).join("");
+  window.__teamData = d;
   $("#team-card").innerHTML = `
-    <h3>${langPick("Team", "الفريق")} — ${esc(d.manager.name)} · ${esc(d.manager.department)}</h3>
+    <h3>${langPick("Team", "الفريق")} — ${esc(d.manager.name)} · ${esc(d.manager.department)} (${d.team_size})</h3>
+    <div class="chips-row">
+      ${["all", "blocked", "ontrack"].map((f) =>
+        `<button class="chip filter" data-filter="${f}">${langPick(
+          { all: "All", blocked: "Blocked", ontrack: "On track" }[f],
+          { all: "الكل", blocked: "متعثرون", ontrack: "على المسار" }[f])}</button>`).join("")}
+    </div>
     <div class="note">${langPick("Read-only help, not surveillance: blockers shown are journey facts.",
       "مساعدة للقراءة فقط وليست مراقبة: العوائق المعروضة حقائق رحلة.")}</div>
     <div class="note warn">${esc(d.privacy)}</div>
-    <div class="person-list">${rows}</div>`;
+    <div class="person-list" id="team-list"></div>`;
+  const draw = (f) => {
+    const rows = d.reports
+      .filter((r) => f === "all" || (f === "blocked" ? r.blockers.length : !r.blockers.length))
+      .map((r) => `
+        <div class="person-row">
+          <div class="person-main">
+            <span class="person-name" dir="auto">${esc(r.name)}</span>
+            <span class="person-sub">${esc(r.role)} · ${esc(r.journey)} · ${t_day(r.day)}</span>
+            ${r.blockers.length ? r.blockers.map((b) => `
+              <div class="person-blocker"><b dir="auto">${esc(b.label)}</b>
+                <span class="tl-status overdue">+${b.days_overdue} ${T().overdue}</span>
+                <span class="person-owner">${T().owner}: ${esc(b.owner)}</span></div>`).join("")
+              : `<div class="person-blocker ok">${langPick("On track", "على المسار الصحيح")}</div>`}
+          </div>
+          ${riskPill(r.risk)}
+        </div>`).join("");
+    $("#team-list").innerHTML = rows || `<div class="note">${T().none}</div>`;
+  };
+  $$("#team-card .chip.filter").forEach((c) => c.addEventListener("click", () => {
+    $$("#team-card .chip.filter").forEach((x) => x.classList.remove("is-active"));
+    c.classList.add("is-active");
+    draw(c.dataset.filter);
+  }));
+  $("#team-card .chip.filter").classList.add("is-active");
+  draw("all");
 }
 const t_day = (n) => langPick(`day ${n}`, `اليوم ${n}`);
 
 async function renderQueue() {
   const d = await api(`/queue/${state.personaId}`);
+  window.__queueData = d;
   const strip = Object.entries(d.stalls_by_owner).map(([o, n]) =>
     `<span class="chip static">${esc(o)} × ${n}</span>`).join("");
-  const rows = d.flagged.map((f) => `
-    <div class="person-row">
-      <div class="person-main">
-        <span class="person-name" dir="auto">${esc(f.name)}</span>
-        <span class="person-sub">${esc(f.journey)} · ${t_day(f.day)} · ${T().risk} ${Math.round(f.risk * 100)}%</span>
-        ${f.blockers.map((b) => `
-          <div class="person-blocker"><b dir="auto">${esc(b.label)}</b>
-            <span class="tl-status overdue">+${b.days_overdue} ${T().overdue}</span>
-            <span class="person-owner">${T().owner}: ${esc(b.owner)}</span></div>`).join("")}
-        <div class="person-blocker ok">${f.employee_notified
-          ? langPick("✓ Employee notified first (companion)", "✓ تم تنبيه الموظف أولًا (الرفيق)")
-          : langPick("Not yet notified", "لم يتم التنبيه بعد")}</div>
-      </div>
-      <div class="person-side">${f.open_handoff_id
-        ? `<button class="cta secondary" data-open-handoff="${esc(f.open_handoff_id)}">${T().viewHandoff}</button>`
-        : ""}</div>
-    </div>`).join("");
   $("#queue-card").innerHTML = `
     <h3>${langPick("Early-warning queue", "قائمة الإنذار المبكر")} — ${esc(d.hrbp.name)}</h3>
     <div class="kv-strip"><b>${d.blocked_total}/${d.caseload}</b> ${langPick("people blocked", "أشخاص متعثرون")}</div>
     <div class="chips-row">${strip}</div>
+    <div class="chips-row">
+      ${["all", "onboarding", "mobility"].map((f) =>
+        `<button class="chip filter" data-filter="${f}">${langPick(
+          { all: "All", onboarding: "Onboarding", mobility: "Mobility" }[f],
+          { all: "الكل", onboarding: "انضمام", mobility: "تنقل" }[f])}</button>`).join("")}
+    </div>
     <div class="note">${langPick("Only real stalls land here — the employee always saw theirs first.",
       "التعثرات الحقيقية فقط تصل هنا — الموظف رأى تعثره أولًا دائمًا.")}</div>
-    <div class="person-list">${rows || `<div class="note">${T().none}</div>`}</div>`;
-  $$("[data-open-handoff]", $("#queue-card")).forEach((b) =>
-    b.addEventListener("click", () => expandHandoff(b.dataset.openHandoff)));
+    <div class="person-list" id="queue-list"></div>`;
+  const draw = (f) => {
+    const rows = d.flagged
+      .filter((x) => f === "all" || x.journey === f)
+      .map((x) => `
+        <div class="person-row">
+          <div class="person-main">
+            <span class="person-name" dir="auto">${esc(x.name)}</span>
+            <span class="person-sub">${esc(x.journey)} · ${t_day(x.day)} · ${T().risk} ${Math.round(x.risk * 100)}%</span>
+            ${x.blockers.map((b) => `
+              <div class="person-blocker"><b dir="auto">${esc(b.label)}</b>
+                <span class="tl-status overdue">+${b.days_overdue} ${T().overdue}</span>
+                <span class="person-owner">${T().owner}: ${esc(b.owner)}</span></div>`).join("")}
+            <div class="person-blocker ok">${x.employee_notified
+              ? langPick("✓ Employee notified first (companion)", "✓ تم تنبيه الموظف أولًا (الرفيق)")
+              : langPick("Not yet notified", "لم يتم التنبيه بعد")}</div>
+          </div>
+          <div class="person-side">${x.open_handoff_id
+            ? `<button class="cta secondary" data-open-handoff="${esc(x.open_handoff_id)}">${T().viewHandoff}</button>`
+            : ""}</div>
+        </div>`).join("");
+    $("#queue-list").innerHTML = rows || `<div class="note">${T().none}</div>`;
+    $$("[data-open-handoff]", $("#queue-list")).forEach((b) =>
+      b.addEventListener("click", () => expandHandoff(b.dataset.openHandoff)));
+  };
+  $$("#queue-card .chip.filter").forEach((c) => c.addEventListener("click", () => {
+    $$("#queue-card .chip.filter").forEach((x) => x.classList.remove("is-active"));
+    c.classList.add("is-active");
+    draw(c.dataset.filter);
+  }));
+  $("#queue-card .chip.filter").classList.add("is-active");
+  draw("all");
+}
+
+async function renderStalls() {
+  const d = await api("/stalls");
+  const max = Math.max(1, ...d.by_stage.map((x) => x.count));
+  const bars = d.by_stage.map((x) => `
+    <div class="bar-row">
+      <span class="bar-label" dir="auto">${esc(x.label || x.event.replace(/_/g, " "))}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${Math.round(x.count / max * 100)}%"></div></div>
+      <span class="bar-count">${x.count}</span>
+    </div>`).join("");
+  const owners = d.by_owner.map((x) => `<span class="chip static">${esc(x.owner)} × ${x.count}</span>`).join("");
+  const reqs = d.overdue_requests_by_type.map((x) =>
+    `<span class="chip static">${esc(x.type)} × ${x.count}</span>`).join("");
+  $("#stalls-card").innerHTML = `
+    <h3>${langPick("Where journeys stall most", "أكثر مواضع التعثر في الرحلات")}</h3>
+    <div class="kv-strip"><b>${d.blocked_total}/${d.journeys_scanned}</b>
+      ${langPick("journeys currently blocked", "رحلة متعثرة حاليًا")}</div>
+    <div class="bars">${bars}</div>
+    <h3 class="sub">${langPick("Stalls by named owner", "التعثرات حسب المالك")}</h3>
+    <div class="chips-row">${owners}</div>
+    <h3 class="sub">${langPick("Overdue requests by type", "الطلبات المتأخرة حسب النوع")}</h3>
+    <div class="chips-row">${reqs || `<span class="chip static">${T().none}</span>`}</div>
+    <div class="note">${langPick("Aggregate only — never an individual. This is where the organization should fix the process, not the person.",
+      "بيانات مجمعة فقط — لا فرد أبدًا. هنا يجب أن تصلح المنظمة العملية لا الشخص.")}</div>`;
 }
 
 async function renderHandoffs() {
@@ -414,10 +489,37 @@ async function renderNotices() {
 function refreshNoticeBadge() {
   api(`/me/notices?employee_id=${state.employeeId}`).then((rows) => {
     const badge = $("#notice-badge");
-    badge.hidden = !rows.length;
-    badge.textContent = rows.length;
+    if (badge) { badge.hidden = !rows.length; badge.textContent = rows.length; }
+    const bell = $("#bell-btn");
+    bell.hidden = state.viewRole !== "employee";
+    const bb = $("#bell-badge");
+    bb.hidden = !rows.length;
+    bb.textContent = rows.length;
   }).catch(() => {});
 }
+
+/* notification bell tray (employee-side, super friendly) */
+$("#bell-btn").addEventListener("click", async () => {
+  const tray = $("#bell-tray");
+  if (!tray.hidden) { tray.hidden = true; return; }
+  const rows = await api(`/me/notices?employee_id=${state.employeeId}`);
+  tray.innerHTML = `<div class="tray-head">${langPick("Notifications", "التنبيهات")}</div>`
+    + (rows.length ? rows.slice(0, 6).map((n) => `
+      <div class="tray-row ${esc(n.kind)}">
+        <div class="notice-title" dir="auto">${esc(n.title)}</div>
+        <div class="notice-detail" dir="auto">${esc(n.detail)}</div>
+      </div>`).join("")
+      + `<a class="ghost-link" href="#/notices">${langPick("See all →", "عرض الكل ←")}</a>`
+      : `<div class="tray-empty">${langPick("Nothing needs you right now.", "لا شيء يتطلب انتباهك الآن.")}</div>`);
+  tray.hidden = false;
+  if (rows.length) {
+    await post("/me/notices/read", { employee_id: state.employeeId });
+    refreshNoticeBadge();
+  }
+});
+document.addEventListener("click", (e) => {
+  if (!e.target.closest("#bell-btn") && !e.target.closest("#bell-tray")) $("#bell-tray").hidden = true;
+});
 
 /* ---------------- chat ---------------- */
 function welcome() {

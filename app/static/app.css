@@ -226,6 +226,34 @@ h1, h3, p { margin: 0; }
   font-weight: 600; cursor: pointer; }
 .send-btn:disabled { opacity: .55; cursor: default; }
 
+/* bell tray */
+.bell { position: relative; border: 1px solid var(--line); background: #fbfdfd; border-radius: 10px;
+  padding: 8px 10px; cursor: pointer; color: var(--ink-2); display: flex; align-items: center; }
+.bell:hover { border-color: var(--teal); color: var(--teal-ink); }
+.bell .badge { position: absolute; top: -6px; inset-inline-end: -6px; margin: 0; }
+.bell-tray { position: absolute; inset-inline-end: 16px; top: 58px; width: 340px; max-height: 420px;
+  overflow-y: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: var(--shadow); padding: 12px; z-index: 60; }
+.tray-head { font-weight: 700; font-size: 13.5px; margin-bottom: 8px; }
+.tray-row { border: 1px solid var(--line); border-radius: 9px; padding: 8px 10px; margin-bottom: 6px; }
+.tray-row.blocker { border-inline-start: 3px solid var(--warn); }
+.tray-row.welcome { border-inline-start: 3px solid var(--teal); }
+.tray-empty { color: var(--ink-2); font-size: 13px; padding: 6px 2px; }
+.viewas-search { width: 100%; border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px;
+  margin: 4px 0 2px; background: #fbfdfd; direction: ltr; }
+
+/* filters + stall bars */
+.chip.filter.is-active { border-color: var(--teal); color: var(--teal-ink); background: var(--teal-tint); }
+.bars { display: flex; flex-direction: column; gap: 8px; margin: 10px 0 16px; }
+.bar-row { display: grid; grid-template-columns: 220px 1fr 40px; gap: 10px; align-items: center; }
+.bar-label { font-size: 12.5px; color: var(--ink-2); text-align: end; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+[dir="rtl"] .bar-label { text-align: start; }
+.bar-track { background: #eef3f3; border-radius: 99px; height: 14px; overflow: hidden; }
+.bar-fill { background: var(--teal); height: 100%; border-radius: 99px; }
+.bar-count { font-weight: 700; font-size: 12.5px; }
+h3.sub { font-size: 13px; color: var(--ink-2); margin: 14px 0 8px; }
+
 /* floating sweep + toast */
 .sweep-wrap { position: fixed; bottom: 16px; inset-inline-end: 16px; z-index: 30; }
 .ghost-btn { border: 1px dashed var(--line); background: var(--surface); color: var(--ink-2);
