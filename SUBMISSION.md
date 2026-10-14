@@ -16,6 +16,10 @@ Both required scenarios are in the video and reproducible live: **E0421** (onboa
 
 ## 60-second start guide
 
+**Prerequisites:** Python 3.12/3.13 + [uv](https://docs.astral.sh/uv/)
+(`curl -LsS https://astral.sh/uv/install.sh | sh` — Windows: `irm https://astral.sh/uv/install.ps1 | iex`;
+or plain pip: `pip install -e ".[dev]"` in a venv).
+
 ```bash
 uv sync                                   # or: pip install -e ".[dev]"
 uv run uvicorn app.main:app --port 8000   # or simply: make run

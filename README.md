@@ -20,11 +20,31 @@ before you have to chase it yourself.
 
 ## Quick start
 
+**Prerequisites:** Python 3.12 or 3.13, plus [uv](https://docs.astral.sh/uv/) (recommended —
+installs the exact environment in seconds):
+
+```bash
+# macOS / Linux
+curl -LsS https://astral.sh/uv/install.sh | sh
+# Windows (PowerShell)
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
 ```bash
 uv sync                                   # or: pip install -e ".[dev]"
 uv run uvicorn app.main:app --port 8000   # or simply: make run
 uv run pytest -q                          # 39 tests: engine, RAG grounding, consent, sweep
 ```
+
+**No uv? Plain pip works the same** (Python 3.12/3.13 venv):
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+pip install -e ".[dev]"
+uvicorn app.main:app --port 8000          # pytest -q for the tests
+```
+
+Verify: `pytest` prints `39 passed`; the app serves the UI at `http://localhost:8000`.
 
 No API keys are required — without one, answers are composed **extractively from retrieved
 policy text** (still cited, zero hallucination surface). To add generative polish, copy

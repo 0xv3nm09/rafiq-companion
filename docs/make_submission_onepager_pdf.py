@@ -108,6 +108,10 @@ story.append(t)
 story.append(Spacer(1, 4))
 
 story.append(P("60-second start guide", "h2"))
+story.append(P("Prerequisites: Python 3.12/3.13 and uv\u00a0\u2014 install with "
+               '<font face="Courier" size="8.2">curl -LsS https://astral.sh/uv/install.sh | sh</font>'
+               " (Windows PowerShell: <font face='Courier' size='8.2'>irm astral.sh/uv/install.ps1 | iex</font>); "
+               "or plain pip in a venv: <font face='Courier' size='8.2'>pip install -e &quot;.[dev]&quot;</font>", "body"))
 story.append(P("uv sync&nbsp;&nbsp;·&nbsp;&nbsp;uv run uvicorn app.main:app --port 8000"
                "&nbsp;&nbsp;(or: make run)&nbsp;&nbsp;·&nbsp;&nbsp;uv run pytest -q&nbsp;&nbsp;"
                "(39 tests)", "code"))
