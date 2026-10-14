@@ -6,3 +6,6 @@ __pycache__/
 data/runtime/
 data/pack/
 .DS_Store
+submission/video/shots/
+submission/video/audio/
+submission/video/build/
