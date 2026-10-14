@@ -22,6 +22,7 @@ W, H = A4
 M = 15 * mm
 AVAIL = W - 2 * M
 REPO = "https://github.com/0xv3nm09/rafiq-companion"
+REL = REPO + "/releases/tag/demo-video"
 
 S = {
     "title": ParagraphStyle("t", fontName="Helvetica-Bold", fontSize=20, leading=24, textColor=TEXT),
@@ -91,8 +92,7 @@ rows = [
      "Web link: " + link(REPO + "/releases/tag/demo-video") +
      " · also uploaded as a file with this entry"],
     ["Solution note — 2 pages incl. consent, privacy, human oversight",
-     "Web link: " + link(REPO + "/blob/master/docs/rafiq-solution-note.pdf") +
-     " · also uploaded as a file with this entry"],
+     "Web link: " + link(REL) + " · also uploaded as a file with this entry"],
 ]
 t = Table([[P(c, "cellb" if r == 0 else "cell") for c in row] for r, row in enumerate(rows)],
           colWidths=[AVAIL * 0.42, AVAIL * 0.58], repeatRows=1, hAlign="CENTER")

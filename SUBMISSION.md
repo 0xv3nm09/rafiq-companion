@@ -10,7 +10,7 @@
 | --- | --- | --- |
 | 1 | Working prototype (runnable repo with setup steps) | This repository — see the 60-second start below |
 | 2 | Demo video, 1:46 (≤3:00) — two employee scenarios, narration + captions | [rafiq-demo.mp4 — release page](https://github.com/0xv3nm09/rafiq-companion/releases/tag/demo-video) · also uploaded with the entry |
-| 3 | Solution note, 2 pages — includes consent, privacy and human oversight | [docs/rafiq-solution-note.pdf](https://github.com/0xv3nm09/rafiq-companion/blob/master/docs/rafiq-solution-note.pdf) · source: [docs/SOLUTION_NOTE.md](https://github.com/0xv3nm09/rafiq-companion/blob/master/docs/SOLUTION_NOTE.md) |
+| 3 | Solution note, 2 pages — includes consent, privacy and human oversight | [rafiq-solution-note.pdf — release page](https://github.com/0xv3nm09/rafiq-companion/releases/tag/demo-video) · source: [docs/SOLUTION_NOTE.md](https://github.com/0xv3nm09/rafiq-companion/blob/master/docs/SOLUTION_NOTE.md) |
 
 Both required scenarios are in the video and reproducible live: **E0421** (onboarding day 5, laptop overdue) and **E0422** (internal transfer with a stalled approval).
 
