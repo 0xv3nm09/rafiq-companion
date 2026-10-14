@@ -145,7 +145,15 @@ function buildNav() {
     queue: ["Early-warning queue", "قائمة الإنذار المبكر"], handoffs: ["Handoffs", "الإحالات"],
     stalls: ["Where journeys stall", "أكثر مواضع التعثر"],
   };
-  $("#nav").innerHTML = SCREENS[state.viewRole].map((s) => {
+  // the dashboard carries Ask Rafiq / My journey / My data as hero buttons — the rail
+  // holds only the secondary surfaces so the two never duplicate
+  const NAV_ITEMS = {
+    employee: ["home", "audit", "notices", "stalls"],
+    manager: ["team", "stalls"],
+    hrbp: ["queue", "handoffs", "stalls"],
+    owner: ["handoffs"],
+  };
+  $("#nav").innerHTML = NAV_ITEMS[state.viewRole].map((s) => {
     const badge = s === "notices" ? '<span class="badge" id="notice-badge" hidden></span>' : "";
     return `<a class="nav-pill" href="#/${s}" data-screen="${s}">${langPick(labels[s][0], labels[s][1])}${badge}</a>`;
   }).join("");
