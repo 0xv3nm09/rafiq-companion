@@ -31,7 +31,7 @@ class NoticeStore:
     def add_deduped(self, employee_id: str, key: str, day: int, **kw) -> dict | None:
         if self.already_today(employee_id, key, day):
             return None
-        notice = self.add(employee_id, **kw)
+        notice = self.add(employee_id, day=day, **kw)
         notices = load_json(self.path, [])
         for n in notices:
             if n["id"] == notice["id"]:
