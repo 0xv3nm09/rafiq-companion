@@ -199,9 +199,7 @@ curl -X POST http://localhost:8000/ask -H "Content-Type: application/json" \
 
 ## 11. Regenerating the submission artifacts
 
-```bash
-uv run python submission/video/make_video.py   # demo video (captures + narration + captions)
-```
+The final submission artifacts live in `submittable/`:
 
-The video pipeline reads per-shot browser captures from `submission/video/shots/` — see
-`docs/DEMO_SCRIPT.md` for the shot list.
+- `submittable/rafiq-demo.mp4` — the 1:46 demo video
+- `submittable/rafiq-solution-note.pdf` — the 2-page solution note
