@@ -200,9 +200,7 @@ curl -X POST http://localhost:8000/ask -H "Content-Type: application/json" \
 ## 11. Regenerating the submission artifacts
 
 ```bash
-uv run python docs/make_solution_note_pdf.py          # 2-page solution note PDF
-uv run python docs/make_submission_onepager_pdf.py    # one-page submission summary PDF
-uv run python submission/video/make_video.py          # demo video (captures + narration + captions)
+uv run python submission/video/make_video.py   # demo video (captures + narration + captions)
 ```
 
 The video pipeline reads per-shot browser captures from `submission/video/shots/` — see
