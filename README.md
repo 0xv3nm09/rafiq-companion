@@ -16,7 +16,7 @@ before you have to chase it yourself.
 >
 > **Muhammad Omaid — Magnus Mage (dev team)**
 >
-> Submitting or reviewing? Start with [SUBMISSION.md](SUBMISSION.md) — the one-page summary with links (also as [SUBMISSION.pdf](SUBMISSION.pdf), clickable).
+> Submitting or reviewing? The 2-page solution note and the 1:46 demo video are in [`submittable/`](submittable/). To set it up and run it yourself, see [GETTING_STARTED.md](GETTING_STARTED.md).
 
 ## Quick start
 
