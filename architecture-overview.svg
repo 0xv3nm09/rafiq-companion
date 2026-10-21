@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 444" width="760" height="444" role="img" aria-label="Employee companion architecture: proactive, grounded, gated, human-owned">
+  <style>
+    :root{
+      --bg:#ffffff; --ink:#1f2328; --quiet:#636c76; --edge:#8c959f; --grid:#d0d7de;
+      --accent:#0969da; --accentfill:rgba(9,105,218,.12); --tint:#f6f8fa;
+    }
+    @media (prefers-color-scheme:dark){
+      :root{
+        --bg:#0d1117; --ink:#e6edf3; --quiet:#9198a1; --edge:#6e7681; --grid:#30363d;
+        --accent:#58a6ff; --accentfill:rgba(88,166,255,.15); --tint:#161b22;
+      }
+    }
+    text{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;fill:var(--ink)}
+    .q{fill:var(--quiet)}
+    .bg{fill:var(--bg)}
+    .box{fill:none;stroke:var(--edge);stroke-width:1.25}
+    .accent{fill:var(--accentfill);stroke:var(--accent);stroke-width:2}
+    .tint{fill:var(--tint);stroke:var(--edge);stroke-width:1.25}
+    .flow{fill:none;stroke:var(--edge);stroke-width:1.25}
+    .supp{fill:none;stroke:var(--grid);stroke-width:1.25;stroke-dasharray:4 4}
+    .head{fill:var(--edge)}
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" class="head"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="760" height="444"/>
+  <text x="24" y="30" font-size="15" font-weight="600">A proactive, agentic companion: grounded, gated, human-owned</text>
+
+  <!-- flow -->
+  <path class="flow" d="M250 96V118" marker-end="url(#a)"/>
+  <path class="flow" d="M250 168V190" marker-end="url(#a)"/>
+  <path class="flow" d="M250 234V250" marker-end="url(#a)"/>
+  <path class="flow" d="M250 294V310" marker-end="url(#a)"/>
+  <path class="flow" d="M250 354V370" marker-end="url(#a)"/>
+  <path class="flow" d="M452 143H402" marker-end="url(#a)"/>
+  <path class="flow" d="M400 393H452" marker-end="url(#a)"/>
+  <!-- support -->
+  <path class="supp" d="M452 212H402" marker-end="url(#a)"/>
+  <path class="supp" d="M452 272H402" marker-end="url(#a)"/>
+  <path class="supp" d="M452 332H402" marker-end="url(#a)"/>
+  <path class="supp" d="M100 393H70V73H100" marker-end="url(#a)"/>
+
+  <!-- employee -->
+  <rect class="box" x="100" y="50" width="300" height="46" rx="8"/>
+  <text x="250" y="72" text-anchor="middle" font-weight="600">Employee</text>
+  <text class="q" x="250" y="88" text-anchor="middle" font-size="11.5">asks by text or voice, Arabic + English</text>
+  <!-- orchestrator -->
+  <rect class="accent" x="100" y="118" width="300" height="50" rx="8"/>
+  <text x="250" y="140" text-anchor="middle" font-weight="600">Orchestrator agent</text>
+  <text class="q" x="250" y="156" text-anchor="middle" font-size="11.5">understands, plans, routes the task</text>
+  <!-- friction -->
+  <rect class="box" x="452" y="118" width="272" height="50" rx="8"/>
+  <text x="588" y="140" text-anchor="middle" font-weight="600">Friction radar</text>
+  <text class="q" x="588" y="156" text-anchor="middle" font-size="11.5">watches events, SLAs, pulse dips</text>
+  <!-- journey -->
+  <rect class="box" x="100" y="190" width="300" height="44" rx="8"/>
+  <text x="250" y="210" text-anchor="middle" font-weight="600">Journey-state agent</text>
+  <text class="q" x="250" y="226" text-anchor="middle" font-size="11.5">knows your stage vs target SLA</text>
+  <!-- policy -->
+  <rect class="box" x="100" y="250" width="300" height="44" rx="8"/>
+  <text x="250" y="270" text-anchor="middle" font-weight="600">Policy agent (RAG)</text>
+  <text class="q" x="250" y="286" text-anchor="middle" font-size="11.5">answers with a cited source</text>
+  <!-- action -->
+  <rect class="box" x="100" y="310" width="300" height="44" rx="8"/>
+  <text x="250" y="330" text-anchor="middle" font-weight="600">Action and routing agent</text>
+  <text class="q" x="250" y="346" text-anchor="middle" font-size="11.5">starts requests, builds handoff cards</text>
+  <!-- trust -->
+  <rect class="tint" x="100" y="370" width="300" height="46" rx="8"/>
+  <text x="250" y="390" text-anchor="middle" font-weight="600">Trust gate</text>
+  <text class="q" x="250" y="406" text-anchor="middle" font-size="11.5">consent, cites, confidence, human gate</text>
+  <!-- grounding -->
+  <rect class="box" x="452" y="190" width="272" height="164" rx="8"/>
+  <text x="468" y="212" font-weight="600">Grounding and tools</text>
+  <text class="q" x="468" y="240" font-size="11.5">Journey-state store</text>
+  <text class="q" x="468" y="264" font-size="11.5">Policy vector store (cited)</text>
+  <text class="q" x="468" y="288" font-size="11.5">HRIS / ITSM connectors</text>
+  <text class="q" x="468" y="312" font-size="11.5">Consent and pulse records</text>
+  <!-- human -->
+  <rect class="box" x="452" y="370" width="272" height="46" rx="8"/>
+  <text x="588" y="390" text-anchor="middle" font-weight="600">Named human owners</text>
+  <text class="q" x="588" y="406" text-anchor="middle" font-size="11.5">HRBP, IT, Facilities</text>
+  <!-- edge labels -->
+  <text class="q" x="426" y="136" text-anchor="middle" font-size="11.5">proactive</text>
+  <text class="q" x="426" y="386" text-anchor="middle" font-size="11.5">escalate</text>
+</svg>

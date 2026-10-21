@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 760" width="760" height="760" role="img" aria-label="Zoned architecture of the employee companion">
+  <style>
+    :root{
+      --bg:#ffffff; --ink:#1f2328; --quiet:#636c76; --edge:#8c959f; --grid:#d0d7de; --tint:#f6f8fa;
+      --c1:#0969da; --c2:#bc4c00; --c3:#0f766e; --c4:#8250df;
+      --c1fill:rgba(9,105,218,.12); --c4fill:rgba(130,80,223,.12); --greyfill:rgba(208,215,222,.5);
+    }
+    @media (prefers-color-scheme:dark){
+      :root{
+        --bg:#0d1117; --ink:#e6edf3; --quiet:#9198a1; --edge:#6e7681; --grid:#30363d; --tint:#161b22;
+        --c1:#58a6ff; --c2:#ff9b5e; --c3:#2dd4bf; --c4:#a371f7;
+        --c1fill:rgba(88,166,255,.15); --c4fill:rgba(163,113,247,.18); --greyfill:rgba(48,54,61,.6);
+      }
+    }
+    text{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;fill:var(--ink)}
+    .q{fill:var(--quiet)}
+    .bg{fill:var(--bg)}
+    .z1{fill:var(--c1)} .z2{fill:var(--c2)} .z3{fill:var(--c3)}
+    .band1{fill:none;stroke:var(--c1);stroke-width:1.5;opacity:.6}
+    .band2{fill:none;stroke:var(--c2);stroke-width:1.5;opacity:.6}
+    .band3{fill:none;stroke:var(--c3);stroke-width:1.5;opacity:.6}
+    .box{fill:none;stroke:var(--edge);stroke-width:1.25}
+    .accent{fill:var(--c1fill);stroke:var(--c1);stroke-width:1.75}
+    .tint{fill:var(--tint);stroke:var(--edge);stroke-width:1.25}
+    .warn{fill:var(--c4fill);stroke:var(--c4);stroke-width:1.75}
+    .grey{fill:var(--greyfill);stroke:var(--edge);stroke-width:1.25}
+    .dash{fill:none;stroke:var(--edge);stroke-width:1.25;stroke-dasharray:5 4}
+    .flow{fill:none;stroke:var(--edge);stroke-width:1.3}
+    .dot{fill:var(--ink)}
+    .head{fill:var(--edge)}
+    .lgdash{stroke:var(--edge);stroke-width:1.3;stroke-dasharray:5 4}
+    .lgbox{fill:var(--greyfill);stroke:var(--edge);stroke-width:1}
+  </style>
+  <defs>
+    <marker id="z" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" class="head"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="760" height="760"/>
+  <text x="24" y="30" font-size="16" font-weight="600">Zoned architecture: the employee companion</text>
+  <text class="q" x="24" y="50" font-size="11.5">employee-owned · grounded + gated · in-region (PDPL) · human-owned escalations</text>
+
+  <!-- Zone 1 -->
+  <rect class="band1" x="20" y="72" width="720" height="112" rx="12"/>
+  <text class="z1" x="36" y="100" font-weight="600" font-size="12">Zone 1</text>
+  <text x="36" y="118" font-weight="600" font-size="12">Employee + channels</text>
+  <text class="q" x="36" y="135" font-size="10.5">web or phone</text>
+  <rect class="box" x="188" y="92" width="236" height="78" rx="8"/>
+  <text x="306" y="116" text-anchor="middle" font-weight="600">Employee</text>
+  <text class="q" x="306" y="134" text-anchor="middle" font-size="11">web or mobile app</text>
+  <text class="q" x="306" y="150" text-anchor="middle" font-size="11">text or voice · AR + EN</text>
+  <rect class="box" x="452" y="92" width="268" height="78" rx="8"/>
+  <text x="586" y="116" text-anchor="middle" font-weight="600">App UI</text>
+  <text class="q" x="586" y="134" text-anchor="middle" font-size="11">chat · journey timeline</text>
+  <text class="q" x="586" y="150" text-anchor="middle" font-size="11">my-data + consent panel</text>
+  <path class="flow" d="M424 131H452" marker-end="url(#z)"/>
+  <path class="flow" d="M586 170V202" marker-end="url(#z)"/>
+  <circle class="dot" cx="586" cy="188" r="4"/>
+  <text class="q" x="598" y="196" font-size="10.5">question (text / voice)</text>
+
+  <!-- Zone 2 -->
+  <rect class="band2" x="20" y="202" width="720" height="252" rx="12"/>
+  <text class="z2" x="36" y="230" font-weight="600" font-size="12">Zone 2</text>
+  <text x="36" y="248" font-weight="600" font-size="12">AI companion</text>
+  <text class="q" x="36" y="265" font-size="10.5">the app</text>
+  <rect class="accent" x="188" y="220" width="126" height="58" rx="8"/>
+  <text x="251" y="244" text-anchor="middle" font-weight="600">Orchestrator</text>
+  <text class="q" x="251" y="260" text-anchor="middle" font-size="10.5">router</text>
+  <rect class="box" x="324" y="220" width="126" height="58" rx="8"/>
+  <text x="387" y="244" text-anchor="middle" font-weight="600" font-size="11">Journey-state</text>
+  <text class="q" x="387" y="260" text-anchor="middle" font-size="10.5">events vs SLA</text>
+  <rect class="box" x="460" y="220" width="126" height="58" rx="8"/>
+  <text x="523" y="244" text-anchor="middle" font-weight="600" font-size="11">Policy (RAG)</text>
+  <text class="q" x="523" y="260" text-anchor="middle" font-size="10.5">cited answers</text>
+  <rect class="box" x="596" y="220" width="126" height="58" rx="8"/>
+  <text x="659" y="244" text-anchor="middle" font-weight="600" font-size="11">Action + route</text>
+  <text class="q" x="659" y="260" text-anchor="middle" font-size="10.5">requests · handoff</text>
+  <rect class="box" x="188" y="296" width="210" height="46" rx="8"/>
+  <text x="293" y="316" text-anchor="middle" font-weight="600" font-size="11">Friction radar</text>
+  <text class="q" x="293" y="332" text-anchor="middle" font-size="10.5">sweep: events · SLAs · pulse</text>
+  <rect class="tint" x="188" y="360" width="534" height="46" rx="8"/>
+  <text x="455" y="387" text-anchor="middle" font-weight="600" font-size="11">Trust gate — consent · citations · confidence · PII redaction · human gate</text>
+  <path class="flow" d="M455 278V360" marker-end="url(#z)"/>
+  <text class="q" x="468" y="326" font-size="10.5">every answer + action</text>
+  <path class="flow" d="M455 406V468" marker-end="url(#z)"/>
+  <circle class="dot" cx="455" cy="454" r="4"/>
+  <text class="q" x="468" y="440" font-size="10.5">grounded data · escalation</text>
+
+  <!-- Zone 3 -->
+  <rect class="band3" x="20" y="468" width="720" height="252" rx="12"/>
+  <text class="z3" x="36" y="496" font-weight="600" font-size="12">Zone 3</text>
+  <text x="36" y="514" font-weight="600" font-size="12">Data + people</text>
+  <text class="q" x="36" y="531" font-size="10.5">records · human queue</text>
+  <rect class="box" x="188" y="486" width="172" height="54" rx="8"/>
+  <text x="274" y="508" text-anchor="middle" font-weight="600" font-size="11">Journey + consent</text>
+  <text class="q" x="274" y="524" text-anchor="middle" font-size="10.5">store</text>
+  <rect class="box" x="372" y="486" width="172" height="54" rx="8"/>
+  <text x="458" y="508" text-anchor="middle" font-weight="600" font-size="11">Policy vector</text>
+  <text class="q" x="458" y="524" text-anchor="middle" font-size="10.5">store</text>
+  <rect class="box" x="556" y="486" width="164" height="54" rx="8"/>
+  <text x="638" y="508" text-anchor="middle" font-weight="600" font-size="11">Audit log</text>
+  <text class="q" x="638" y="524" text-anchor="middle" font-size="10.5">append-only</text>
+  <rect class="dash" x="188" y="552" width="356" height="54" rx="8"/>
+  <text x="366" y="574" text-anchor="middle" font-weight="600" font-size="11">HRIS / ITSM connectors</text>
+  <text class="q" x="366" y="590" text-anchor="middle" font-size="10.5">synthetic now · live read-only in pilot</text>
+  <rect class="grey" x="556" y="552" width="164" height="54" rx="8"/>
+  <text x="638" y="574" text-anchor="middle" font-weight="600" font-size="11">Emirates systems</text>
+  <text class="q" x="638" y="590" text-anchor="middle" font-size="10.5">HR · IT · Facilities</text>
+  <rect class="warn" x="188" y="620" width="532" height="80" rx="8"/>
+  <text x="206" y="646" font-weight="600" font-size="12">Named human owners · specialist queue</text>
+  <text class="q" x="206" y="668" font-size="11">HRBP · IT · Facilities — every escalation reaches a person, with a summary</text>
+  <text class="q" x="206" y="686" font-size="10.5">intervention only through a named owner · decided once · audited</text>
+
+  <!-- legend -->
+  <circle class="dot" cx="40" cy="732" r="4"/>
+  <text class="q" x="52" y="736" font-size="11">personal data crosses a boundary</text>
+  <line class="lgdash" x1="300" y1="732" x2="340" y2="732"/>
+  <text class="q" x="348" y="736" font-size="11">synthetic now, live read-only in pilot</text>
+  <rect class="lgbox" x="600" y="726" width="16" height="12" rx="2"/>
+  <text class="q" x="622" y="736" font-size="11">existing system</text>
+</svg>

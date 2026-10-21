@@ -46,6 +46,9 @@ uvicorn app.main:app --port 8000          # pytest -q for the tests
 
 Verify: `pytest` prints `39 passed`; the app serves the UI at `http://localhost:8000`.
 
+**Full step-by-step guide** — prerequisites, configuration, the complete API, troubleshooting:
+see [GETTING_STARTED.md](GETTING_STARTED.md).
+
 No API keys are required — without one, answers are composed **extractively from retrieved
 policy text** (still cited, zero hallucination surface). To add generative polish, copy
 `.env.example` → `.env` and set `OPENROUTER_API_KEY` or `GROQ_API_KEY`.
